@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://firecomms-cn.com/sitemap.xml
