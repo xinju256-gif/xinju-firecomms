@@ -36,37 +36,4 @@ collections:
         required: false
       - label: "正文"
         name: "body"
-        widget: "markdown"backend:
-  name: github
-  repo: xinju256-gif/xinju-firecomms
-  branch: main
-
-locale: zh_Hans
-
-media_folder: "uploads"
-public_folder: "/uploads"
-
-collections:
-  - name: "articles"
-    label: "技术文章"
-    folder: "content/articles"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: "文章标题"
-        name: "title"
-        widget: "string"
-      - label: "发布时间"
-        name: "date"
-        widget: "datetime"
-      - label: "文章摘要"
-        name: "description"
-        widget: "text"
-        required: false
-      - label: "封面图片"
-        name: "image"
-        widget: "image"
-        required: false
-      - label: "正文"
-        name: "body"
         widget: "markdown"
