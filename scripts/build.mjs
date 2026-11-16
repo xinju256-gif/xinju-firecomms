@@ -40,11 +40,21 @@ if(fs.existsSync(articlesDir)) for(const file of fs.readdirSync(articlesDir).fil
   articles.push({title:String(data.title), description:String(data.description ?? ''),date:date.toISOString(), displayDate:new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(date),image:safeImage(data.image),url:`/articles/${slug}/`,body:sanitizeHtml(md.render(content),{allowedTags:[...sanitizeHtml.defaults.allowedTags,'img','h1','h2'],allowedAttributes:{...sanitizeHtml.defaults.allowedAttributes,img:['src','alt','title'],a:['href','title']},allowedSchemes:['https','http','mailto','tel'],allowProtocolRelative:false})});
 }
 articles.sort((a,b)=>b.date.localeCompare(a.date)||a.url.localeCompare(b.url));
+function enhanceHeader(html) {
+ const label=/<html[^>]*lang=["']en/i.test(html)?'Technical Articles':'技术文章';
+ if(!html.includes('class="nav-link" href="/articles/"')) html=html.replace(/(<ul class="nav-list">)/,`$1<li class="nav-item"><a class="nav-link" href="/articles/">${label}</a></li>`);
+ html=html.replace(/(<div class="mobile-menu"[^]*?)(<a href="index.html")/,`$1<a href="/articles/">${label}</a>$2`);
+ return html;
+}
+const homeSource=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const headerMatch=homeSource.match(/<body[^>]*>([^]*?)<section class="hero"/);
+if(!headerMatch) throw new Error('首页页头结构变化，请核对共用页头。');
+const sharedHeader=enhanceHeader('<html lang="en">'+headerMatch[1]).replace('<html lang="en">','').replace(/(href|src)="(?!https?:|mailto:|tel:|#|\/)([^" ]+)"/g,(_,attr,url)=>`${attr}="/${url.replace(/^(\.\.\/)+/,'')}"`);
 function page(title,description,url,body,structured='') {
-return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}｜芯聚电子 Firecomms</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${base}${url}"><link rel="stylesheet" href="/article-style.css">${structured}</head><body><div class="top"><div class="wrap"><a href="tel:+862162271972">021-62271972</a><a href="mailto:firecomms@simacity.com.cn">firecomms@simacity.com.cn</a></div></div><header class="wrap header"><a class="logos" href="/"><img src="/simacity-logo.jpg" alt="SIMACITY 芯聚电子"><span></span><img src="/firecomms-logo.png" alt="Firecomms 飞尔康"></a><nav aria-label="主导航"><a href="/">首页</a><a href="/products.html">产品中心</a><a href="/cross-ref.html">替代查询</a><a href="/articles/" aria-current="page">技术文章</a><a href="/contact.html">联系我们</a></nav></header><main>${body}</main><footer><div class="wrap">上海芯聚电子科技有限公司 · Firecomms 技术与选型支持<br><a href="tel:+862162271972">021-62271972</a> · <a href="mailto:firecomms@simacity.com.cn">firecomms@simacity.com.cn</a></div></footer></body></html>`;
+return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}｜芯聚电子 Firecomms</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${base}${url}"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/article-style.css"><link rel="stylesheet" href="/site-nav-fix.css">${structured}</head><body class="article-page">${sharedHeader}<main>${body}</main><footer><div class="wrap">上海芯聚电子科技有限公司 · Firecomms 技术与选型支持<br><a href="tel:+862162271972">021-62271972</a> · <a href="mailto:firecomms@simacity.com.cn">firecomms@simacity.com.cn</a></div></footer><script src="/main.js" defer></script></body></html>`;
 }
 const cards=articles.map(a=>`<article class="card" data-search="${escape(a.title+' '+a.description)}">${a.image?`<a href="${a.url}" tabindex="-1"><img class="cover" src="${escape(a.image)}" alt="${escape(a.title)}" loading="lazy"></a>`:''}<div class="card-content"><time datetime="${a.date}">${escape(a.displayDate)}</time><h2><a href="${a.url}">${escape(a.title)}</a></h2><p>${escape(a.description)}</p><a class="read" href="${a.url}">阅读全文 →</a></div></article>`).join('');
-write('articles/index.html',page('飞尔康技术文章与选型指南','Firecomms 飞尔康产品选型、应用案例与技术资料。','/articles/',`<section class="hero"><div class="wrap"><span class="eyebrow">FIRECOMMS · TECHNICAL RESOURCES</span><h1>技术文章与选型指南</h1><p>从型号、链路条件到应用验证，查找所需的技术内容。</p></div></section><section class="wrap listing"><label for="article-search">搜索型号或关键词</label><input id="article-search" type="search" placeholder="输入型号、应用或问题" autocomplete="off"><p class="count" id="count" aria-live="polite">共 ${articles.length} 篇文章</p><div class="grid">${cards}</div><p id="empty" class="empty" ${articles.length?'hidden':''}>${articles.length?'没有找到匹配的文章，请更换关键词。':'技术文章正在整理中，您也可以直接联系我们获取选型支持。'}</p></section><script src="/article-search.js" defer></script>`));
+write('articles/index.html',page('飞尔康技术文章与选型指南','Firecomms 飞尔康产品选型、应用案例与技术资料。','/articles/',`<section class="article-hero"><div class="wrap"><span class="eyebrow">FIRECOMMS · TECHNICAL RESOURCES</span><h1>技术文章与选型指南</h1><p>从型号、链路条件到应用验证，查找所需的技术内容。</p></div></section><section class="wrap listing"><label for="article-search">搜索型号或关键词</label><input id="article-search" type="search" placeholder="输入型号、应用或问题" autocomplete="off"><p class="count" id="count" aria-live="polite">共 ${articles.length} 篇文章</p><div class="grid">${cards}</div><p id="empty" class="empty" ${articles.length?'hidden':''}>${articles.length?'没有找到匹配的文章，请更换关键词。':'技术文章正在整理中，您也可以直接联系我们获取选型支持。'}</p></section><script src="/article-search.js" defer></script>`));
 for(const a of articles) {
  const schema=JSON.stringify({'@context':'https://schema.org','@type':'Article',headline:a.title,description:a.description,datePublished:a.date,mainEntityOfPage:base+a.url,publisher:{'@type':'Organization',name:'上海芯聚电子科技有限公司'},...(a.image?{image:a.image.startsWith('/')?base+a.image:a.image}:{})}).replace(/</g,'\\u003c');
  const mail=`mailto:firecomms@simacity.com.cn?subject=${encodeURIComponent('技术咨询：'+a.title)}`;
@@ -53,7 +63,8 @@ for(const a of articles) {
 // Add an entry at build time, without replacing tracked existing page source.
 for(const name of fs.readdirSync(out).filter(f=>f.endsWith('.html'))) {
  const file=path.join(out,name);let html=fs.readFileSync(file,'utf8');
- if(!html.includes('href="/articles/"')) html=html.replace(/(<ul class="nav-list">)/,'$1<li class="nav-item"><a href="/articles/" class="nav-link">技术文章</a></li>');
+ html=enhanceHeader(html);
+ html=html.replace('</head>','<link rel="stylesheet" href="/site-nav-fix.css"></head>');
  fs.writeFileSync(file,html);
 }
 let sitemap=fs.existsSync(path.join(root,'sitemap.xml'))?fs.readFileSync(path.join(root,'sitemap.xml'),'utf8'):'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>';
