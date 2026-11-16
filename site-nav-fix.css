@@ -1,0 +1,20 @@
+/* Shared header layout: prevent labels collapsing into vertical text. */
+.header-main{gap:16px;background:#fff}
+.header-main .main-nav{min-width:0}
+.header-main .nav-list{flex-shrink:0;white-space:nowrap}
+.header-main .nav-item{flex-shrink:0}
+.header-main .nav-link{white-space:nowrap;word-break:keep-all;flex-shrink:0;padding-inline:11px;font-size:12px;letter-spacing:.025em}
+.header-main .brand{min-width:0;gap:10px;padding-right:14px}
+.header-main .brand-text .name-cn{font-size:14px;letter-spacing:0}
+.header-main .brand-text .name-en{font-size:10px}
+.header-main .nav-cta{flex-shrink:0;white-space:nowrap;padding-inline:19px;font-size:12px}
+@media(min-width:1181px){.header-main .nav-toggle{display:none}}
+@media(max-width:1180px){
+ .header-main{height:68px;gap:10px}
+ .header-main .main-nav,.header-main .nav-cta{display:none!important}
+ .header-main .nav-toggle{display:flex!important;flex-shrink:0;margin-left:auto}
+ .header-main .brand{border-right:0;flex:1;overflow:hidden}
+ .header-main .brand-text{min-width:0}
+ .header-main .brand-text .name-cn{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+}
+@media(max-width:480px){.header-main .brand-text .name-cn{font-size:11px!important}.header-main .brand-text .name-en{font-size:9px!important}.header-main .brand-logo{height:24px!important}.header-main .brand-divider{display:none}.header-main .brand{gap:8px!important}}
