@@ -1,0 +1,19 @@
+{
+  "name": "xinju-firecomms-main",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test-build.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "gray-matter": "4.0.3",
+    "markdown-it": "15.0.3",
+    "sanitize-html": "2.18.2"
+  },
+  "private": true
+}

@@ -29,6 +29,11 @@ collections:
         name: "image"
         widget: "image"
         required: false
+      - label: "草稿（开启后不在网站展示）"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        required: false
       - label: "正文"
         name: "body"
         widget: "markdown"
