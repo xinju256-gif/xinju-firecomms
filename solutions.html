@@ -1,275 +1,573 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solutions | Firecomms China - POF Applications for Industrial & Medical</title>
-  <meta name="description" content="Firecomms POF fiber optic solutions for industrial automation, medical imaging, renewable energy, smart grid and home networks. EMI-immune, cost-effective, easy to install.">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20261015a">
+  <title>解决方案 | Firecomms中国 - 工业/医疗/新能源/轨交POF应用</title>
+  <meta name="description" content="Firecomms塑料光纤解决方案：工业自动化抗EMI通信、医疗影像无损传输、新能源系统可靠连接、轨交车载网络。全部支持EMI免疫，无需接地回路。">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260921f">
 </head>
 <body>
-  <div class="header-top"><div class="header-top-inner"><div class="header-top-left"><a href="tel:+862162271972">☎ +86 21 6227 1972</a><a href="mailto:firecomms@simacity.com.cn">✉ firecomms@simacity.com.cn</a></div><div class="lang-switch"><a href="../solutions.html" class="lang-btn" data-lang="zh">中文</a><span>/</span><a href="solutions.html" class="lang-btn active">English</a></div></div></div>
-  <header class="header-main"><a href="index.html" class="brand"><img src="../assets/img/simacity-logo.jpg" alt="SIMACITY" class="brand-logo simacity-logo"><div class="brand-divider"></div><div class="brand-text"><div class="name-cn">Shanghai SIMACITY × Firecomms China</div><div class="name-en">Official Authorized Distributor</div></div></a><nav class="main-nav"><ul class="nav-list"><li class="nav-item"><a href="products.html" class="nav-link">PRODUCTS <span class="chevron">▼</span></a><div class="nav-dropdown"><a href="products.html#optolock">OptoLock® Fiber Transceivers</a><a href="products.html#lc">LC Fiber Transceivers</a><a href="products.html#redlink">RedLink® Transceivers</a><a href="products.html#pof">SMI & Media Converters</a><a href="products.html#kit">Evaluation Kits</a><a href="product-index.html" style="color:var(--brand-red);font-weight:700;"> Product Search</a>
-            <a href="cross-ref.html" style="color:var(--brand-red);font-weight:700;">↔ Avago Cross Ref</a></div></li><li class="nav-item"><a href="solutions.html" class="nav-link">SOLUTIONS <span class="chevron">▼</span></a><div class="nav-dropdown"><a href="solutions.html#industrial">Industrial Automation</a><a href="solutions.html#medical">Medical Imaging</a><a href="solutions.html#renewable">Renewable Energy</a><a href="solutions.html#smartgrid">Smart Grid</a><a href="solutions.html#home">Home Networks</a></div></li><li class="nav-item"><a href="about.html" class="nav-link">ABOUT <span class="chevron">▼</span></a><div class="nav-dropdown"><a href="about.html#about">Company Profile</a><a href="about.html#why">Why Choose Us</a><a href="about.html#timeline">Timeline</a><a href="about.html#news">News & Events</a></div></li><li class="nav-item"><a href="contact.html" class="nav-link">CONTACT</a></li></ul></nav><a href="contact.html" class="btn btn-red nav-cta">Contact Us</a><button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button></header>
-  <div class="mobile-menu" id="mobile-menu"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><strong style="color:var(--navy);font-size:1rem;">Navigation</strong><button id="mobile-menu-close" style="font-size:1.5rem;color:var(--navy);background:none;border:none;cursor:pointer;">&times;</button></div><a href="index.html">Home</a><a href="products.html">Products</a><a href="product-index.html"> Product Search</a><a href="cross-ref.html" style="color:var(--brand-red);font-weight:700;">↔ Avago Cross Ref</a><a href="solutions.html" style="color:var(--brand-red);font-weight:700;">Solutions</a><a href="about.html">About</a><a href="contact.html">Contact</a><div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);"><a href="../solutions.html" style="color:var(--navy);">中文 Chinese</a></div></div>
-  <section class="page-banner"><div class="container"><h1>Industry Solutions</h1><p>Proven POF Fiber Optic Applications Across Five Key Industries</p></div></section>
+
+  <div class="header-top">
+    <div class="header-top-inner">
+      <div class="header-top-left">
+        <a href="tel:+862162271972">☎ +86 21 6227 1972</a>
+        <a href="mailto:firecomms@simacity.com.cn">✉ firecomms@simacity.com.cn</a>
+      </div>
+      <div class="lang-switch">
+        <a href="solutions.html" class="lang-btn active">中文</a>
+        <span>/</span>
+        <a href="en/solutions.html" class="lang-btn" data-lang="en">English</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header-main">
+    <a href="index.html" class="brand">
+      <img src="assets/img/simacity-logo.jpg" alt="SIMACITY" class="brand-logo simacity-logo">
+      <div class="brand-divider"></div>
+      <div class="brand-text">
+        <div class="name-cn">上海芯聚 × Firecomms中国</div>
+        <div class="name-en">SIMACITY · Firecomms China</div>
+      </div>
+    </a>
+    <nav class="main-nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="products.html" class="nav-link">产品中心 <span class="chevron">▼</span></a>
+          <div class="nav-dropdown">
+            <a href="products.html#optolock">OptoLock® 光纤收发器</a>
+            <a href="products.html#lc">LC 光纤收发器</a>
+            <a href="products.html#redlink">RedLink® 收发器</a>
+            <a href="products.html#pof">SMI & 媒体转换器</a>
+            <a href="products.html#kit">评估套件</a>
+            <a href="product-index.html" style="color:var(--brand-red);font-weight:700;">型号检索</a>
+            <a href="cross-ref.html" style="color:var(--brand-red);font-weight:700;">Avago 替代查询</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="solutions.html" class="nav-link">解决方案 <span class="chevron">▼</span></a>
+          <div class="nav-dropdown">
+            <a href="solutions.html#industrial">工业自动化</a>
+            <a href="solutions.html#medical">医疗影像</a>
+            <a href="solutions.html#renewable">新能源</a>
+            <a href="solutions.html#smartgrid">智能电网</a>
+            <a href="solutions.html#home">家庭网络</a>
+            <a href="solutions.html#robotic">机器人与协作机器人</a>
+            <a href="solutions.html#trains">电力及柴油机车</a>
+            <a href="solutions.html#power">电力系统管理</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">关于我们 <span class="chevron">▼</span></a>
+          <div class="nav-dropdown">
+            <a href="about.html#about">公司简介</a>
+            <a href="about.html#why">为什么选择</a>
+            <a href="about.html#timeline">发展历程</a>
+            <a href="about.html#news">新闻动态</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">联系我们</a>
+        </li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="btn btn-red nav-cta">联系我们</a>
+    <button class="nav-toggle" aria-label="打开菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <strong style="color:var(--navy);font-size:1rem;">导航菜单</strong>
+      <button id="mobile-menu-close" style="font-size:1.5rem;color:var(--navy);background:none;border:none;cursor:pointer;">&times;</button>
+    </div>
+    <a href="index.html">首页</a>
+    <a href="products.html">产品中心</a>
+    <a href="product-index.html">型号检索</a><a href="cross-ref.html" style="color:var(--brand-red);font-weight:700;">Avago 替代查询</a>
+    <a href="solutions.html" style="color:var(--brand-red);font-weight:700;">解决方案</a>
+    <a href="about.html">关于我们</a>
+    <a href="contact.html">联系我们</a>
+    <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="en/solutions.html" style="color:var(--navy);">English</a>
+    </div>
+  </div>
+
+  <section class="page-banner">
+    <div class="container">
+      <h1>行业解决方案</h1>
+      <p>POF Fiber Optic Solutions for Demanding Applications</p>
+    </div>
+  </section>
+
   <main class="container" style="padding:60px 20px 80px;">
 
+    <!-- 工业自动化 -->
     <div class="sol-card" id="industrial">
       <div class="sol-card-head">
-        <div class="sol-icon"><svg viewBox="0 0 48 48" fill="none" stroke="var(--navy)" stroke-width="1.5" width="48" height="48"><rect x="8" y="20" width="32" height="20" rx="2"/><path d="M16 20V14a8 8 0 0 1 16 0v6"/><circle cx="24" cy="30" r="4"/></svg></div>
-        <div><h3>Industrial Automation</h3><p>EMI-immune fiber communication for factory environments</p></div>
+        <div class="sol-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+            <rect x="8" y="20" width="32" height="20" rx="2"/>
+            <path d="M16 20V14a8 8 0 0 1 16 0v6"/>
+            <circle cx="24" cy="30" r="4"/>
+            <line x1="10" y1="40" x2="10" y2="44"/>
+            <line x1="38" y1="40" x2="38" y2="44"/>
+          </svg>
+        </div>
+        <div>
+          <h3>工业自动化</h3>
+          <p>Industrial Automation — EMI免疫光纤通信解决方案</p>
+        </div>
       </div>
       <div class="sol-card-body">
-        <p>Industrial environments are filled with intense EMI from VFDs, motors and welding equipment. Traditional copper cables suffer dramatically increased BER under strong EMI, leading to unstable communication and production line shutdowns. POF is naturally immune to EMI and RFI, maintaining zero-bit-error data transmission in harsh industrial environments.</p>
+        <p>工业自动化环境充斥着强烈的电磁干扰（EMI），来自变频器、电机、焊机等设备。传统铜缆在强EMI环境下数据误码率急剧上升，导致通信不稳定、生产线停机。塑料光纤（POF）天然免疫EMI和RFI，在恶劣工业环境中保持数据零误码，成为工业以太网和现场总线升级的理想选择。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Key Challenges</h4><ul>
-            <li>VFD generates high-frequency harmonic interference disrupting Ethernet</li>
-            <li>Large motor inrush current causes transient link failures</li>
-            <li>Factory ground loops cause cumulative data errors</li>
-            <li>Long distances (50m+) cause copper cable signal attenuation</li>
-          </ul></div>
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms Solution</h4><ul>
-            <li>POF naturally immune to EMI — zero bit errors guaranteed</li>
-            <li>Glass fiber performance at 1/10th the cost</li>
-            <li>Galvanic isolation eliminates ground loop issues</li>
-            <li>OptoLock® snap-lock dramatically reduces installation time</li>
-          </ul></div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">核心挑战</h4>
+            <ul>
+              <li>变频器产生高频谐波干扰以太网通信</li>
+              <li>大型电机启动时瞬态电流导致链路中断</li>
+              <li>工厂接地回路造成数据错误累积</li>
+              <li>设备间距离远（50m+）铜缆信号衰减</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms 方案</h4>
+            <ul>
+              <li>POF 天然免疫电磁干扰，数据稳定</li>
+              <li>玻璃光纤同等性能，成本仅为十分之一</li>
+              <li>电气隔离，消除接地回路问题</li>
+              <li>OptoLock® 快速插拔，大幅缩短安装时间</li>
+            </ul>
+          </div>
         </div>
         <div style="background:var(--off-white);border-radius:6px;padding:16px 20px;margin-top:20px;">
-          <strong style="color:var(--navy);font-size:.88rem;">Recommended Models: </strong>
-          <span style="font-size:.85rem;margin-left:8px;"><a href="product-detail.html?model=FB2M5KVR" style="color:var(--royal);font-weight:700;">FB2M5KVR</a> (250 Mbps) · <a href="product-detail.html?model=FR50MH" style="color:var(--brand-red);font-weight:700;">FR50MH</a> (50 Mbps) · <a href="product-detail.html?model=FE50MSIR" style="color:var(--navy);font-weight:700;">FE50MSIR</a> (Media Converter)</span>
+          <strong style="color:var(--navy);font-size:.88rem;">推荐产品型号：</strong>
+          <span style="font-size:.85rem;margin-left:8px;">
+            <a href="product-detail.html?model=FB2M5KVR" style="color:var(--royal);font-weight:700;">FB2M5KVR</a>（250Mbps高速）
+            ·
+            <a href="product-detail.html?model=FR50MH" style="color:var(--brand-red);font-weight:700;">FR50MH</a>（50Mbps经典）
+            ·
+            <a href="product-detail.html?model=FE50MSIR" style="color:var(--navy);font-weight:700;">FE50MSIR</a>（媒体转换器）
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- 医疗影像 -->
     <div class="sol-card" id="medical">
       <div class="sol-card-head">
-        <div class="sol-icon"><svg viewBox="0 0 48 48" fill="none" stroke="var(--royal)" stroke-width="1.5" width="48" height="48"><rect x="10" y="8" width="28" height="24" rx="3"/><line x1="17" y1="36" x2="17" y2="44"/><line x1="31" y1="36" x2="31" y2="44"/><line x1="14" y1="44" x2="34" y2="44"/></svg></div>
-        <div><h3>Medical Imaging</h3><p>Zero-noise fiber transmission for diagnostic equipment</p></div>
+        <div class="sol-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+            <rect x="10" y="8" width="28" height="24" rx="3"/>
+            <line x1="17" y1="36" x2="17" y2="44"/>
+            <line x1="31" y1="36" x2="31" y2="44"/>
+            <line x1="14" y1="44" x2="34" y2="44"/>
+            <line x1="18" y1="16" x2="30" y2="16"/>
+            <line x1="18" y1="20" x2="28" y2="20"/>
+            <line x1="18" y1="24" x2="26" y2="24"/>
+          </svg>
+        </div>
+        <div>
+          <h3>医疗影像</h3>
+          <p>Medical Imaging — 零噪声光纤传输解决方案</p>
+        </div>
       </div>
       <div class="sol-card-body">
-        <p>Medical imaging equipment (ultrasound, CT, MRI, X-ray) requires extremely high reliability and real-time data transmission. Any data loss or delay affects diagnostic accuracy. POF fiber at 650nm visible red light is completely unaffected by strong electromagnetic fields, making it the ideal medium for medical device internal communication.</p>
+        <p>医疗影像设备（超声、CT、MRI、X光机等）对数据传输的可靠性和实时性要求极高。影像数据量大（4K/8K实时流），任何数据丢包或延迟都会影响诊断准确性。POF 光纤以 650nm 可见红光传输，完全不受医疗设备强电磁场影响，是医疗设备内部通信和设备间连接的理想介质。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Key Challenges</h4><ul>
-            <li>MRI scanners (3T+) strong magnetic fields destroy copper signal integrity</li>
-            <li>CT slip ring copper cable wear and signal interference during rotation</li>
-            <li>Ultrasound probe high-frequency signals affect image quality</li>
-            <li>Long-distance fiber cabling between medical equipment</li>
-          </ul></div>
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms Solution</h4><ul>
-            <li>Fully MRI-compatible — zero signal loss in strong magnetic fields</li>
-            <li>Visible red light (650nm) — routing visible during installation</li>
-            <li>Class 1 laser certification — medical-grade safety</li>
-            <li>1mm diameter fiber — ideal for compact medical device interiors</li>
-          </ul></div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">核心挑战</h4>
+            <ul>
+              <li>MRI 强磁场（3T以上）破坏铜缆信号完整性</li>
+              <li>CT 旋转扫描时滑环铜缆磨损和信号干扰</li>
+              <li>超声探头高频信号对图像质量的影响</li>
+              <li>医疗设备间长距离布线的信号衰减</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms 方案</h4>
+            <ul>
+              <li>完全抗MRI强磁场干扰，信号零损失</li>
+              <li>可见红光（650nm），安装走线一目了然</li>
+              <li>Class 1激光认证，医疗级安全</li>
+              <li>轻量化光纤（直径1mm），适合狭小设备内部布线</li>
+            </ul>
+          </div>
         </div>
         <div style="background:var(--off-white);border-radius:6px;padding:16px 20px;margin-top:20px;">
-          <strong style="color:var(--navy);font-size:.88rem;">Recommended Models: </strong>
-          <span style="font-size:.85rem;margin-left:8px;"><a href="product-detail.html?model=FB2M5LVR" style="color:var(--navy);font-weight:700;">FB2M5LVR</a> (250 Mbps LC) · <a href="product-detail.html?model=FR50MH" style="color:var(--brand-red);font-weight:700;">FR50MH</a> (50 Mbps Isolated) · <a href="product-detail.html?model=EVAL-POF-MED" style="color:var(--mid-gray);font-weight:700;">EVAL-POF-MED</a> (Medical Eval)</span>
+          <strong style="color:var(--navy);font-size:.88rem;">推荐产品型号：</strong>
+          <span style="font-size:.85rem;margin-left:8px;">
+            <a href="product-detail.html?model=FB2M5LVR" style="color:var(--navy);font-weight:700;">FB2M5LVR</a>（250Mbps LC接口）
+            ·
+            <a href="product-detail.html?model=FR50MH" style="color:var(--brand-red);font-weight:700;">FR50MH</a>（50Mbps隔离型）
+            ·
+            <a href="product-detail.html?model=EVAL-POF-MED" style="color:var(--mid-gray);font-weight:700;">EVAL-POF-MED</a>（医疗评估套件）
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- 新能源 -->
     <div class="sol-card" id="renewable">
       <div class="sol-card-head">
-        <div class="sol-icon"><svg viewBox="0 0 48 48" fill="none" stroke="var(--navy)" stroke-width="1.5" width="48" height="48"><circle cx="24" cy="24" r="6"/><line x1="24" y1="4" x2="24" y2="12"/><line x1="4" y1="24" x2="12" y2="24"/><line x1="36" y1="24" x2="44" y2="24"/><line x1="9.5" y1="9.5" x2="15.3" y2="15.3"/><line x1="32.7" y1="32.7" x2="38.5" y2="38.5"/><path d="M10 40 L40 40"/></svg></div>
-        <div><h3>Renewable Energy</h3><p>Reliable POF communication in PV and wind power systems</p></div>
+        <div class="sol-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+            <circle cx="24" cy="24" r="6"/>
+            <line x1="24" y1="4" x2="24" y2="12"/>
+            <line x1="24" y1="36" x2="24" y2="44"/>
+            <line x1="4" y1="24" x2="12" y2="24"/>
+            <line x1="36" y1="24" x2="44" y2="24"/>
+            <line x1="9.5" y1="9.5" x2="15.3" y2="15.3"/>
+            <line x1="32.7" y1="32.7" x2="38.5" y2="38.5"/>
+            <line x1="9.5" y1="38.5" x2="15.3" y2="32.7"/>
+            <line x1="32.7" y1="15.3" x2="38.5" y2="9.5"/>
+            <path d="M10 40 L40 40"/>
+          </svg>
+        </div>
+        <div>
+          <h3>新能源</h3>
+          <p>Renewable Energy — 光伏风电系统可靠通信</p>
+        </div>
       </div>
       <div class="sol-card-body">
-        <p>PV inverters and wind power converters have high-voltage, high-current electromagnetic environments. The communication system must operate stably under strong interference. POF fiber provides natural galvanic isolation, making it the ideal communication medium for renewable energy power converters, improving system reliability and operational efficiency.</p>
+        <p>光伏逆变器和风电变流器内部存在高电压、大电流的电磁环境，通信系统必须在强干扰条件下稳定运行。POF 光纤不受电磁干扰影响，同时天然电气隔离特性使其成为新能源功率变换器的理想通信介质，帮助提升系统可靠性和运维效率。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Key Challenges</h4><ul>
-            <li>PV inverter IGBT switching generates intense EMI noise</li>
-            <li>Wind farm lightning surges travel along copper cables</li>
-            <li>Wide temperature range (-40°C to 50°C)</li>
-            <li>Outdoor long-distance cabling (50m to hundreds of meters)</li>
-          </ul></div>
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms Solution</h4><ul>
-            <li>IP68-rated, wide temperature range for all climates</li>
-            <li>1500Vrms isolation — lightning and surge protection</li>
-            <li>POF cabling simple, no additional protective conduit needed</li>
-            <li>-40~85°C industrial temperature range</li>
-          </ul></div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">核心挑战</h4>
+            <ul>
+              <li>光伏逆变器IGBT开关产生强EMI噪声</li>
+              <li>风电场雷击浪涌沿铜缆侵入控制系统</li>
+              <li>宽温工作（-40°C漠北/50°C高温沙漠）</li>
+              <li>户外长距离布线（50m~数百米）</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms 方案</h4>
+            <ul>
+              <li>IP68级防护，耐高低温，适应各种气候</li>
+              <li>1500Vrms电气隔离，防雷击浪涌</li>
+              <li>POF光纤布线简单，无需额外保护管</li>
+              <li>-40~85°C工业级温度范围</li>
+            </ul>
+          </div>
         </div>
         <div style="background:var(--off-white);border-radius:6px;padding:16px 20px;margin-top:20px;">
-          <strong style="color:var(--navy);font-size:.88rem;">Recommended Models: </strong>
-          <span style="font-size:.85rem;margin-left:8px;"><a href="product-detail.html?model=FR50MH" style="color:var(--brand-red);font-weight:700;">FR50MH</a> (50 Mbps Standard) · <a href="product-detail.html?model=FT50MxNR" style="color:var(--navy);font-weight:700;">FT50MxNR</a> (SMI High-Speed) · <a href="product-detail.html?model=FE50MKIR" style="color:var(--royal);font-weight:700;">FE50MKIR</a> (Media Converter)</span>
+          <strong style="color:var(--navy);font-size:.88rem;">推荐产品型号：</strong>
+          <span style="font-size:.85rem;margin-left:8px;">
+            <a href="product-detail.html?model=FR50MH" style="color:var(--brand-red);font-weight:700;">FR50MH</a>（50Mbps隔离标准型）
+            ·
+            <a href="product-detail.html?model=FT-50MHI" style="color:var(--navy);font-weight:700;">FT-50MHI</a>（SMI高速型）
+            ·
+            <a href="product-detail.html?model=FE50MKIR" style="color:var(--royal);font-weight:700;">FE50MKIR</a>（媒体转换器）
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- 智能电网 -->
     <div class="sol-card" id="smartgrid">
       <div class="sol-card-head">
-        <div class="sol-icon"><svg viewBox="0 0 48 48" fill="none" stroke="var(--navy)" stroke-width="1.5" width="48" height="48"><path d="M8 36 L8 16 L24 8 L40 16 L40 36 Z"/><line x1="16" y1="24" x2="32" y2="24"/><line x1="24" y1="24" x2="24" y2="36"/></svg></div>
-        <div><h3>Smart Grid</h3><p>Power distribution automation and smart meter communication</p></div>
+        <div class="sol-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+            <path d="M8 36 L8 16 L24 8 L40 16 L40 36 Z"/>
+            <line x1="16" y1="24" x2="32" y2="24"/>
+            <line x1="24" y1="24" x2="24" y2="36"/>
+          </svg>
+        </div>
+        <div>
+          <h3>智能电网</h3>
+          <p>Smart Grid — 配电自动化与电表通信</p>
+        </div>
       </div>
       <div class="sol-card-body">
-        <p>Smart grid covers the complete chain from generation, transmission, distribution to consumption, involving interconnected distributed equipment (smart meters, data concentrators, DTU/FTU). POF provides reliable, interference-resistant, economical fiber communication solutions covering everything from 1 Mbps low-speed meter reading to 50 Mbps high-speed distribution network communication.</p>
+        <p>智能电网涵盖从发电、输电、配电到用电的完整链条，涉及大量分布式设备（智能电表、数据集中器、配电终端DTU/FTU）的互联互通。POF 光纤在这些场景中提供了可靠的、抗干扰的、经济的光纤通信解决方案，支持从1Mbps低速抄表到50Mbps高速配电网通信的全覆盖。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Key Challenges</h4><ul>
-            <li>Strong EMI environment near high-voltage switching equipment</li>
-            <li>Outdoor distribution cabinets: wide temp, humidity, corrosive gas</li>
-            <li>Massive data backhaul from large-scale smart meter concentrators</li>
-            <li>Strict galvanic isolation requirements in power systems</li>
-          </ul></div>
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms Solution</h4><ul>
-            <li>1500Vrms isolation — compliant with power industry standards</li>
-            <li>POF light and flexible — ideal for distribution cabinet wiring</li>
-            <li>Low total system cost — suitable for large-scale deployment</li>
-            <li>SMI transceivers connect directly to MCU — no external PHY needed</li>
-          </ul></div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">核心挑战</h4>
+            <ul>
+              <li>高压开关设备附近强电磁环境干扰通信</li>
+              <li>户外配电柜宽温、潮湿、腐蚀性气体</li>
+              <li>大规模电表集中器海量数据回传</li>
+              <li>电力系统严格要求电气隔离</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms 方案</h4>
+            <ul>
+              <li>1500Vrms电气隔离，符合电力行业标准</li>
+              <li>POF轻量柔软，适合配电柜内部走线</li>
+              <li>系统整体成本低，适合大规模部署</li>
+              <li>SMI收发器直连MCU，无需外部PHY</li>
+            </ul>
+          </div>
         </div>
         <div style="background:var(--off-white);border-radius:6px;padding:16px 20px;margin-top:20px;">
-          <strong style="color:var(--navy);font-size:.88rem;">Recommended Models: </strong>
-          <span style="font-size:.85rem;margin-left:8px;"><a href="product-detail.html?model=FR05MH" style="color:var(--brand-red);font-weight:700;">FR05MH</a> (5 Mbps) · <a href="product-detail.html?model=FR10MH" style="color:var(--navy);font-weight:700;">FR10MH</a> (10 Mbps) · <a href="product-detail.html?model=FT05MxNR" style="color:var(--royal);font-weight:700;">FT05MxNR</a> (SMI Meter-Specific)</span>
+          <strong style="color:var(--navy);font-size:.88rem;">推荐产品型号：</strong>
+          <span style="font-size:.85rem;margin-left:8px;">
+            <a href="product-detail.html?model=FR05MH" style="color:var(--brand-red);font-weight:700;">FR05MH</a>（5Mbps标准）
+            ·
+            <a href="product-detail.html?model=FR10MH" style="color:var(--navy);font-weight:700;">FR10MH</a>（10Mbps）
+            ·
+            <a href="product-detail.html?model=FT-05MHI" style="color:var(--royal);font-weight:700;">FT-05MHI</a>（SMI电表专用）
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- 家庭网络 -->
     <div class="sol-card" id="home">
       <div class="sol-card-head">
-        <div class="sol-icon"><svg viewBox="0 0 48 48" fill="none" stroke="var(--royal)" stroke-width="1.5" width="48" height="48"><path d="M24 8 L38 18 L38 40 L28 40 L28 28 L20 28 L20 40 L10 40 L10 18 Z"/><circle cx="24" cy="24" r="4"/></svg></div>
-        <div><h3>Home Networks</h3><p>FTTD (Fiber-to-the-Desk) solutions for residential and smart buildings</p></div>
+        <div class="sol-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+            <path d="M24 8 L38 18 L38 40 L28 40 L28 28 L20 28 L20 40 L10 40 L10 18 Z"/>
+            <circle cx="24" cy="24" r="4"/>
+          </svg>
+        </div>
+        <div>
+          <h3>家庭网络</h3>
+          <p>Home Networks — FTTD 光纤到桌面解决方案</p>
+        </div>
       </div>
       <div class="sol-card-body">
-        <p>FTTD (Fiber-to-the-Desk) is becoming a new choice for high-end residences, villas and smart buildings. Compared to copper, POF offers higher bandwidth potential, longer transmission distance and complete immunity to EMI. 650nm visible red light lets users visually confirm wiring integrity, and OptoLock® quick-connect design enables ordinary users to complete installation easily.</p>
+        <p>光纤到桌面（FTTD）正在成为高端住宅、别墅和智能楼宇的新选择。相比铜缆，POF 光纤具有更高的带宽潜力、更长的传输距离和完全抗电磁干扰的优势。650nm可见红光让用户直观确认布线完整性，OptoLock® 快插设计使普通用户也能轻松完成安装。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Key Challenges</h4><ul>
-            <li>Home appliances (microwave, vacuum) interfere with Wi-Fi and copper</li>
-            <li>Long-distance cabling (50m) causes copper signal attenuation</li>
-            <li>Users want simple installation without professional tools</li>
-            <li>Future bandwidth upgrade requirements</li>
-          </ul></div>
-          <div><h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms Solution</h4><ul>
-            <li>Fully EMI-immune — build truly stable home networks</li>
-            <li>Visible red light (650nm) — plug-and-play, no tools needed</li>
-            <li>AK-series connectors — ordinary users can self-install</li>
-            <li>Downward compatible — easy upgrade from existing copper systems</li>
-          </ul></div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">核心挑战</h4>
+            <ul>
+              <li>家庭电器（微波炉、吸尘器）干扰Wi-Fi和铜缆</li>
+              <li>长距离布线（50m）铜缆信号衰减</li>
+              <li>用户希望简单安装，不需专业工具</li>
+              <li>未来带宽升级需求</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms 方案</h4>
+            <ul>
+              <li>完全免疫EMI，构建真正稳定的家庭网络</li>
+              <li>可见红光（650nm）即插即用，无需工具</li>
+              <li>AK系列连接器，普通用户可自行安装</li>
+              <li>向下兼容，轻松升级现有铜缆系统</li>
+            </ul>
+          </div>
         </div>
         <div style="background:var(--off-white);border-radius:6px;padding:16px 20px;margin-top:20px;">
-          <strong style="color:var(--navy);font-size:.88rem;">Recommended Models: </strong>
-          <span style="font-size:.85rem;margin-left:8px;"><a href="product-detail.html?model=FB1M2KPR" style="color:var(--navy);font-weight:700;">FB1M2KPR</a> (125 Mbps Entry) · <a href="product-detail.html?model=FB2M5KVR" style="color:var(--royal);font-weight:700;">FB2M5KVR</a> (250 Mbps Mainstream)</span>
+          <strong style="color:var(--navy);font-size:.88rem;">推荐产品型号：</strong>
+          <span style="font-size:.85rem;margin-left:8px;">
+            <a href="product-detail.html?model=FB1M2KPR" style="color:var(--navy);font-weight:700;">FB1M2KPR</a>（125Mbps入门）
+            ·
+            <a href="product-detail.html?model=FB2M5KVR" style="color:var(--royal);font-weight:700;">FB2M5KVR</a>（250Mbps主流）
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- 机器人与协作机器人 -->
     <div class="sol-card" id="robotic">
       <div class="sol-card-head">
-        <div class="sol-icon"><svg viewBox="0 0 48 48" fill="none" stroke="var(--royal)" stroke-width="1.5" width="48" height="48"><rect x="20" y="6" width="8" height="10" rx="1"/><circle cx="24" cy="4" r="2"/><path d="M24 16 L24 24"/><path d="M14 24 L34 24 L34 32 L14 32 Z"/><path d="M14 32 L8 40"/><path d="M34 32 L40 40"/><path d="M18 32 L18 40"/><path d="M30 32 L30 40"/><circle cx="20" cy="28" r="1.5"/><circle cx="28" cy="28" r="1.5"/></svg></div>
-        <div><h3>Robotic & Cobotic Solutions</h3><p>Real-time communication for collaborative and industrial robots</p></div>
+        <div class="sol-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+            <rect x="20" y="6" width="8" height="10" rx="1"/>
+            <circle cx="24" cy="4" r="2"/>
+            <path d="M24 16 L24 24"/>
+            <path d="M14 24 L34 24 L34 32 L14 32 Z"/>
+            <path d="M14 32 L8 40"/>
+            <path d="M34 32 L40 40"/>
+            <path d="M18 32 L18 40"/>
+            <path d="M30 32 L30 40"/>
+            <circle cx="20" cy="28" r="1.5"/>
+            <circle cx="28" cy="28" r="1.5"/>
+          </svg>
+        </div>
+        <div>
+          <h3>机器人与协作机器人</h3>
+          <p>Robotic & Cobotic Solutions — 协作机器人实时通信方案</p>
+        </div>
       </div>
       <div class="sol-card-body">
-        <p>Collaborative robots (cobots) and industrial robots require millisecond-level deterministic communication to ensure safe human-machine collaboration. POF is completely immune to strong EMI from servo motors and inverters, making it ideal for joint encoder data, force-feedback control and safety I/O links. OptoLock® snap-in design enables modular joint assembly, while RedLink® delivers 50 Mbps high-speed communication for real-time control loops.</p>
+        <p>协作机器人（Cobot）与工业机器人要求毫秒级确定性通信以保障安全协作。POF 完全免疫伺服电机与变频器产生的强电磁干扰，是机器人关节编码器、力控反馈、安全 I/O 通信链路的理想介质。OptoLock® 快插设计便于关节模组化装配，RedLink® 系列提供 50Mbps 高速通信满足实时控制需求。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
           <div>
-            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Key Challenges</h4>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">核心挑战</h4>
             <ul>
-              <li>Servo drives generate GHz-level EMI</li>
-              <li>Multi-joint coordination requires deterministic real-time comms</li>
-              <li>Modular joints need lightweight, easy-to-install connections</li>
-              <li>Safety I/O requires high bandwidth and low jitter</li>
+              <li>伺服电机驱动产生 GHz 级 EMI 干扰</li>
+              <li>多关节协同要求实时确定性通信</li>
+              <li>关节模组化需要轻量化、易拆装</li>
+              <li>安全 I/O 链路要求高带宽、低抖动</li>
             </ul>
           </div>
           <div>
-            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms Solution</h4>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms 方案</h4>
             <ul>
-              <li>POF fully immune to motor EMI — zero bit errors</li>
-              <li>50 Mbps RedLink® meets real-time control demands</li>
-              <li>OptoLock® snap-in design simplifies assembly</li>
-              <li>Lightweight POF ideal for robotic arm internal wiring</li>
+              <li>POF 完全免疫电机 EMI，保障零误码</li>
+              <li>50Mbps RedLink® 满足实时控制需求</li>
+              <li>OptoLock® 卡扣即插即用，便于装配</li>
+              <li>POF 重量轻，适合柔性机械臂内部布线</li>
             </ul>
           </div>
         </div>
         <div style="background:var(--off-white);border-radius:6px;padding:16px 20px;margin-top:20px;">
-          <strong style="color:var(--navy);font-size:.88rem;">Recommended Models: </strong>
-          <span style="font-size:.85rem;margin-left:8px;"><a href="product-detail.html?model=FR50MH" style="color:var(--navy);font-weight:700;">FR50MH</a> (50 Mbps high-speed) · <a href="products.html#optolock" style="color:var(--royal);font-weight:700;">OptoLock® Series</a> (snap-in)</span>
+          <strong style="color:var(--navy);font-size:.88rem;">推荐产品型号：</strong>
+          <span style="font-size:.85rem;margin-left:8px;">
+            <a href="product-detail.html?model=FR50MH" style="color:var(--navy);font-weight:700;">FR50MH</a>（50Mbps 高速）
+            ·
+            <a href="products.html#optolock" style="color:var(--royal);font-weight:700;">OptoLock® 系列</a>（快插连接）
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- 电力及柴油机车 -->
     <div class="sol-card" id="trains">
       <div class="sol-card-head">
-        <div class="sol-icon"><svg viewBox="0 0 48 48" fill="none" stroke="var(--royal)" stroke-width="1.5" width="48" height="48"><rect x="6" y="14" width="32" height="18" rx="3"/><circle cx="14" cy="38" r="3"/><circle cx="30" cy="38" r="3"/><line x1="38" y1="18" x2="42" y2="18"/><rect x="10" y="18" width="8" height="6" rx="1"/><rect x="20" y="18" width="8" height="6" rx="1"/><rect x="30" y="18" width="6" height="6" rx="1"/></svg></div>
-        <div><h3>Electric & Diesel Trains</h3><p>Onboard and train-to-ground communication for rail transit</p></div>
+        <div class="sol-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+            <rect x="6" y="14" width="32" height="18" rx="3"/>
+            <circle cx="14" cy="38" r="3"/>
+            <circle cx="30" cy="38" r="3"/>
+            <line x1="38" y1="18" x2="42" y2="18"/>
+            <rect x="10" y="18" width="8" height="6" rx="1"/>
+            <rect x="20" y="18" width="8" height="6" rx="1"/>
+            <rect x="30" y="18" width="6" height="6" rx="1"/>
+          </svg>
+        </div>
+        <div>
+          <h3>电力及柴油机车</h3>
+          <p>Electric & Diesel Trains — 轨道交通车载通信方案</p>
+        </div>
       </div>
       <div class="sol-card-body">
-        <p>Rail transit demands extreme reliability for onboard communication systems, typically requiring EN 50155 compliance: -40~+85°C wide temperature, vibration resistance and EMI immunity. POF is immune to strong EMI from traction motors and pantographs, and weighs 60% less than copper cable — ideal for space-constrained train installations. Firecomms LC fiber transceivers and RedLink® series are deployed in metro and EMU projects worldwide.</p>
+        <p>轨道交通领域对车载通信系统的可靠性要求极高，必须满足 EN 50155 标准（-40~+85°C 宽温、抗振动、抗 EMI）。POF 光纤不受牵引电机强电磁干扰影响，重量比铜缆轻 60%，更适合列车有限空间布线。Firecomms LC 光纤收发器与 RedLink® 系列已批量应用于国内外地铁与动车组项目。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
           <div>
-            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Key Challenges</h4>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">核心挑战</h4>
             <ul>
-              <li>Traction motors and pantographs generate strong EMI</li>
-              <li>Vibration and mechanical shock demand robust connections</li>
-              <li>Train-to-ground links need long-distance (≥50m) reliable transmission</li>
-              <li>Harsh temperature range (-40~+85°C)</li>
+              <li>牵引电机与受电弓产生强电磁干扰</li>
+              <li>列车振动、机械冲击要求连接可靠</li>
+              <li>车地通信需要长距离（≥50m）可靠传输</li>
+              <li>严苛温度范围（-40~+85°C）</li>
             </ul>
           </div>
           <div>
-            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms Solution</h4>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms 方案</h4>
             <ul>
-              <li>EN 50155 rail transit compliant</li>
-              <li>POF fully immune to traction EMI</li>
-              <li>-40~+85°C industrial wide-temperature operation</li>
-              <li>60% lighter than copper, reducing carload</li>
+              <li>符合 EN 50155 轨道交通标准</li>
+              <li>POF 完全免疫牵引 EMI</li>
+              <li>-40~+85°C 工业级宽温工作</li>
+              <li>重量比铜缆轻 60%，降低车厢载荷</li>
             </ul>
           </div>
         </div>
         <div style="background:var(--off-white);border-radius:6px;padding:16px 20px;margin-top:20px;">
-          <strong style="color:var(--navy);font-size:.88rem;">Recommended Models: </strong>
-          <span style="font-size:.85rem;margin-left:8px;"><a href="product-detail.html?model=FR50MH" style="color:var(--navy);font-weight:700;">FR50MH</a> (50 Mbps onboard) · <a href="products.html#lc" style="color:var(--royal);font-weight:700;">LC Fiber Transceivers</a> (train-ground)</span>
+          <strong style="color:var(--navy);font-size:.88rem;">推荐产品型号：</strong>
+          <span style="font-size:.85rem;margin-left:8px;">
+            <a href="product-detail.html?model=FR50MH" style="color:var(--navy);font-weight:700;">FR50MH</a>（50Mbps 车载）
+            ·
+            <a href="products.html#lc" style="color:var(--royal);font-weight:700;">LC 光纤收发器</a>（车地通信）
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- 电力系统管理 -->
     <div class="sol-card" id="power">
       <div class="sol-card-head">
-        <div class="sol-icon"><svg viewBox="0 0 48 48" fill="none" stroke="var(--royal)" stroke-width="1.5" width="48" height="48"><path d="M24 6 L24 14"/><path d="M14 10 L18 16"/><path d="M34 10 L30 16"/><path d="M24 14 L18 22 L24 30 L24 14 Z"/><path d="M12 36 L24 36 L24 44"/><path d="M36 36 L24 36"/></svg></div>
-        <div><h3>Power System Management</h3><p>Communication for power plants, substations and energy storage</p></div>
+        <div class="sol-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+            <path d="M24 6 L24 14"/>
+            <path d="M14 10 L18 16"/>
+            <path d="M34 10 L30 16"/>
+            <path d="M24 14 L18 22 L24 30 L24 14 Z"/>
+            <path d="M12 36 L24 36 L24 44"/>
+            <path d="M36 36 L24 36"/>
+          </svg>
+        </div>
+        <div>
+          <h3>电力系统管理</h3>
+          <p>Power System Management — 发电厂与变电站通信方案</p>
+        </div>
       </div>
       <div class="sol-card-body">
-        <p>SCADA systems in power plants, substations and energy storage stations must operate reliably under high voltage, strong EMI and lightning strikes. POF provides natural electrical isolation, eliminating ground potential difference and common-mode interference, while long-distance (≥50m) stable transmission covers an entire substation. Firecomms SMI transceivers and RedLink® series deliver professional-grade communication for the power industry.</p>
+        <p>发电厂、变电站与储能电站的 SCADA 监控系统需要在高电压、强电磁、雷电冲击等极端环境下可靠工作。POF 光纤天然电气隔离，可彻底消除地电位差引起的共模干扰，长距离（≥50m）稳定传输可覆盖大型变电站全场。Firecomms SMI 接口收发器与 RedLink® 系列为电力行业提供专业级通信解决方案。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
           <div>
-            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Key Challenges</h4>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">核心挑战</h4>
             <ul>
-              <li>High-voltage equipment induces strong common-mode interference</li>
-              <li>Lightning and switching transients require high insulation</li>
-              <li>Large substations need long-distance (≥50m) coverage</li>
-              <li>Traditional RS-485 is interference-prone with high bit error rate</li>
+              <li>高压设备产生强共模干扰与地电位差</li>
+              <li>雷击、开关脉冲需要高绝缘保护</li>
+              <li>大型变电站需要长距离（≥50m）覆盖</li>
+              <li>传统 RS-485 易受干扰、误码率高</li>
             </ul>
           </div>
           <div>
-            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms Solution</h4>
+            <h4 style="font-size:.88rem;color:var(--navy);margin-bottom:10px;font-weight:700;">Firecomms 方案</h4>
             <ul>
-              <li>Natural electrical isolation eliminates common-mode interference</li>
-              <li>Withstands lightning and transient overvoltage</li>
-              <li>50m+ long-distance transmission covers the full site</li>
-              <li>Replaces RS-485 and cuts maintenance cost significantly</li>
+              <li>POF 天然电气隔离，杜绝共模干扰</li>
+              <li>抗雷击、开关脉冲等瞬态过电压</li>
+              <li>50m+ 长距离可靠传输覆盖全场</li>
+              <li>替代 RS-485 大幅降低维护成本</li>
             </ul>
           </div>
         </div>
         <div style="background:var(--off-white);border-radius:6px;padding:16px 20px;margin-top:20px;">
-          <strong style="color:var(--navy);font-size:.88rem;">Recommended Models: </strong>
-          <span style="font-size:.85rem;margin-left:8px;"><a href="products.html#pof" style="color:var(--navy);font-weight:700;">SMI Transceivers</a> (power network) · <a href="products.html#redlink" style="color:var(--royal);font-weight:700;">RedLink® Series</a> (high-speed)</span>
+          <strong style="color:var(--navy);font-size:.88rem;">推荐产品型号：</strong>
+          <span style="font-size:.85rem;margin-left:8px;">
+            <a href="products.html#pof" style="color:var(--navy);font-weight:700;">SMI 接口收发器</a>（电力专网）
+            ·
+            <a href="products.html#redlink" style="color:var(--royal);font-weight:700;">RedLink® 系列</a>（高速通信）
+          </span>
         </div>
       </div>
     </div>
 
   </main>
 
-  <div class="floating-contact"><a href="contact.html#contact-form" title="Online Chat"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="fc-tooltip">Online Chat</span></a><a href="tel:+862162271972" title="Hotline"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.7 16.92z"/></svg><span class="fc-tooltip">Hotline</span></a><a href="#" class="fc-btn-wechat" id="fc-wechat-btn" title="WeChat">
-      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8.69 13.79c-.36 0-.66-.3-.66-.66 0-.36.3-.66.66-.66.36 0 .66.3.66.66 0 .36-.3.66-.66.66zm6.62 0c-.36 0-.66-.3-.66-.66 0-.36.3-.66.66-.66.36 0 .66.3.66.66 0 .36-.3.66-.66.66zM8.69 4C4.43 4 1 6.94 1 10.56c0 1.93 1.04 3.66 2.69 4.85-.1.37-.36 1.34-.41 1.51-.07.22.08.43.31.32.17-.08 1.99-1.27 2.78-1.78.66.15 1.35.24 2.06.24.13 0 .26-.01.39-.02-.32-.69-.51-1.45-.51-2.24 0-3.21 2.87-5.82 6.4-5.82.13 0 .26.01.39.02C14.31 5.49 11.74 4 8.69 4zm14.62 9.4c0-3.06-2.93-5.56-6.52-5.56-3.59 0-6.52 2.5-6.52 5.56 0 3.07 2.93 5.56 6.52 5.56.66 0 1.3-.1 1.9-.26.61.42 2.05 1.27 2.19 1.33.18.08.3-.08.25-.25-.04-.13-.24-.9-.32-1.21 1.31-.98 2.13-2.39 2.13-3.96 0-.41-.04-.81-.13-1.21z"/></svg><span class="fc-tooltip">WeChat</span><div class="fc-wechat-panel" id="fc-wechat-panel"><img src="../assets/img/wechat-qr.jpg" alt="WeChat QR code" onerror="this.style.display='none';var s=this.nextElementSibling;s.style.display='block'"><p style="display:none;font-size:.72rem;color:var(--mid-gray);text-align:center;">Contact us for QR code</p><p class="fc-wx-title">Scan to Add WeChat</p><p class="fc-wx-sub">Long-press to identify QR code</p><p class="fc-wx-sub" style="margin-top:6px;color:var(--brand-red);">☎ +86 21 6227 1972</p></div></a><a href="mailto:firecomms@simacity.com.cn" title="Email"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="fc-tooltip">Email Us</span></a></div>
+  <!-- 全域悬浮卡片 -->
+  <div class="floating-contact">
+    <a href="contact.html#contact-form" title="在线咨询"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="fc-tooltip">在线咨询</span></a>
+    <a href="tel:+862162271972" title="热线电话"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.7 16.92z"/></svg><span class="fc-tooltip">热线电话</span></a>
+    <a href="#" class="fc-btn-wechat" id="fc-wechat-btn" title="企业微信">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8.69 13.79c-.36 0-.66-.3-.66-.66 0-.36.3-.66.66-.66.36 0 .66.3.66.66 0 .36-.3.66-.66.66zm6.62 0c-.36 0-.66-.3-.66-.66 0-.36.3-.66.66-.66.36 0 .66.3.66.66 0 .36-.3.66-.66.66zM8.69 4C4.43 4 1 6.94 1 10.56c0 1.93 1.04 3.66 2.69 4.85-.1.37-.36 1.34-.41 1.51-.07.22.08.43.31.32.17-.08 1.99-1.27 2.78-1.78.66.15 1.35.24 2.06.24.13 0 .26-.01.39-.02-.32-.69-.51-1.45-.51-2.24 0-3.21 2.87-5.82 6.4-5.82.13 0 .26.01.39.02C14.31 5.49 11.74 4 8.69 4zm14.62 9.4c0-3.06-2.93-5.56-6.52-5.56-3.59 0-6.52 2.5-6.52 5.56 0 3.07 2.93 5.56 6.52 5.56.66 0 1.3-.1 1.9-.26.61.42 2.05 1.27 2.19 1.33.18.08.3-.08.25-.25-.04-.13-.24-.9-.32-1.21 1.31-.98 2.13-2.39 2.13-3.96 0-.41-.04-.81-.13-1.21z"/></svg><span class="fc-tooltip">企业微信</span><div class="fc-wechat-panel" id="fc-wechat-panel"><img src="assets/img/wechat-qr.jpg" alt="企业微信二维码" onerror="this.style.display='none';var s=this.nextElementSibling;s.style.display='block'"><p style="display:none;font-size:.72rem;color:var(--mid-gray);text-align:center;">请联系获取二维码</p><p class="fc-wx-title">扫码添加企业微信</p><p class="fc-wx-sub">长按识别二维码</p><p class="fc-wx-sub" style="margin-top:6px;color:var(--brand-red);">☎ 021-62271972</p></div></a>
+    <a href="mailto:firecomms@simacity.com.cn" title="邮件咨询"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="fc-tooltip">邮件咨询</span></a>
+  </div>
 
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-brand">
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
           <div class="footer-logos">
-            <img src="../assets/img/simacity-logo.jpg" alt="SIMACITY" class="footer-brand-logo simacity">
+            <img src="assets/img/simacity-logo.jpg" alt="SIMACITY" class="footer-brand-logo simacity">
             <div class="footer-logo-divider"></div>
-            <img src="../assets/img/firecomms-logo.png" alt="Firecomms" class="footer-brand-logo firecomms">
+            <img src="assets/img/firecomms-logo.png" alt="Firecomms" class="footer-brand-logo firecomms">
           </div>
-          <p>Shanghai SIMACITY Electronics Technology Co., Ltd. — Official authorized distributor of Firecomms in China. Serving POF solutions for over 10 years.</p>
-        </div><div class="footer-col"><h4>Products</h4><ul><li><a href="products.html#optolock">OptoLock® Transceivers</a></li><li><a href="products.html#lc">LC Fiber Transceivers</a></li><li><a href="products.html#redlink">RedLink® Transceivers</a></li><li><a href="products.html#pof">SMI & Media Converters</a></li><li><a href="product-index.html"> Product Search</a></li><li><a href="cross-ref.html">↔ Avago Cross Ref</a></li></ul></div><div class="footer-col"><h4>Solutions</h4><ul><li><a href="solutions.html#industrial">Industrial Automation</a></li><li><a href="solutions.html#medical">Medical Imaging</a></li><li><a href="solutions.html#renewable">Renewable Energy</a></li><li><a href="solutions.html#smartgrid">Smart Grid</a></li><li><a href="solutions.html#home">Home Networks</a></li><li><a href="solutions.html#robotic">Robotic & Cobotic</a></li><li><a href="solutions.html#trains">Electric & Diesel Trains</a></li><li><a href="solutions.html#power">Power System Management</a></li></ul></div><div class="footer-col"><h4><a href="contact.html" style="color:inherit;text-decoration:none;">Contact →</a></h4><ul><li><a href="contact.html#address">Shanghai, China</a></li><li><a href="tel:+862162271972">☎ +86 21 6227 1972</a></li><li><a href="mailto:firecomms@simacity.com.cn">✉ firecomms@simacity.com.cn</a></li><li>Mon-Fri 9:00-18:00</li></ul><a href="contact.html" class="btn btn-red btn-sm" style="margin-top:14px;display:inline-block;">Contact Us</a></div></div><div class="footer-bottom"><span>© <span id="footer-year"></span> Shanghai SIMACITY Electronics Technology Co., Ltd. · firecomms-cn.com · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">沪ICP备2026013493号-2</a></span><span>All Firecomms® trademarks are owned by Firecomms Ltd.</span></div></div></footer>
-  <div class="back-to-top" id="back-to-top"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polyline points="18 15 12 9 6 15"/></svg></div>
-  <script src="../assets/js/main.js?v=20261015a"></script>
-</body></html>
+          <p>上海芯聚电子科技有限公司是 Firecomms 中国区官方授权代理商，专注塑料光纤（POF）解决方案超过10年。</p>
+        </div>
+        <div class="footer-col"><h4>产品中心</h4><ul><li><a href="products.html#optolock">OptoLock®</a></li><li><a href="products.html#lc">LC 光纤收发器</a></li><li><a href="products.html#redlink">RedLink®</a></li><li><a href="products.html#pof">SMI & 媒体转换器</a></li><li><a href="product-index.html">型号检索</a></li><li><a href="cross-ref.html">Avago 替代查询</a></li></ul></div>
+        <div class="footer-col"><h4>解决方案</h4><ul><li><a href="solutions.html#industrial">工业自动化</a></li><li><a href="solutions.html#medical">医疗影像</a></li><li><a href="solutions.html#renewable">新能源</a></li><li><a href="solutions.html#smartgrid">智能电网</a></li><li><a href="solutions.html#home">家庭网络</a></li><li><a href="solutions.html#robotic">机器人与协作机器人</a></li><li><a href="solutions.html#trains">电力及柴油机车</a></li><li><a href="solutions.html#power">电力系统管理</a></li></ul></div>
+        <div class="footer-col">
+          <h4><a href="contact.html" style="color:inherit;text-decoration:none;">联系我们 →</a></h4>
+          <ul>
+            <li><a href="contact.html#address">上海市长宁区延安西路2299号</a></li>
+            <li><a href="tel:+862162271972">☎ 021-62271972</a></li>
+            <li><a href="mailto:firecomms@simacity.com.cn">✉ firecomms@simacity.com.cn</a></li>
+            <li>周一至周五 9:00-18:00</li>
+          </ul>
+          <a href="contact.html" class="btn btn-red btn-sm" style="margin-top:14px;display:inline-block;">立即联系</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="footer-year"></span> 上海芯聚电子科技有限公司 · firecomms-cn.com</span>
+        <span>All Firecomms® trademarks are owned by Firecomms Ltd.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="back-to-top" id="back-to-top">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polyline points="18 15 12 9 6 15"/></svg>
+  </div>
+
+  <script src="assets/js/main.js?v=20260921f"></script>
+</body>
+</html>
