@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avago Cross Reference | Firecomms China</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=20261015a">
+  <title>Avago 替代型号查询 | Firecomms 中国</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=20260921f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Top Bar -->
   <div class="top-bar">
     <div class="container top-bar-inner">
       <div class="top-contact">
@@ -16,224 +18,256 @@
         <a href="mailto:firecomms@simacity.com.cn">✉ firecomms@simacity.com.cn</a>
       </div>
       <div class="lang-switch">
-        <a href="../cross-ref.html" class="lang-btn">中文</a>
+        <a href="cross-ref.html" class="lang-btn active">中文</a>
         <span>/</span>
-        <a href="cross-ref.html" class="lang-btn active">English</a>
+        <a href="en/cross-ref.html" class="lang-btn" data-lang="en">English</a>
       </div>
     </div>
   </div>
+
+  <!-- Header -->
   <header class="header-main">
     <a href="index.html" class="brand">
-      <img src="../assets/img/simacity-logo.jpg" alt="SIMACITY" class="brand-logo simacity-logo">
+      <img src="assets/img/simacity-logo.jpg" alt="SIMACITY" class="brand-logo simacity-logo">
       <div class="brand-divider"></div>
       <div class="brand-text">
         <div class="name-cn">上海芯聚 × Firecomms中国</div>
-        <div class="name-en">SIMACITY × Firecomms China</div>
+        <div class="name-en">SIMACITY · Firecomms China</div>
       </div>
     </a>
     <nav class="main-nav">
       <ul class="nav-list">
         <li class="nav-item">
-          <a href="products.html" class="nav-link">Products <span class="chevron">▼</span></a>
+          <a href="products.html" class="nav-link">产品中心 <span class="chevron">▼</span></a>
           <div class="nav-dropdown">
-            <a href="products.html#optolock">OptoLock® Fiber Transceivers</a>
-            <a href="products.html#lc">LC Fiber Transceivers</a>
-            <a href="products.html#redlink">RedLink® Transceivers</a>
-            <a href="products.html#pof">SMI & Media Converters</a>
-            <a href="products.html#kit">Evaluation Kits</a>
-            <a href="product-index.html" style="color:var(--brand-red);font-weight:700;"> Product Search</a>
-            <a href="cross-ref.html" style="color:var(--brand-red);font-weight:700;">↔ Avago Cross Ref</a>
+            <a href="products.html#optolock">OptoLock® 光纤收发器</a>
+            <a href="products.html#lc">LC 光纤收发器</a>
+            <a href="products.html#redlink">RedLink® 收发器</a>
+            <a href="products.html#pof">SMI & 媒体转换器</a>
+            <a href="products.html#kit">评估套件</a>
+            <a href="product-index.html" style="color:var(--brand-red);font-weight:700;">型号检索</a>
+            <a href="cross-ref.html" style="color:var(--brand-red);font-weight:700;">Avago 替代查询</a>
           </div>
         </li>
         <li class="nav-item">
-          <a href="solutions.html" class="nav-link">Solutions <span class="chevron">▼</span></a>
+          <a href="solutions.html" class="nav-link">解决方案 <span class="chevron">▼</span></a>
           <div class="nav-dropdown">
-            <a href="solutions.html#industrial">Industrial Automation</a>
-            <a href="solutions.html#medical">Medical Imaging</a>
-            <a href="solutions.html#renewable">Renewable Energy</a>
-            <a href="solutions.html#smartgrid">Smart Grid</a>
-            <a href="solutions.html#home">Home Networks</a>
+            <a href="solutions.html#industrial">工业自动化</a>
+            <a href="solutions.html#medical">医疗影像</a>
+            <a href="solutions.html#renewable">新能源</a>
+            <a href="solutions.html#smartgrid">智能电网</a>
+            <a href="solutions.html#home">家庭网络</a>
           </div>
         </li>
         <li class="nav-item">
-          <a href="about.html" class="nav-link">About <span class="chevron">▼</span></a>
+          <a href="about.html" class="nav-link">关于我们 <span class="chevron">▼</span></a>
           <div class="nav-dropdown">
-            <a href="about.html#about">Company Profile</a>
-            <a href="about.html#why">Why Firecomms</a>
-            <a href="about.html#timeline">Timeline</a>
-            <a href="about.html#news">News</a>
+            <a href="about.html#about">公司简介</a>
+            <a href="about.html#why">为什么选择</a>
+            <a href="about.html#timeline">发展历程</a>
+            <a href="about.html#news">新闻动态</a>
           </div>
         </li>
         <li class="nav-item">
-          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="contact.html" class="nav-link">联系我们</a>
         </li>
       </ul>
     </nav>
-    <a href="contact.html" class="btn btn-red nav-cta">Contact Us</a>
-    <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <a href="contact.html" class="btn btn-red nav-cta">联系我们</a>
+    <button class="nav-toggle" aria-label="打开菜单">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <strong style="color:var(--navy);font-size:1rem;">Navigation</strong>
+      <strong style="color:var(--navy);font-size:1rem;">导航菜单</strong>
       <button id="mobile-menu-close" style="font-size:1.5rem;color:var(--navy);background:none;border:none;cursor:pointer;">×</button>
     </div>
-    <a href="index.html">Home</a>
-    <a href="products.html" style="color:var(--brand-red);font-weight:700;">Products</a>
-    <a href="product-index.html"> Product Search</a>
-    <a href="cross-ref.html">↔ Avago Cross Ref</a>
-    <a href="solutions.html">Solutions</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html">首页</a>
+    <a href="products.html" style="color:var(--brand-red);font-weight:700;">产品中心</a>
+    <a href="product-index.html">型号检索</a>
+    <a href="cross-ref.html">Avago 替代查询</a>
+    <a href="solutions.html">解决方案</a>
+    <a href="about.html">关于我们</a>
+    <a href="contact.html">联系我们</a>
     <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
-      <a href="../cross-ref.html" style="color:var(--navy);">中文</a>
+      <a href="en/cross-ref.html" style="color:var(--navy);">English</a>
     </div>
   </div>
+
+  <!-- Banner -->
   <section class="page-banner">
     <div class="container">
-      <h1>Avago Cross Reference</h1>
-      <p>Firecomms POF Replacement Guide — 1M / 5M / 10M / 50M / Fiber Cables</p>
+      <h1>Avago 替代型号查询</h1>
+      <p>Firecomms POF 替代方案 — 覆盖 1M / 5M / 10M / 50M / 光纤线全系列</p>
     </div>
   </section>
+
   <main class="container" style="padding:48px 20px 80px;">
+
+    <!-- 查询区 -->
     <div class="cross-ref-hero">
-      <h2 class="section-title">Enter Avago Part Number → Find Firecomms Replacement</h2>
+      <h2 class="section-title">输入 Avago 型号 → 找到 Firecomms 替代方案</h2>
       <div class="red-line"></div>
-      <p style="color:var(--text-body);margin:16px 0 28px;font-size:.95rem;">Search by Avago part number (e.g. HFBR-1521Z) or Firecomms part number (e.g. FT05MHNR). Partial match supported.</p>
+      <p style="color:var(--text-body);margin:16px 0 28px;font-size:.95rem;">支持搜索 Avago 型号（如 HFBR-1521Z）或 Firecomms 型号（如 FT05MHNR），关键词可部分匹配</p>
+
       <div class="cross-ref-search-bar">
-        <input type="text" id="cross-ref-search" class="cross-ref-input" placeholder="Enter Avago or Firecomms part number, e.g. HFBR-1521Z…" autocomplete="off">
-        <button class="cross-ref-clear" id="cross-ref-clear" title="Clear">×</button>
+        <input type="text" id="cross-ref-search" class="cross-ref-input" placeholder="输入 Avago 或 Firecomms 型号关键词，如 HFBR-1521Z …" autocomplete="off">
+        <button class="cross-ref-clear" id="cross-ref-clear" title="清除">×</button>
       </div>
+
       <div class="cross-ref-chips" id="cross-ref-chips">
-        <button class="chip active" data-series="all">All</button>
-        <button class="chip" data-series="1m">1M</button>
-        <button class="chip" data-series="5m">5M</button>
-        <button class="chip" data-series="10m">10M</button>
-        <button class="chip" data-series="50m">50M</button>
-        <button class="chip" data-series="fiber">Fiber Cables</button>
+        <button class="chip active" data-series="all">全部</button>
+        <button class="chip" data-series="1m">1M 系列</button>
+        <button class="chip" data-series="5m">5M 系列</button>
+        <button class="chip" data-series="10m">10M 系列</button>
+        <button class="chip" data-series="50m">50M 系列</button>
+        <button class="chip" data-series="fiber">光纤线</button>
       </div>
+
       <div class="cross-ref-meta">
-        <span id="cross-ref-count" data-unit="results">43 results</span>
-        <a href="../assets/pdf/Firecomms-vs-Avago-Cross-Ref-v6.pdf" target="_blank" class="btn btn-outline btn-sm" style="margin-left:auto;"> Download PDF Reference</a>
+        <span id="cross-ref-count" data-unit="条">共 43 条</span>
+        <a href="assets/pdf/firecomms-vs-avago-cross-ref-v6.pdf" target="_blank" class="btn btn-outline btn-sm" style="margin-left:auto;">
+           下载完整对照表 (PDF)
+        </a>
       </div>
     </div>
+
+    <!-- 对照表 -->
     <div class="cross-ref-table-wrap">
       <table class="cross-ref-table" id="cross-ref-table">
-        <thead><tr><th>Avago Part #</th><th>Series</th><th>Type</th><th>Firecomms Replacement</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Avago 型号</th>
+            <th>系列</th>
+            <th>类型</th>
+            <th>Firecomms 替代型号</th>
+          </tr>
+        </thead>
         <tbody>
-          <!-- 1M Series -->
-          <tr data-series="1m" data-kw="HFBR-1522Z FT05MHNR 1M Transmitter / Horizontal"><td><code class="avago-code">HFBR-1522Z</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MHNR</code></a></td></tr>
-          <tr data-series="1m" data-kw="HFBR-1522ETZ FT05MHNR 1M Transmitter / Horizontal"><td><code class="avago-code">HFBR-1522ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MHNR</code></a></td></tr>
-          <tr data-series="1m" data-kw="HFBR-1532Z FT05MVNR 1M Transmitter / Vertical"><td><code class="avago-code">HFBR-1532Z</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Transmitter / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MVNR</code></a></td></tr>
-          <tr data-series="1m" data-kw="HFBR-1532ETZ FT05MVNR 1M Transmitter / Vertical"><td><code class="avago-code">HFBR-1532ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Transmitter / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MVNR</code></a></td></tr>
-          <tr data-series="1m" data-kw="HFBR-1542ETZ FT05MWNR 1M Transmitter / 30° Angle"><td><code class="avago-code">HFBR-1542ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Transmitter / 30° Angle</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MWNR</code></a></td></tr>
-          <tr data-series="1m" data-kw="HFBR-2522Z FR2521 1M Receiver / Horizontal"><td><code class="avago-code">HFBR-2522Z</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Receiver / Horizontal</td><td><code class="fc-code">FR2521</code></td></tr>
-          <tr data-series="1m" data-kw="HFBR-2522ETZ FR2521 1M Receiver / Horizontal"><td><code class="avago-code">HFBR-2522ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Receiver / Horizontal</td><td><code class="fc-code">FR2521</code></td></tr>
-          <tr data-series="1m" data-kw="HFBR-2532Z FR2531 1M Receiver / Vertical"><td><code class="avago-code">HFBR-2532Z</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Receiver / Vertical</td><td><code class="fc-code">FR2531</code></td></tr>
-          <tr data-series="1m" data-kw="HFBR-2532ETZ FR2531 1M Receiver / Vertical"><td><code class="avago-code">HFBR-2532ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Receiver / Vertical</td><td><code class="fc-code">FR2531</code></td></tr>
-          <tr data-series="1m" data-kw="HFBR-2542ETZ FR2541 1M Receiver / 30° Angle"><td><code class="avago-code">HFBR-2542ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>Receiver / 30° Angle</td><td><code class="fc-code">FR2541</code></td></tr>
-          <!-- 5M Series -->
-          <tr data-series="5m" data-kw="HFBR-1521Z FT05MHNR 5M Transmitter / Horizontal"><td><code class="avago-code">HFBR-1521Z</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MHNR</code></a></td></tr>
-          <tr data-series="5m" data-kw="HFBR-1521ETZ FT05MHNR 5M Transmitter / Horizontal"><td><code class="avago-code">HFBR-1521ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MHNR</code></a></td></tr>
-          <tr data-series="5m" data-kw="AFBR-1521CZ FT10MHNR 5M Transmitter / Horizontal"><td><code class="avago-code">AFBR-1521CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT10MxNR&lang=en" title="View product"><code class="fc-code">FT10MHNR</code></a></td></tr>
-          <tr data-series="5m" data-kw="HFBR-1531Z FT05MVNR 5M Transmitter / Vertical"><td><code class="avago-code">HFBR-1531Z</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Transmitter / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MVNR</code></a></td></tr>
-          <tr data-series="5m" data-kw="HFBR-1531ETZ FT05MVNR 5M Transmitter / Vertical"><td><code class="avago-code">HFBR-1531ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Transmitter / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MVNR</code></a></td></tr>
-          <tr data-series="5m" data-kw="AFBR-1531CZ FT10MVNR 5M Transmitter / Vertical"><td><code class="avago-code">AFBR-1531CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Transmitter / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FT10MxNR&lang=en" title="View product"><code class="fc-code">FT10MVNR</code></a></td></tr>
-          <tr data-series="5m" data-kw="HFBR-1541ETZ FT05MWNR 5M Transmitter / 30° Angle"><td><code class="avago-code">HFBR-1541ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Transmitter / 30° Angle</td><td><a class="fc-link" href="product-detail.html?model=FT05MxNR&lang=en" title="View product"><code class="fc-code">FT05MWNR</code></a></td></tr>
-          <tr data-series="5m" data-kw="AFBR-1541CZ FT10MWNR 5M Transmitter / 30° Angle"><td><code class="avago-code">AFBR-1541CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Transmitter / 30° Angle</td><td><a class="fc-link" href="product-detail.html?model=FT10MxNR&lang=en" title="View product"><code class="fc-code">FT10MWNR</code></a></td></tr>
-          <tr data-series="5m" data-kw="HFBR-2521Z FR2521 5M Receiver / Horizontal"><td><code class="avago-code">HFBR-2521Z</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Receiver / Horizontal</td><td><code class="fc-code">FR2521</code></td></tr>
-          <tr data-series="5m" data-kw="HFBR-2521ETZ FR2521 5M Receiver / Horizontal"><td><code class="avago-code">HFBR-2521ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Receiver / Horizontal</td><td><code class="fc-code">FR2521</code></td></tr>
-          <tr data-series="5m" data-kw="AFBR-2521CZ FR05DHIR 5M Receiver / Horizontal"><td><code class="avago-code">AFBR-2521CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Receiver / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FR05DxDR&lang=en" title="View product"><code class="fc-code">FR05DHIR</code></a></td></tr>
-          <tr data-series="5m" data-kw="HFBR-2531Z FR2531 5M Receiver / Vertical"><td><code class="avago-code">HFBR-2531Z</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Receiver / Vertical</td><td><code class="fc-code">FR2531</code></td></tr>
-          <tr data-series="5m" data-kw="HFBR-2531ETZ FR2531 5M Receiver / Vertical"><td><code class="avago-code">HFBR-2531ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Receiver / Vertical</td><td><code class="fc-code">FR2531</code></td></tr>
-          <tr data-series="5m" data-kw="AFBR-2531CZ FR05DVIR 5M Receiver / Vertical"><td><code class="avago-code">AFBR-2531CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Receiver / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FR05DxDR&lang=en" title="View product"><code class="fc-code">FR05DVIR</code></a></td></tr>
-          <tr data-series="5m" data-kw="HFBR-2541ETZ FR2541 5M Receiver / 30° Angle"><td><code class="avago-code">HFBR-2541ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Receiver / 30° Angle</td><td><code class="fc-code">FR2541</code></td></tr>
-          <tr data-series="5m" data-kw="AFBR-2541CZ FR05DWIR 5M Receiver / 30° Angle"><td><code class="avago-code">AFBR-2541CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>Receiver / 30° Angle</td><td><a class="fc-link" href="product-detail.html?model=FR05DxDR&lang=en" title="View product"><code class="fc-code">FR05DWIR</code></a></td></tr>
-          <!-- 10M Series -->
-          <tr data-series="10m" data-kw="HFBR-1528Z FT10MHNR 10M Transmitter / Horizontal"><td><code class="avago-code">HFBR-1528Z</code></td><td><span class="series-tag tag-10m">10M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT10MxNR&lang=en" title="View product"><code class="fc-code">FT10MHNR</code></a></td></tr>
-          <tr data-series="10m" data-kw="AFBR-1529Z FT10MHNR 10M Transmitter / Horizontal"><td><code class="avago-code">AFBR-1529Z</code></td><td><span class="series-tag tag-10m">10M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT10MxNR&lang=en" title="View product"><code class="fc-code">FT10MHNR</code></a></td></tr>
-          <tr data-series="10m" data-kw="AFBR-1528CZ FT10MHNR 10M Transmitter / Horizontal"><td><code class="avago-code">AFBR-1528CZ</code></td><td><span class="series-tag tag-10m">10M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT10MxNR&lang=en" title="View product"><code class="fc-code">FT10MHNR</code></a></td></tr>
-          <tr data-series="10m" data-kw="AFBR-1539Z FT10MVNR 10M Transmitter / Vertical"><td><code class="avago-code">AFBR-1539Z</code></td><td><span class="series-tag tag-10m">10M</span></td><td>Transmitter / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FT10MxNR&lang=en" title="View product"><code class="fc-code">FT10MVNR</code></a></td></tr>
-          <tr data-series="10m" data-kw="HFBR-2528Z FR10MHIR 10M Receiver / Horizontal"><td><code class="avago-code">HFBR-2528Z</code></td><td><span class="series-tag tag-10m">10M</span></td><td>Receiver / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FR10MH&lang=en" title="View product"><code class="fc-code">FR10MHIR</code></a></td></tr>
-          <tr data-series="10m" data-kw="AFBR-2528CZ FR10MHIR 10M Receiver / Horizontal"><td><code class="avago-code">AFBR-2528CZ</code></td><td><span class="series-tag tag-10m">10M</span></td><td>Receiver / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FR10MH&lang=en" title="View product"><code class="fc-code">FR10MHIR</code></a></td></tr>
-          <!-- 50M Series -->
-          <tr data-series="50m" data-kw="AFBR-1629Z FT50MHIR 50M Transmitter / Horizontal"><td><code class="avago-code">AFBR-1629Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT50MxNR&lang=en" title="View product"><code class="fc-code">FT50MHIR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-1639Z FT50MVIR 50M Transmitter / Vertical"><td><code class="avago-code">AFBR-1639Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Transmitter / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FT50MxNR&lang=en" title="View product"><code class="fc-code">FT50MVIR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-1624Z FT50MHNR 50M Transmitter / Horizontal"><td><code class="avago-code">AFBR-1624Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Transmitter / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FT50MxNR&lang=en" title="View product"><code class="fc-code">FT50MHNR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-1634Z FT50MVNR 50M Transmitter / Vertical"><td><code class="avago-code">AFBR-1634Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Transmitter / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FT50MxNR&lang=en" title="View product"><code class="fc-code">FT50MVNR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-1644Z FT50MWNR 50M Transmitter / 30° Angle"><td><code class="avago-code">AFBR-1644Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Transmitter / 30° Angle</td><td><a class="fc-link" href="product-detail.html?model=FT50MxNR&lang=en" title="View product"><code class="fc-code">FT50MWNR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-2529Z FR50MHIR 50M Receiver / Horizontal"><td><code class="avago-code">AFBR-2529Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Receiver / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=en" title="View product"><code class="fc-code">FR50MHIR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-2539Z FR50MVIR 50M Receiver / Vertical"><td><code class="avago-code">AFBR-2539Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Receiver / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=en" title="View product"><code class="fc-code">FR50MVIR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-2624Z FR50MHNR 50M Receiver / Horizontal"><td><code class="avago-code">AFBR-2624Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Receiver / Horizontal</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=en" title="View product"><code class="fc-code">FR50MHNR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-2634Z FR50MVNR 50M Receiver / Vertical"><td><code class="avago-code">AFBR-2634Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Receiver / Vertical</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=en" title="View product"><code class="fc-code">FR50MVNR</code></a></td></tr>
-          <tr data-series="50m" data-kw="AFBR-2644Z FR50MWNR 50M Receiver / 30° Angle"><td><code class="avago-code">AFBR-2644Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>Receiver / 30° Angle</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=en" title="View product"><code class="fc-code">FR50MWNR</code></a></td></tr>
-          <!-- Fiber Cable Series -->
-          <tr data-series="fiber" data-kw="HFBR-EUS500Z FC-500-0SB Fiber Cable Fiber Cable"><td><code class="avago-code">HFBR-EUS500Z</code></td><td><span class="series-tag tag-fiber">Fiber Cable</span></td><td>Fiber Cable</td><td><code class="fc-code">FC-500-0SB</code></td></tr>
+          <!-- 1M 系列 -->
+          <tr data-series="1m" data-kw="HFBR-1522Z FT05MHNR 1M 发射器 / 水平"><td><code class="avago-code">HFBR-1522Z</code></td><td><span class="series-tag tag-1m">1M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MHNR</code></a></td></tr>
+          <tr data-series="1m" data-kw="HFBR-1522ETZ FT05MHNR 1M 发射器 / 水平"><td><code class="avago-code">HFBR-1522ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MHNR</code></a></td></tr>
+          <tr data-series="1m" data-kw="HFBR-1532Z FT05MVNR 1M 发射器 / 竖直"><td><code class="avago-code">HFBR-1532Z</code></td><td><span class="series-tag tag-1m">1M</span></td><td>发射器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MVNR</code></a></td></tr>
+          <tr data-series="1m" data-kw="HFBR-1532ETZ FT05MVNR 1M 发射器 / 竖直"><td><code class="avago-code">HFBR-1532ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>发射器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MVNR</code></a></td></tr>
+          <tr data-series="1m" data-kw="HFBR-1542ETZ FT05MWNR 1M 发射器 / 斜30°"><td><code class="avago-code">HFBR-1542ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>发射器 / 斜30°</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MWNR</code></a></td></tr>
+          <tr data-series="1m" data-kw="HFBR-2522Z FR2521 1M 接收器 / 水平"><td><code class="avago-code">HFBR-2522Z</code></td><td><span class="series-tag tag-1m">1M</span></td><td>接收器 / 水平</td><td><code class="fc-code">FR2521</code></td></tr>
+          <tr data-series="1m" data-kw="HFBR-2522ETZ FR2521 1M 接收器 / 水平"><td><code class="avago-code">HFBR-2522ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>接收器 / 水平</td><td><code class="fc-code">FR2521</code></td></tr>
+          <tr data-series="1m" data-kw="HFBR-2532Z FR2531 1M 接收器 / 竖直"><td><code class="avago-code">HFBR-2532Z</code></td><td><span class="series-tag tag-1m">1M</span></td><td>接收器 / 竖直</td><td><code class="fc-code">FR2531</code></td></tr>
+          <tr data-series="1m" data-kw="HFBR-2532ETZ FR2531 1M 接收器 / 竖直"><td><code class="avago-code">HFBR-2532ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>接收器 / 竖直</td><td><code class="fc-code">FR2531</code></td></tr>
+          <tr data-series="1m" data-kw="HFBR-2542ETZ FR2541 1M 接收器 / 斜30°"><td><code class="avago-code">HFBR-2542ETZ</code></td><td><span class="series-tag tag-1m">1M</span></td><td>接收器 / 斜30°</td><td><code class="fc-code">FR2541</code></td></tr>
+          <!-- 5M 系列 -->
+          <tr data-series="5m" data-kw="HFBR-1521Z FT05MHNR 5M 发射器 / 水平"><td><code class="avago-code">HFBR-1521Z</code></td><td><span class="series-tag tag-5m">5M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MHNR</code></a></td></tr>
+          <tr data-series="5m" data-kw="HFBR-1521ETZ FT05MHNR 5M 发射器 / 水平"><td><code class="avago-code">HFBR-1521ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MHNR</code></a></td></tr>
+          <tr data-series="5m" data-kw="AFBR-1521CZ FT10MHNR 5M 发射器 / 水平"><td><code class="avago-code">AFBR-1521CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-10MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT10MHNR</code></a></td></tr>
+          <tr data-series="5m" data-kw="HFBR-1531Z FT05MVNR 5M 发射器 / 竖直"><td><code class="avago-code">HFBR-1531Z</code></td><td><span class="series-tag tag-5m">5M</span></td><td>发射器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MVNR</code></a></td></tr>
+          <tr data-series="5m" data-kw="HFBR-1531ETZ FT05MVNR 5M 发射器 / 竖直"><td><code class="avago-code">HFBR-1531ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>发射器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MVNR</code></a></td></tr>
+          <tr data-series="5m" data-kw="AFBR-1531CZ FT10MVNR 5M 发射器 / 竖直"><td><code class="avago-code">AFBR-1531CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>发射器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FT-10MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT10MVNR</code></a></td></tr>
+          <tr data-series="5m" data-kw="HFBR-1541ETZ FT05MWNR 5M 发射器 / 斜30°"><td><code class="avago-code">HFBR-1541ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>发射器 / 斜30°</td><td><a class="fc-link" href="product-detail.html?model=FT-05MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT05MWNR</code></a></td></tr>
+          <tr data-series="5m" data-kw="AFBR-1541CZ FT10MWNR 5M 发射器 / 斜30°"><td><code class="avago-code">AFBR-1541CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>发射器 / 斜30°</td><td><a class="fc-link" href="product-detail.html?model=FT-10MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT10MWNR</code></a></td></tr>
+          <tr data-series="5m" data-kw="HFBR-2521Z FR2521 5M 接收器 / 水平"><td><code class="avago-code">HFBR-2521Z</code></td><td><span class="series-tag tag-5m">5M</span></td><td>接收器 / 水平</td><td><code class="fc-code">FR2521</code></td></tr>
+          <tr data-series="5m" data-kw="HFBR-2521ETZ FR2521 5M 接收器 / 水平"><td><code class="avago-code">HFBR-2521ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>接收器 / 水平</td><td><code class="fc-code">FR2521</code></td></tr>
+          <tr data-series="5m" data-kw="AFBR-2521CZ FR05DHIR 5M 接收器 / 水平"><td><code class="avago-code">AFBR-2521CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>接收器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FR05DxDR&lang=zh" title="查看产品详情"><code class="fc-code">FR05DHIR</code></a></td></tr>
+          <tr data-series="5m" data-kw="HFBR-2531Z FR2531 5M 接收器 / 竖直"><td><code class="avago-code">HFBR-2531Z</code></td><td><span class="series-tag tag-5m">5M</span></td><td>接收器 / 竖直</td><td><code class="fc-code">FR2531</code></td></tr>
+          <tr data-series="5m" data-kw="HFBR-2531ETZ FR2531 5M 接收器 / 竖直"><td><code class="avago-code">HFBR-2531ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>接收器 / 竖直</td><td><code class="fc-code">FR2531</code></td></tr>
+          <tr data-series="5m" data-kw="AFBR-2531CZ FR05DVIR 5M 接收器 / 竖直"><td><code class="avago-code">AFBR-2531CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>接收器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FR05DxDR&lang=zh" title="查看产品详情"><code class="fc-code">FR05DVIR</code></a></td></tr>
+          <tr data-series="5m" data-kw="HFBR-2541ETZ FR2541 5M 接收器 / 斜30°"><td><code class="avago-code">HFBR-2541ETZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>接收器 / 斜30°</td><td><code class="fc-code">FR2541</code></td></tr>
+          <tr data-series="5m" data-kw="AFBR-2541CZ FR05DWIR 5M 接收器 / 斜30°"><td><code class="avago-code">AFBR-2541CZ</code></td><td><span class="series-tag tag-5m">5M</span></td><td>接收器 / 斜30°</td><td><a class="fc-link" href="product-detail.html?model=FR05DxDR&lang=zh" title="查看产品详情"><code class="fc-code">FR05DWIR</code></a></td></tr>
+          <!-- 10M 系列 -->
+          <tr data-series="10m" data-kw="HFBR-1528Z FT10MHNR 10M 发射器 / 水平"><td><code class="avago-code">HFBR-1528Z</code></td><td><span class="series-tag tag-10m">10M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-10MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT10MHNR</code></a></td></tr>
+          <tr data-series="10m" data-kw="AFBR-1529Z FT10MHNR 10M 发射器 / 水平"><td><code class="avago-code">AFBR-1529Z</code></td><td><span class="series-tag tag-10m">10M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-10MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT10MHNR</code></a></td></tr>
+          <tr data-series="10m" data-kw="AFBR-1528CZ FT10MHNR 10M 发射器 / 水平"><td><code class="avago-code">AFBR-1528CZ</code></td><td><span class="series-tag tag-10m">10M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-10MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT10MHNR</code></a></td></tr>
+          <tr data-series="10m" data-kw="AFBR-1539Z FT10MVNR 10M 发射器 / 竖直"><td><code class="avago-code">AFBR-1539Z</code></td><td><span class="series-tag tag-10m">10M</span></td><td>发射器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FT-10MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT10MVNR</code></a></td></tr>
+          <tr data-series="10m" data-kw="HFBR-2528Z FR10MHIR 10M 接收器 / 水平"><td><code class="avago-code">HFBR-2528Z</code></td><td><span class="series-tag tag-10m">10M</span></td><td>接收器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FR10MH&lang=zh" title="查看产品详情"><code class="fc-code">FR10MHIR</code></a></td></tr>
+          <tr data-series="10m" data-kw="AFBR-2528CZ FR10MHIR 10M 接收器 / 水平"><td><code class="avago-code">AFBR-2528CZ</code></td><td><span class="series-tag tag-10m">10M</span></td><td>接收器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FR10MH&lang=zh" title="查看产品详情"><code class="fc-code">FR10MHIR</code></a></td></tr>
+          <!-- 50M 系列 -->
+          <tr data-series="50m" data-kw="AFBR-1629Z FT50MHIR 50M 发射器 / 水平"><td><code class="avago-code">AFBR-1629Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-50MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT50MHIR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-1639Z FT50MVIR 50M 发射器 / 竖直"><td><code class="avago-code">AFBR-1639Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>发射器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FT-50MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT50MVIR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-1624Z FT50MHNR 50M 发射器 / 水平"><td><code class="avago-code">AFBR-1624Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>发射器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FT-50MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT50MHNR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-1634Z FT50MVNR 50M 发射器 / 竖直"><td><code class="avago-code">AFBR-1634Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>发射器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FT-50MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT50MVNR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-1644Z FT50MWNR 50M 发射器 / 斜30°"><td><code class="avago-code">AFBR-1644Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>发射器 / 斜30°</td><td><a class="fc-link" href="product-detail.html?model=FT-50MHI&lang=zh" title="查看产品详情"><code class="fc-code">FT50MWNR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-2529Z FR50MHIR 50M 接收器 / 水平"><td><code class="avago-code">AFBR-2529Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>接收器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=zh" title="查看产品详情"><code class="fc-code">FR50MHIR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-2539Z FR50MVIR 50M 接收器 / 竖直"><td><code class="avago-code">AFBR-2539Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>接收器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=zh" title="查看产品详情"><code class="fc-code">FR50MVIR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-2624Z FR50MHNR 50M 接收器 / 水平"><td><code class="avago-code">AFBR-2624Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>接收器 / 水平</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=zh" title="查看产品详情"><code class="fc-code">FR50MHNR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-2634Z FR50MVNR 50M 接收器 / 竖直"><td><code class="avago-code">AFBR-2634Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>接收器 / 竖直</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=zh" title="查看产品详情"><code class="fc-code">FR50MVNR</code></a></td></tr>
+          <tr data-series="50m" data-kw="AFBR-2644Z FR50MWNR 50M 接收器 / 斜30°"><td><code class="avago-code">AFBR-2644Z</code></td><td><span class="series-tag tag-50m">50M</span></td><td>接收器 / 斜30°</td><td><a class="fc-link" href="product-detail.html?model=FR50MxxR&lang=zh" title="查看产品详情"><code class="fc-code">FR50MWNR</code></a></td></tr>
+          <!-- 光纤线 系列 -->
+          <tr data-series="fiber" data-kw="HFBR-EUS500Z FC-500-0SB 光纤线 光纤线"><td><code class="avago-code">HFBR-EUS500Z</code></td><td><span class="series-tag tag-fiber">光纤线</span></td><td>光纤线</td><td><code class="fc-code">FC-500-0SB</code></td></tr>
         </tbody>
       </table>
+
       <div id="cross-ref-empty" class="cross-ref-empty" style="display:none;">
         <div style="text-align:center;padding:60px 20px;">
           <div style="font-size:3rem;margin-bottom:16px;"></div>
-          <h3 style="color:var(--navy);margin-bottom:12px;">No Matching Results</h3>
-          <p style="color:var(--text-light);">Try a different keyword or contact SIMACITY technical support.</p>
-          <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">Contact Us →</a>
+          <h3 style="color:var(--navy);margin-bottom:12px;">未找到匹配型号</h3>
+          <p style="color:var(--text-light);">请尝试不同的关键词，或联系上海芯聚技术支持获取帮助</p>
+          <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">联系我们 →</a>
         </div>
       </div>
     </div>
+
+    <!-- 免责声明 -->
     <div class="cross-ref-disclaimer">
-      <p>This cross reference table is compiled by Shanghai SIMACITY Electronics as a selection guide. Final selection should always be verified against the official Firecomms Ltd. Datasheet. Contact us for technical support.</p>
+      <p> 本对照表由上海芯聚电子科技（SIMACITY）整理，供选型参考使用。数据来源于原厂规格书及相关工程实践，<strong>最终选型请以 Firecomms Ltd. 官方 Datasheet 为准</strong>。如需技术支持，欢迎联系我们。</p>
     </div>
+
   </main>
+
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logos">
-            <img src="../assets/img/simacity-logo.jpg" alt="SIMACITY" class="footer-brand-logo simacity">
+            <img src="assets/img/simacity-logo.jpg" alt="SIMACITY" class="footer-brand-logo simacity">
             <div class="footer-logo-divider"></div>
-            <img src="../assets/img/firecomms-logo.png" alt="Firecomms" class="footer-brand-logo firecomms">
+            <img src="assets/img/firecomms-logo.png" alt="Firecomms" class="footer-brand-logo firecomms">
           </div>
-          <p>Shanghai SIMACITY Electronics Technology Co., Ltd. is the official authorized distributor of Firecomms in China, specializing in Plastic Optical Fiber (POF) solutions for over 10 years.</p>
+          <p>上海芯聚电子科技有限公司是 Firecomms 中国区官方授权代理商，专注塑料光纤（POF）解决方案超过10年。</p>
         </div>
         <div class="footer-col">
-          <h4>Products</h4>
+          <h4>产品中心</h4>
           <ul>
-            <li><a href="products.html#optolock">OptoLock® Transceivers</a></li>
-            <li><a href="products.html#lc">LC Fiber Transceivers</a></li>
-            <li><a href="products.html#redlink">RedLink® Transceivers</a></li>
-            <li><a href="products.html#pof">SMI &amp; Media Converters</a></li>
-            <li><a href="products.html#kit">Evaluation Kits</a></li>
-            <li><a href="product-index.html"> Model Search</a></li><li><a href="cross-ref.html">↔ Avago Cross Ref</a></li>
+            <li><a href="products.html#optolock">OptoLock® 收发器</a></li>
+            <li><a href="products.html#lc">LC 光纤收发器</a></li>
+            <li><a href="products.html#redlink">RedLink® 收发器</a></li>
+            <li><a href="products.html#pof">SMI &amp; 媒体转换器</a></li>
+            <li><a href="products.html#kit">评估套件</a></li>
+            <li><a href="product-index.html">型号检索</a></li><li><a href="cross-ref.html">Avago 替代查询</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Solutions</h4>
+          <h4>解决方案</h4>
           <ul>
-            <li><a href="solutions.html#industrial">Industrial Automation</a></li>
-            <li><a href="solutions.html#medical">Medical Imaging</a></li>
-            <li><a href="solutions.html#renewable">Renewable Energy</a></li>
-            <li><a href="solutions.html#smartgrid">Smart Grid</a></li>
-            <li><a href="solutions.html#home">Home Network</a></li>
-            <li><a href="solutions.html#robotic">Robotic & Cobotic</a></li>
-            <li><a href="solutions.html#trains">Electric & Diesel Trains</a></li>
-            <li><a href="solutions.html#power">Power System Management</a></li>
+            <li><a href="solutions.html#industrial">工业自动化</a></li>
+            <li><a href="solutions.html#medical">医疗影像</a></li>
+            <li><a href="solutions.html#renewable">新能源</a></li>
+            <li><a href="solutions.html#smartgrid">智能电网</a></li>
+            <li><a href="solutions.html#home">家庭网络</a></li>
+            <li><a href="solutions.html#robotic">机器人与协作机器人</a></li>
+            <li><a href="solutions.html#trains">电力及柴油机车</a></li>
+            <li><a href="solutions.html#power">电力系统管理</a></li>
           </ul>
         </div>
-        <div class="footer-col"><h4><a href="contact.html" style="color:inherit;text-decoration:none;">Contact →</a></h4>
+        <div class="footer-col">
+          <h4><a href="contact.html" style="color:inherit;text-decoration:none;">联系我们 →</a></h4>
           <ul>
-            <li><a href="contact.html#address">2299 West Yan'an Road, Changning District, Shanghai</a></li>
-            <li><a href="tel:+862162271972">☎ +86 21 6227 1972</a></li>
+            <li><a href="contact.html#address">上海市长宁区延安西路2299号</a></li>
+            <li><a href="tel:+862162271972">☎ 021-62271972</a></li>
             <li><a href="mailto:firecomms@simacity.com.cn">✉ firecomms@simacity.com.cn</a></li>
-            <li>Mon-Fri 9:00-18:00</li>
+            <li>周一至周五 9:00-18:00</li>
           </ul>
-          <a href="contact.html" class="btn btn-red btn-sm" style="margin-top:14px;display:inline-block;">Contact Us</a>
+          <a href="contact.html" class="btn btn-red btn-sm" style="margin-top:14px;display:inline-block;">立即联系</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span id="footer-year"></span> Shanghai SIMACITY Electronics Technology Co., Ltd. · firecomms-cn.com · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">沪ICP备2026013493号-2</a></span>
+        <span>© <span id="footer-year"></span> 上海芯聚电子科技有限公司 · firecomms-cn.com</span>
         <span>All Firecomms® trademarks are owned by Firecomms Ltd.</span>
       </div>
     </div>
   </footer>
-  <script src="../assets/js/main.js?v=20261015a"></script>
+  <script src="assets/js/main.js?v=20260921f"></script>
 </body>
 </html>

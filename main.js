@@ -1237,63 +1237,24 @@
      5. LANGUAGE SWITCH
      ============================================================= */
   function initLangSwitch() {
-    var langBtns = document.querySelectorAll('.lang-btn');
-    if (!langBtns.length) return;
-
-    langBtns.forEach(function (btn) {
+    var supported = ['index.html', 'about.html', 'contact.html', 'cross-ref.html', 'products.html', 'product-index.html', 'product-detail.html', 'solutions.html'];
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
         var targetLang = this.getAttribute('data-lang');
-        var curPath = window.location.pathname;
-        var dest;
-
-        // Parse current path
-        var pathParts = curPath.split('/').filter(Boolean);
-        var filename = pathParts.length > 0 ? pathParts[pathParts.length - 1] : 'index.html';
-
-        // Special handling for product-detail with lang param
-        var params = new URLSearchParams(window.location.search);
-
-        if (targetLang === 'en') {
-          // zh -> en: insert 'en' before filename
-          if (pathParts.length === 0) {
-            dest = 'en/index.html';
-          } else {
-            var isEnDir = pathParts[0] === 'en';
-            if (isEnDir) {
-              // Already in en, just update the file
-              dest = curPath;
-            } else {
-              // Insert 'en' before filename
-              pathParts.push(filename);
-              pathParts[pathParts.length - 2] = 'en';
-              dest = '/' + pathParts.join('/');
-            }
-          }
-          // Sync lang param on product detail
-          if (filename === 'product-detail.html') {
-            params.set('lang', 'en');
-            dest += '?' + params.toString();
-          }
-        } else {
-          // en -> zh: remove 'en' segment
-          if (pathParts[0] === 'en') {
-            pathParts.shift();
-            var newFilename = pathParts.length > 0 ? pathParts[pathParts.length - 1] : 'index.html';
-            pathParts.pop();
-            pathParts.push(newFilename);
-            dest = '/' + pathParts.join('/');
-          } else {
-            dest = curPath;
-          }
-          // Sync lang param on product detail
-          if (filename === 'product-detail.html') {
-            params.set('lang', 'zh');
-            dest += (dest.indexOf('?') > -1 ? '&' : '?') + params.toString();
-          }
+        if (!targetLang) {
+          var href = this.getAttribute('href') || '';
+          targetLang = /(^|\/)en\//.test(href) || /english/i.test(this.textContent) ? 'en' : 'zh';
         }
-
-        if (dest) window.location.href = dest;
+        var parts = window.location.pathname.split('/').filter(Boolean);
+        if (parts[0] === 'en') parts.shift();
+        var filename = parts.length === 1 && supported.indexOf(parts[0]) !== -1 ? parts[0] : 'index.html';
+        var params = new URLSearchParams(window.location.search);
+        if (filename === 'product-detail.html' || params.has('lang')) params.set('lang', targetLang);
+        var search = params.toString();
+        // Articles currently have Chinese content only; language buttons lead to the corresponding home.
+        var hash = /\/articles(?:\/|$)/.test(window.location.pathname) ? '' : window.location.hash;
+        window.location.href = (targetLang === 'en' ? '/en/' : '/') + filename + (search ? '?' + search : '') + hash;
       });
     });
   }
