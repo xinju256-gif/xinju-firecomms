@@ -14,7 +14,7 @@ const safeImage = value => /^\/(?!\/)/.test(value ?? '') || /^https:\/\//i.test(
 const write = (name, content) => { const file=path.join(out,name); fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,content); };
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-const excluded = new Set(['dist','content','node_modules','.git','scripts','work','package.json','package-lock.json','netlify.toml','README-DEPLOY.txt']);
+const excluded = new Set(['dist','content','node_modules','.git','scripts','work','package.json','package-lock.json','netlify.toml','README-DEPLOY.txt','README-LAYOUT.txt','README-BILINGUAL.txt','config.yml','test-build.mjs']);
 for (const entry of fs.readdirSync(root,{withFileTypes:true})) {
   if (excluded.has(entry.name) || entry.name.startsWith('.')) continue;
   fs.cpSync(path.join(root,entry.name),path.join(out,entry.name),{recursive:true});
@@ -49,7 +49,7 @@ function enhanceHeader(html) {
 const homeSource=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const headerMatch=homeSource.match(/<body[^>]*>([^]*?)<section class="hero"/);
 if(!headerMatch) throw new Error('首页页头结构变化，请核对共用页头。');
-const sharedHeader=enhanceHeader('<html lang="en">'+headerMatch[1]).replace('<html lang="en">','').replace(/(href|src)="(?!https?:|mailto:|tel:|#|\/)([^" ]+)"/g,(_,attr,url)=>`${attr}="/${url.replace(/^(\.\.\/)+/,'')}"`);
+const sharedHeader=enhanceHeader('<html lang="zh-CN">'+headerMatch[1]).replace('<html lang="zh-CN">','').replace(/(href|src)="(?!https?:|mailto:|tel:|#|\/)([^" ]+)"/g,(_,attr,url)=>`${attr}="/${url.replace(/^(\.\.\/)+/,'')}"`);
 function page(title,description,url,body,structured='') {
 return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}｜芯聚电子 Firecomms</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${base}${url}"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/article-style.css"><link rel="stylesheet" href="/site-nav-fix.css">${structured}</head><body class="article-page">${sharedHeader}<main>${body}</main><footer><div class="wrap">上海芯聚电子科技有限公司 · Firecomms 技术与选型支持<br><a href="tel:+862162271972">021-62271972</a> · <a href="mailto:firecomms@simacity.com.cn">firecomms@simacity.com.cn</a></div></footer><script src="/main.js" defer></script></body></html>`;
 }
@@ -61,7 +61,7 @@ for(const a of articles) {
  write(`${a.url.slice(1)}index.html`,page(a.title,a.description,a.url,`<div class="wrap detail"><a class="back" href="/articles/">← 返回技术文章</a><article class="paper"><time datetime="${a.date}">${escape(a.displayDate)}</time><h1>${escape(a.title)}</h1>${a.description?`<p class="summary">${escape(a.description)}</p>`:''}${a.image?`<img class="article-cover" src="${escape(a.image)}" alt="${escape(a.title)}">`:''}<div class="prose">${a.body}</div></article><aside class="cta"><div><h2>需要协助选型或核对替代条件？</h2><p>请提供型号、应用条件及需求数量，便于我们进一步沟通。</p></div><a class="button" href="${escape(mail)}">邮件咨询</a><a href="tel:+862162271972">电话咨询</a></aside></div>`,`<script type="application/ld+json">${schema}</script>`));
 }
 // Add an entry at build time, without replacing tracked existing page source.
-for(const name of fs.readdirSync(out).filter(f=>f.endsWith('.html'))) {
+for(const name of [...fs.readdirSync(out).filter(f=>f.endsWith('.html')), ...fs.readdirSync(path.join(out,'en')).filter(f=>f.endsWith('.html')).map(f=>'en/'+f)]) {
  const file=path.join(out,name);let html=fs.readFileSync(file,'utf8');
  html=enhanceHeader(html);
  html=html.replace('</head>','<link rel="stylesheet" href="/site-nav-fix.css"></head>');
