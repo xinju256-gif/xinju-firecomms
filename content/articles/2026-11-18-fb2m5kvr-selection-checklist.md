@@ -1,33 +1,49 @@
 ---
-title: "Firecomms FB2M5KVR选型：先核对速率、光纤和链路条件"
-date: "2026-11-18T08:00:00+08:00"
-description: "结合Firecomms原厂资料，核对FB2M5KVR的数据速率、2.2 mm POF连接方式、温度范围及传输距离条件。"
-draft: true
+title: Firecomms FB2M5KVR选型：先核对速率、光纤和链路条件
+date: 2026-11-18T08:00:00+08:00
+description: 结合Firecomms原厂资料，核对FB2M5KVR的数据速率、2.2 mm POF连接方式、温度范围及传输距离条件。
+draft: false
 title_en: "FB2M5KVR Selection: Data Rate, Fiber and Link Conditions"
-description_en: "A practical selection checklist for the Firecomms FB2M5KVR, based on manufacturer documentation."
-body_en: |
+description_en: A practical selection checklist for the Firecomms FB2M5KVR,
+  based on manufacturer documentation.
+body_en: >
   ## Key specifications
+
 
   FB2M5KVR is a Firecomms OptoLock® optical transceiver.
 
+
   | Item | Manufacturer specification |
+
   | --- | --- |
+
   | Data rate | 10–250 Mbps |
+
   | Fiber termination | Bare-fiber termination for 2.2 mm jacketed POF |
+
   | Light source | 650 nm RCLED |
+
   | Operating temperature | −40°C to +85°C |
+
   | Reference link distance | 50 m over step-index POF at 250 Mbps, subject to installation conditions and operating data rate |
+
 
   ## What to verify before selection
 
+
   Check the actual serial data rate, encoding, host electrical interface, fiber type and installation conditions. The transceiver's maximum serial rate should not be treated as application payload throughput.
+
 
   Validate the assembled link at the intended distance and temperature. A reference distance alone does not establish performance for every cable or installation.
 
+
   ## Sources and support
 
+
   - [Firecomms OptoLock product page](https://www.firecomms.com/optolock)
+
   - [FB2M5KVR Datasheet, Revision E, page 1](https://www.firecomms.com/contentFiles/technicalDocuments/FB2M5KVR%20Datasheet%20Revision%20E.pdf)
+
   - Shanghai SIMACITY Technology Co., Ltd.: firecomms@simacity.com.cn · +86 21 6227 1972
 ---
 
