@@ -1,6 +1,6 @@
 /* =============================================================
    Firecomms China — main.js v4.0
-   Includes: Product Data (22 models), Mobile Nav, Dropdown,
+   Includes: Product Data (23 models), Mobile Nav, Dropdown,
    Lang Switch, Tab Switch, Product Search, Product Detail,
    Contact Form, Floating Contact, Back-to-Top, Footer Year
    ============================================================= */
@@ -8,7 +8,7 @@
   'use strict';
 
   /* =============================================================
-     1. PRODUCT DATA — All 22 models
+     1. PRODUCT DATA — All 23 models
      ============================================================= */
   const PRODUCT_DATA = [
     // ---- OptoLock® Series (4 models) ----
@@ -566,6 +566,109 @@
       applicationsEn: ['High-end embedded vision systems', 'Medical equipment high-speed fiber interfaces', 'Aerospace communication modules', 'Professional video production equipment']
     },
 
+    {
+  "id": "FR50DxxR",
+  "series": "redlink",
+  "seriesName": "RedLink® 接收器",
+  "seriesNameEn": "RedLink® Receivers",
+  "rate": 50,
+  "rateText": "DC–50 MBd",
+  "wavelength": "400–900 nm",
+  "distance": "POF ≤50 m / PCS ≤120 m (50 MBd)",
+  "interface": "TTL / RedLink",
+  "temp": "-40~85°C",
+  "fiber": "1 mm POF / 200 µm PCS",
+  "supply": "3.3 V ±5% / 5 V ±5%",
+  "status": "demand",
+  "statusText": "供货请咨询",
+  "statusTextEn": "Contact for availability",
+  "skus": [
+    "FR50DHNR",
+    "FR50DHIR",
+    "FR50DVNR",
+    "FR50DVIR",
+    "FR50DWNR",
+    "FR50DWIR"
+  ],
+  "datasheet": "/assets/pdf/fr50dxxr-rev-p1.pdf",
+  "datasheetNote": {
+    "zh": "预发布规格书 Revision P1。性能测试采用635–680 nm光源；距离取决于匹配发射器、光纤、速率及安装条件。",
+    "en": "Preliminary Datasheet, Revision P1. Performance is characterized with 635–680 nm sources. Reach depends on the matched transmitter, fiber, data rate and installation."
+  },
+  "desc": "FR50DxxR 是集成PIN光电二极管和数字化接收IC的RedLink®光接收器，支持DC–50 MBd信号速率、3.3 V或5 V供电和TTL兼容推挽CMOS输出。提供水平、垂直和30°倾斜封装，以及反相、非反相选项。",
+  "descEn": "FR50DxxR is a RedLink® optical receiver with an integrated PIN photodiode and digitizing IC. It supports DC–50 MBd, 3.3 V or 5 V supplies and a TTL-compatible push-pull CMOS output. Horizontal, vertical and 30° tilted packages are offered in inverting and non-inverting versions.",
+  "features": [
+    "信号速率DC–50 MBd（规格书第1、6页）",
+    "3.3 V或5 V供电，允许±5%变化（第6页）",
+    "TTL兼容推挽CMOS输出（第1页）",
+    "1 mm POF参考链路距离最高50 m（第1页）",
+    "200 µm PCS/HCS：50 MBd下最高120 m；10 MBd下最高200 m（第1页）",
+    "光谱响应400–900 nm；表6性能采用635–680 nm光源表征（第6页）",
+    "工作温度−40°C至+85°C（第1、5页）",
+    "预发布规格书Revision P1；链路需与合适的发射器配对验证"
+  ],
+  "featuresEn": [
+    "DC–50 MBd signal rate (pages 1 and 6)",
+    "3.3 V or 5 V supply, ±5% tolerance (page 6)",
+    "TTL-compatible push-pull CMOS output (page 1)",
+    "Up to 50 m reference reach with 1 mm POF (page 1)",
+    "200 µm PCS/HCS: up to 120 m at 50 MBd or 200 m at 10 MBd (page 1)",
+    "400–900 nm spectral response; Table 6 characterized at 635–680 nm (page 6)",
+    "−40°C to +85°C operating temperature (pages 1 and 5)",
+    "Preliminary Revision P1; validate the link with a suitable transmitter"
+  ],
+  "applications": [
+    "自动化与工业控制",
+    "串行通信光纤链路",
+    "RS232、RS485、CAN-Bus、Modbus、PROFIBUS相关光纤应用（需配套电路）",
+    "电压隔离应用"
+  ],
+  "applicationsEn": [
+    "Automation and industrial control",
+    "Serial communication optical links",
+    "Optical links for RS232, RS485, CAN-Bus, Modbus and PROFIBUS with suitable interface circuitry",
+    "Voltage isolation applications"
+  ],
+  "ordering": [
+    {
+      "sku": "FR50DHNR",
+      "orientation": "水平",
+      "orientationEn": "Horizontal",
+      "inverting": false
+    },
+    {
+      "sku": "FR50DHIR",
+      "orientation": "水平",
+      "orientationEn": "Horizontal",
+      "inverting": true
+    },
+    {
+      "sku": "FR50DVNR",
+      "orientation": "垂直",
+      "orientationEn": "Vertical",
+      "inverting": false
+    },
+    {
+      "sku": "FR50DVIR",
+      "orientation": "垂直",
+      "orientationEn": "Vertical",
+      "inverting": true
+    },
+    {
+      "sku": "FR50DWNR",
+      "orientation": "30°倾斜",
+      "orientationEn": "30° tilted",
+      "inverting": false
+    },
+    {
+      "sku": "FR50DWIR",
+      "orientation": "30°倾斜",
+      "orientationEn": "30° tilted",
+      "inverting": true
+    }
+  ]
+},
+
     // ---- SMI / Media Converters (6 models) ----
     {
       id: 'FT-05MHI',
@@ -1012,6 +1115,7 @@
     [/^FR01D/, 'FR01MH'],
     [/^FR05D/, 'FR05DxDR'],
     [/^FR10M/, 'FR10MH'],
+    [/^FR50D[HVW][NI]R$/, 'FR50DxxR'],
     [/^FR50M/, 'FR50MxxR']
   ];
 
@@ -1038,6 +1142,8 @@
 
   /* All real Firecomms SKUs belonging to a product family. */
   function productSkus(pid) {
+    var data = PRODUCT_DATA.filter(function (p) { return p.id === pid; })[0];
+    if (data && data.skus) return data.skus.slice();
     var xr = PRODUCT_XREF[pid];
     if (!xr) return [];
     var seen = {}, out = [], i, fc;
@@ -1364,6 +1470,7 @@
       'lc': ['LC Duplex'],
       'rms': ['RMS'],
       'dil': ['DIL'],
+      'ttl': ['TTL'],
       'mii': ['MII / RMII'],
       'ethernet': ['10/100 Ethernet']
     };
@@ -1507,13 +1614,13 @@
         var seriesName = isZh ? p.seriesName : p.seriesNameEn;
         var specHtml = '';
         if (p.rate) {
-          specHtml += '<span class="model-spec"><span class="model-spec-label">速率</span><span class="model-spec-value">' + p.rateText + '</span></span>';
+          specHtml += '<span class="model-spec"><span class="model-spec-label">' + (isZh ? '速率' : 'Rate') + '</span><span class="model-spec-value">' + p.rateText + '</span></span>';
         }
         if (p.interface) {
-          specHtml += '<span class="model-spec"><span class="model-spec-label">接口</span><span class="model-spec-value">' + p.interface + '</span></span>';
+          specHtml += '<span class="model-spec"><span class="model-spec-label">' + (isZh ? '接口' : 'Interface') + '</span><span class="model-spec-value">' + p.interface + '</span></span>';
         }
         if (p.temp) {
-          specHtml += '<span class="model-spec"><span class="model-spec-label">温度</span><span class="model-spec-value">' + p.temp + '</span></span>';
+          specHtml += '<span class="model-spec"><span class="model-spec-label">' + (isZh ? '温度' : 'Temperature') + '</span><span class="model-spec-value">' + p.temp + '</span></span>';
         }
 
         return '<a href="product-detail.html?model=' + p.id + '&lang=' + currentLang + '" class="product-list-item" data-id="' + p.id + '">' +
@@ -1683,6 +1790,10 @@
     }
 
     var product = PRODUCT_DATA.filter(function (p) { return p.id === modelId; })[0];
+    if (!product) {
+      var familyId = skuFamily(modelId.toUpperCase());
+      product = PRODUCT_DATA.filter(function (p) { return p.id === familyId; })[0];
+    }
 
     if (!product) {
       showNotFound(lang);
@@ -1709,6 +1820,7 @@
     if (product.distance)   specItems.push({ label: '传输距离', labelEn: 'Distance', value: product.distance });
     if (product.interface)  specItems.push({ label: '接口类型', labelEn: 'Interface', value: product.interface });
     if (product.temp)      specItems.push({ label: '工作温度', labelEn: 'Temp Range', value: product.temp });
+    if (product.supply) specItems.push({ label: '供电电压', labelEn: 'Supply Voltage', value: product.supply });
     if (product.fiber)     specItems.push({ label: '光纤类型', labelEn: 'Fiber Type', value: product.fiber });
 
     var specsHtml = specItems.map(function(s) {
@@ -1724,13 +1836,15 @@
     var featuresHtml = features.map(function(f) { return '<li>' + f + '</li>'; }).join('');
     var appsHtml = apps.map(function(a) { return '<li>' + a + '</li>'; }).join('');
 
+    var orderingHtml = product.ordering ? '<section class="detail-ordering"><h3>' + (isZh ? '可订购型号与输出逻辑' : 'Ordering Options and Output Logic') + '</h3><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th>' + (isZh ? '型号' : 'Part Number') + '</th><th>' + (isZh ? '封装方向' : 'Package Orientation') + '</th><th>' + (isZh ? '输出逻辑' : 'Output Logic') + '</th></tr></thead><tbody>' + product.ordering.map(function (o) { return '<tr><td style="padding:8px;border-bottom:1px solid #dde4ec"><code>' + o.sku + '</code></td><td>' + (isZh ? o.orientation : o.orientationEn) + '</td><td>' + (o.inverting ? (isZh ? '反相' : 'Inverting') : (isZh ? '非反相' : 'Non-inverting')) + '</td></tr>'; }).join('') + '</tbody></table></div></section>' : '';
+
     // Breadcrumb (EN pages need ../ prefix)
     var breadcrumbHtml = ''
-      + '<a href="' + pathPrefix + 'index.html">' + (isZh ? '首页' : 'Home') + '</a>'
+      + '<a href="' + '' + 'index.html">' + (isZh ? '首页' : 'Home') + '</a>'
       + '<span class="breadcrumb-sep">›</span>'
-      + '<a href="' + pathPrefix + 'product-index.html' + (isZh ? '?lang=zh' : '?lang=en') + '">' + (isZh ? '产品中心' : 'Products') + '</a>'
+      + '<a href="' + '' + 'product-index.html' + (isZh ? '?lang=zh' : '?lang=en') + '">' + (isZh ? '产品中心' : 'Products') + '</a>'
       + '<span class="breadcrumb-sep">›</span>'
-      + '<a href="' + pathPrefix + 'product-index.html?series=' + product.series + (isZh ? '&lang=zh' : '&lang=en') + '">' + (isZh ? product.seriesName : product.seriesNameEn) + '</a>'
+      + '<a href="' + '' + 'product-index.html?series=' + product.series + (isZh ? '&lang=zh' : '&lang=en') + '">' + (isZh ? product.seriesName : product.seriesNameEn) + '</a>'
       + '<span class="breadcrumb-sep">›</span>'
       + '<span>' + product.id + '</span>';
 
@@ -1739,7 +1853,7 @@
     if (hasPdf) {
       pdfSectionHtml = ''
         + '<div class="spec-preview">'
-        +   '<iframe id="pdf-preview-frame" src="' + pdfPath + '" width="100%" height="560" frameborder="0" title="PDF规格书预览"></iframe>'
+        +   '<iframe id="pdf-preview-frame" src="' + pdfPath + '" width="100%" height="560" frameborder="0" title="' + (isZh ? 'PDF规格书预览' : 'PDF datasheet preview') + '"></iframe>'
         + '</div>'
         + (product.datasheetNote ? '<div class="pdf-share-note">⚠️ ' + (isZh ? product.datasheetNote.zh : product.datasheetNote.en) + '</div>' : '')
         + '<div class="pdf-download-bar">'
@@ -1778,6 +1892,7 @@
       +   '</div>'
       +   '<div class="detail-specs-grid">' + specsHtml + '</div>'
       +   '<div class="detail-desc" id="detail-desc">' + (isZh ? product.desc : product.descEn) + '</div>'
+      +   orderingHtml
       +   '<div class="detail-features">'
       +     '<h3>' + (isZh ? '产品特点' : 'Key Features') + '</h3>'
       +     '<ul id="detail-features">' + featuresHtml + '</ul>'
@@ -1811,7 +1926,7 @@
     if (container) container.innerHTML = layoutHtml;
 
     // Also update page title
-    document.title = product.id + ' | Firecomms中国';
+    document.title = product.id + (isZh ? ' | Firecomms中国' : ' | Firecomms China');
   }
   function showNotFound(lang) {
     var pathPrefix = (lang === 'en') ? '../' : '';
@@ -1822,7 +1937,7 @@
         '<div class="empty-state-icon"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>' +
         '<h3>' + (lang === 'en' ? 'Product Not Found' : '未找到该产品') + '</h3>' +
         '<p>' + (lang === 'en' ? 'The requested model does not exist. Please check the model number.' : '请求的产品型号不存在，请检查型号是否正确。') + '</p>' +
-        '<br><a href="' + pathPrefix + 'product-index.html" class="btn btn-primary">' + (lang === 'en' ? 'Back to Products' : '返回产品中心') + '</a>' +
+        '<br><a href="' + '' + 'product-index.html" class="btn btn-primary">' + (lang === 'en' ? 'Back to Products' : '返回产品中心') + '</a>' +
         '</div>';
     }
   }

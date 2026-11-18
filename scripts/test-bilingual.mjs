@@ -67,3 +67,37 @@ for(const file of walkHtml('dist')){
  audited++;
 }
 console.log(`通过：${audited}个页面的导航和页脚无重复，解决方案页脚均为8个独立入口。`);
+
+// Run the actual catalog/detail renderer for the uploaded FR50DxxR datasheet.
+const fr50dSkus=['FR50DHNR','FR50DHIR','FR50DVNR','FR50DVIR','FR50DWNR','FR50DWIR'];
+let fr50dReference;
+for(const file of ['main.js','assets/js/main.js']){
+ const source=fs.readFileSync(file,'utf8').replace(/\}\)\(\);\s*$/,'window.__catalog={PRODUCT_DATA,productSkus,skuFamily,initProductDetail};\n})();');
+ let detail={innerHTML:''};
+ const document={addEventListener(){},getElementById:id=>id==='detail-container'?detail:id==='product-detail-page'?{}:null,querySelector:()=>null};
+ const window={location:{pathname:'/product-detail.html',search:'',hash:''}};
+ vm.runInNewContext(source,{window,document,URLSearchParams,setTimeout,clearTimeout});
+ const api=window.__catalog,p=api.PRODUCT_DATA.find(x=>x.id==='FR50DxxR');
+ assert(p);assert.equal(p.rateText,'DC–50 MBd');assert.equal(p.supply,'3.3 V ±5% / 5 V ±5%');
+ assert.equal(JSON.stringify(api.productSkus(p.id)),JSON.stringify(fr50dSkus));
+ assert.equal(p.datasheet,'/assets/pdf/fr50dxxr-rev-p1.pdf');
+ assert(p.datasheetNote.en.includes('Preliminary'));assert.equal(p.ordering.length,6);
+ const serialized=JSON.stringify(p);if(fr50dReference)assert.equal(serialized,fr50dReference);else fr50dReference=serialized;
+ for(const sku of fr50dSkus){
+  assert.equal(api.skuFamily(sku),'FR50DxxR');
+  for(const english of [false,true]){
+   detail.innerHTML='';window.location.pathname=(english?'/en':'')+'/product-detail.html';window.location.search='?model='+sku;
+   api.initProductDetail();
+   assert(detail.innerHTML.includes('FR50DxxR'));assert(detail.innerHTML.includes('href="/assets/pdf/fr50dxxr-rev-p1.pdf"'));
+   for(const model of fr50dSkus)assert(detail.innerHTML.includes(model));
+   assert(detail.innerHTML.includes(english?'Non-inverting':'非反相'));
+   assert(detail.innerHTML.includes(english?'Inverting':'反相'));
+   assert(!detail.innerHTML.includes('1500Vrms'));
+   assert(document.title.includes(english?'Firecomms China':'Firecomms中国'));
+  }
+ }
+ assert.equal(api.PRODUCT_DATA.find(x=>x.id==='FR50MxxR').datasheet,'assets/pdf/fr50mxxr.pdf');
+}
+assert(fs.readFileSync('dist/assets/pdf/fr50dxxr-rev-p1.pdf').subarray(0,4).equals(Buffer.from('%PDF')));
+for(const lang of ['','en/'])assert(fs.readFileSync('dist/'+lang+'products.html','utf8').includes('model=FR50DxxR'));
+console.log('通过：FR50DxxR独立产品、6个订购型号、24次双语详情渲染、PDF入口、原M系列资料保留。');
