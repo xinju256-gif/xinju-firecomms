@@ -1835,12 +1835,12 @@
       +     '</a>'
       +     '<a href="tel:+862162271972" class="btn btn-outline">'
       +       '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.7 16.92z"/></svg>'
-      +       (isZh ? '电话咨询：021-62271972' : 'Call: +86 21 6227 1972')
+      +       (isZh ? '电话咨询：+86 21 6227 1972' : 'Call: +86 21 6227 1972')
       +     '</a>'
       +   '</div>'
       +   '<div class="contact-mini">'
       +     '<p style="font-size:.78rem;color:var(--mid-gray);margin-bottom:8px;">' + (isZh ? '📍 技术支持与商务咨询' : '📍 Technical & Sales Support') + '</p>'
-      +     '<p style="font-size:.82rem;color:var(--navy);font-weight:600;">' + (isZh ? '上海芯聚电子科技有限公司' : 'Shanghai SIMACITY Electronics') + '</p>'
+      +     '<p style="font-size:.82rem;color:var(--navy);font-weight:600;">' + (isZh ? '上海芯聚电子科技有限公司' : 'Shanghai SIMACITY Technology Co., Ltd.') + '</p>'
       +     '<p style="font-size:.78rem;color:var(--text-body);margin-top:4px;">' + (isZh ? '周一至周五 9:00-18:00' : 'Mon–Fri 9:00–18:00') + '</p>'
       +   '</div>'
       + '</aside>';
