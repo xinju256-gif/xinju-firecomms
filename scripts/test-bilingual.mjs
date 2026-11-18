@@ -40,3 +40,30 @@ for(const script of ['main.js','assets/js/main.js']) {
  }
 }
 console.log('通过：英文文章栏目及文章页语言切换。');
+
+// Audit navigation groups across static pages and generated article pages.
+const {parseDocument}=await import('htmlparser2');
+const dom=await import('domutils');
+function walkHtml(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walkHtml(dir+'/'+e.name):e.name.endsWith('.html')?[dir+'/'+e.name]:[]);}
+function isNavigation(node){for(let p=node;p;p=p.parent)if(p.type==='tag'&&(p.name==='nav'||p.name==='footer'||/\b(nav-list|nav-dropdown|mobile-menu)\b/.test(p.attribs.class||'')))return true;return false;}
+let audited=0;
+for(const file of walkHtml('dist')){
+ const doc=parseDocument(fs.readFileSync(file,'utf8'));
+ for(const group of dom.findAll(n=>n.type==='tag'&&(n.name==='ul'||/\b(nav-dropdown|mobile-menu)\b/.test(n.attribs.class||''))&&isNavigation(n),doc.children)){
+  const seen=new Set();for(const item of group.children.filter(n=>n.type==='tag')){
+   const links=item.name==='a'?[item]:dom.findAll(n=>n.type==='tag'&&n.name==='a',item.children||[]);
+   if(links.length!==1)continue;
+   const key=(links[0].attribs.href||'')+' '+dom.textContent(links[0]).replace(/\s+/g,' ').trim();
+   assert(!seen.has(key),`${file}: duplicate navigation entry ${key}`);seen.add(key);
+  }
+ }
+ for(const column of dom.findAll(n=>n.type==='tag'&&/\bfooter-col\b/.test(n.attribs.class||''),doc.children)){
+  const heading=dom.findAll(n=>n.type==='tag'&&n.name==='h4',column.children)[0];
+  if(!heading||!['解决方案','Solutions'].includes(dom.textContent(heading).trim()))continue;
+  const links=dom.findAll(n=>n.type==='tag'&&n.name==='a',column.children);
+  assert.equal(links.length,8,file+': footer must contain all eight solutions');
+  assert.equal(new Set(links.map(n=>n.attribs.href)).size,8,file+': solutions must be unique');
+ }
+ audited++;
+}
+console.log(`通过：${audited}个页面的导航和页脚无重复，解决方案页脚均为8个独立入口。`);
