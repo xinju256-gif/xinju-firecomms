@@ -37,3 +37,16 @@ collections:
       - label: "正文"
         name: "body"
         widget: "markdown"
+
+      - label: "英文标题 / English Title（选填）"
+        name: "title_en"
+        widget: "string"
+        required: false
+      - label: "英文摘要 / English Summary（选填）"
+        name: "description_en"
+        widget: "text"
+        required: false
+      - label: "英文正文 / English Body（选填）"
+        name: "body_en"
+        widget: "markdown"
+        required: false

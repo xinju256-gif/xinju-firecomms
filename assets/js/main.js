@@ -1201,10 +1201,16 @@
           var href = this.getAttribute('href') || '';
           targetLang = /(^|\/)en\//.test(href) || /english/i.test(this.textContent) ? 'en' : 'zh';
         }
+        if (/\/articles(?:\/|$)/.test(window.location.pathname)) {
+          var alternate = document.querySelector('link[rel="alternate"][hreflang="' + (targetLang === 'en' ? 'en' : 'zh-CN') + '"]');
+          window.location.href = alternate ? alternate.getAttribute('href') : (targetLang === 'en' ? '/en/articles/' : '/articles/');
+          return;
+        }
         var parts = window.location.pathname.split('/').filter(Boolean);
         if (parts[0] === 'en') parts.shift();
         var filename = parts.length === 1 && supported.indexOf(parts[0]) !== -1 ? parts[0] : 'index.html';
         var params = new URLSearchParams(window.location.search);
+        params.set('v', '20261118-bilingual');
         if (filename === 'product-detail.html' || params.has('lang')) params.set('lang', targetLang);
         var search = params.toString();
         // Articles currently have Chinese content only; language buttons lead to the corresponding home.
@@ -1427,7 +1433,7 @@
       var langParam = new URLSearchParams(window.location.search).get('lang');
       if (/\/en\//.test(window.location.pathname)) isZh = false;
       if (langParam === 'en') isZh = false;
-      var currentLang = langParam || 'zh';
+      var currentLang = langParam || (/^\/en(?:\/|$)/.test(window.location.pathname) ? 'en' : 'zh');
 
       // Sort
       var sortBy = (document.getElementById('sort-select') || {}).value || 'default';
@@ -1669,7 +1675,7 @@
 
     var params = new URLSearchParams(window.location.search);
     var modelId = params.get('model');
-    var lang = params.get('lang') || 'zh';
+    var lang = params.get('lang') || (/^\/en(?:\/|$)/.test(window.location.pathname) ? 'en' : 'zh');
 
     if (!modelId) {
       showNotFound(lang);
@@ -1907,7 +1913,7 @@
         message
       ].join('\n');
 
-      var mailtoLink = 'mailto:kevin.cai@simacity.com.cn?subject=' + subject + '&body=' + encodeURIComponent(body);
+      var mailtoLink = 'mailto:firecomms@simacity.com.cn?subject=' + subject + '&body=' + encodeURIComponent(body);
       window.location.href = mailtoLink;
 
       // Show success
@@ -1987,7 +1993,7 @@
     if (emailBtn) {
       emailBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        window.location.href = 'mailto:kevin.cai@simacity.com.cn';
+        window.location.href = 'mailto:firecomms@simacity.com.cn';
       });
     }
 

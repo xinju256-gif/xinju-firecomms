@@ -4,7 +4,7 @@ umask 022
 SITE=/usr/share/nginx/html/firecomms-cn-v7
 CONF=/etc/nginx/conf.d/firecomms-cn.conf
 BUILD=$(mktemp -d "$HOME/firecomms-update-XXXXXX")
-BACKUP="/var/backups/firecomms/company-$(date +%Y%m%d-%H%M%S)"
+BACKUP="/var/backups/firecomms/bilingual-$(date +%Y%m%d-%H%M%S)"
 CHANGED=0
 rollback() {
   status=$?
@@ -31,7 +31,9 @@ cd "$BUILD/source"
 git log -1 --format='准备部署：%h %s'
 npm ci --no-audit --no-fund
 npm run build
-for FILE in index.html en/index.html articles/index.html admin/index.html company-info.css assets/pdf/firecomms-simacity-authorization-2026.pdf assets/img/firecomms-simacity-authorization-2026.jpg; do
+npm test
+node scripts/test-bilingual.mjs
+for FILE in index.html en/index.html articles/index.html en/articles/index.html admin/index.html company-info.css assets/pdf/firecomms-simacity-authorization-2026.pdf assets/img/firecomms-simacity-authorization-2026.jpg; do
   test -s "dist/$FILE"
 done
 node <<'NODE'
@@ -50,20 +52,37 @@ NODE
 sudo install -d -m 700 "$BACKUP"
 sudo cp -a "$SITE" "$BACKUP/site"
 sudo cp -a "$CONF" "$BACKUP/site.conf"
+sudo cat "$CONF" > "$BUILD/site.conf"
+node - "$BUILD/site.conf" <<'CACHE'
+const fs=require('fs'),file=process.argv[2];let conf=fs.readFileSync(file,'utf8');
+if(!conf.includes('# firecomms-html-revalidation')) {
+ let count=0;
+ conf=conf.replace(/(^|[}\n])([ \t]*)server[ \t]*\{/g,(_,prefix,indent)=>{count++;return prefix+indent+'server {\n'+indent+'  # firecomms-html-revalidation\n'+indent+'  expires -1;';});
+ if(!count)throw Error('未找到站点 server 配置，停止更新');
+ fs.writeFileSync(file,conf);
+}
+CACHE
 CHANGED=1
 sudo rsync -a --delete --chmod=D755,F644 dist/ "$SITE/"
+sudo cp "$BUILD/site.conf" "$CONF"
 sudo /usr/sbin/nginx -t
 sudo systemctl reload nginx
-for PAGE in /contact.html /en/contact.html /about.html /en/about.html /assets/pdf/firecomms-simacity-authorization-2026.pdf; do
+for PAGE in /index.html /en/index.html /contact.html /en/contact.html /about.html /en/about.html /articles/index.html /en/articles/index.html /assets/pdf/firecomms-simacity-authorization-2026.pdf; do
   OUTPUT="$BUILD/check-$(echo "$PAGE" | tr / _)"
   curl --fail --silent --show-error --connect-timeout 10 --max-time 30 \
     --resolve firecomms-cn.com:443:127.0.0.1 "https://firecomms-cn.com$PAGE" -o "$OUTPUT"
   cmp -s "$OUTPUT" "$SITE$PAGE"
   echo "线上文件检查通过：$PAGE"
 done
+curl --fail --silent --show-error --connect-timeout 10 --max-time 30 \
+  --resolve firecomms-cn.com:443:127.0.0.1 -D "$BUILD/cache-headers" \
+  https://firecomms-cn.com/en/index.html -o /dev/null
+grep -qi '^cache-control:.*no-cache' "$BUILD/cache-headers"
+echo '英文首页缓存重新验证设置检查通过'
 CHANGED=0
 trap - ERR
-echo '========== 公司信息与代理证更新完成 =========='
+echo '========== 中英文栏目及公司信息同步完成 =========='
 echo "备份：$BACKUP"
 echo '中文：https://firecomms-cn.com/about.html#authorization'
-echo '英文：https://firecomms-cn.com/en/about.html#authorization'
+echo '英文：https://firecomms-cn.com/en/index.html?v=20261118-bilingual'
+echo '英文技术文章：https://firecomms-cn.com/en/articles/?v=20261118-bilingual'

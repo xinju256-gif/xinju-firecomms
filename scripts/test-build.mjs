@@ -1,0 +1,41 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+const directory='content/articles';
+fs.mkdirSync(directory,{recursive:true});
+const files=['cms-check-public.md','cms-check-draft.md','cms-check-future.md'];
+const run=()=>execFileSync(process.execPath,['scripts/build.mjs'],{stdio:'pipe'});
+try {
+ fs.writeFileSync(`${directory}/${files[0]}`,'---\ntitle: "FB2M5KVR 测试 <script>"\ndate: 2026-01-01T08:00:00+08:00\ndescription: "链路条件与选型"\ntitle_en: "FB2M5KVR selection guide"\ndescription_en: "Link conditions"\nbody_en: "## Parameters\\n\\n[Unsafe](javascript:alert(1))"\n---\n## 参数\n\n| 项目 | 数值 |\n| --- | --- |\n| 型号 | FB2M5KVR |\n\n<script>alert(1)</script>\n\n[危险链接](javascript:alert(1))\n');
+ fs.writeFileSync(`${directory}/${files[1]}`,'---\ntitle: 不应公开的草稿\ndate: 2026-01-01\ndraft: true\n---\n秘密正文');
+ fs.writeFileSync(`${directory}/${files[2]}`,'---\ntitle: 未来文章\ndate: 2099-01-01\n---\n未来正文');
+ run();
+ const list=fs.readFileSync('dist/articles/index.html','utf8');
+ assert(list.includes('FB2M5KVR 测试 &lt;script&gt;'));
+ assert(!list.includes('不应公开的草稿'));assert(!list.includes('未来文章'));assert(!list.includes('后台发布测试'));
+ const url=list.match(/href="(\/articles\/[a-f0-9]+\/)"/)[1];
+ const detail=fs.readFileSync(`dist${url}index.html`,'utf8');
+ assert(detail.includes('<table>'));assert(!detail.includes('<script>alert'));assert(!detail.includes('href="javascript:'));
+ assert(detail.includes('application/ld+json'));assert(detail.includes(`rel="canonical" href="https://firecomms-cn.com${url}`));
+ assert(detail.includes('mailto:firecomms@simacity.com.cn?subject='));
+ assert(!fs.existsSync('dist/content'));
+ assert(fs.existsSync('dist/admin/config.yml'));assert(fs.existsSync('dist/assets/css/style.css'));
+ assert(fs.readFileSync('dist/index.html','utf8').includes('href="/articles/"'));
+ assert(fs.readFileSync('dist/sitemap.xml','utf8').includes(url));
+ const englishList=fs.readFileSync('dist/en/articles/index.html','utf8');
+ assert(englishList.includes('FB2M5KVR selection guide'));
+ const englishUrl='/en'+url;
+ const englishDetail=fs.readFileSync(`dist${englishUrl}index.html`,'utf8');
+ assert(englishDetail.includes('<h2>Parameters</h2>'));
+ assert(!englishDetail.includes('href="javascript:'));
+ assert(englishDetail.includes('Back to technical articles'));
+ assert(englishDetail.includes('href="https://firecomms-cn.com'+url+'"'));
+ assert(detail.includes('href="https://firecomms-cn.com'+englishUrl+'"'));
+ assert(!englishDetail.includes('上海市长宁区'));
+ const first=list;run();assert.equal(first,fs.readFileSync('dist/articles/index.html','utf8'));
+ fs.unlinkSync(`${directory}/${files[0]}`);run();assert(!fs.existsSync(`dist${url}index.html`));
+ console.log('通过：文章生成、草稿/未来日期隔离、HTML转义、危险链接处理、参数表、SEO、咨询入口、资源路径、重复构建与删除同步。');
+} finally {
+ for(const f of files) fs.rmSync(`${directory}/${f}`,{force:true});
+ run();
+}
