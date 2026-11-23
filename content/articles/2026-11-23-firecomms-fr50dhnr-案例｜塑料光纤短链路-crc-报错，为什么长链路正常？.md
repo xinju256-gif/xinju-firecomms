@@ -3,7 +3,7 @@ title: Firecomms FR50DHNR 案例｜塑料光纤短链路 CRC 报错，为什么�
 date: 2026-11-23T17:54:00.000+08:00
 description: 同一项目中，塑料光纤短链路频繁 CRC 报错，长链路却通信正常。本文以 Firecomms FR50DHNR
   选型案例为例，说明如何对照 FR50DxxR 规格书测量接收峰值光功率、检查脉宽失真，并用可控衰减验证排查方向。
-image: /uploads/06ee5569-9f0c-4b3b-b758-e45786cb5f58.png
+image: ""
 draft: false
 title_en: "Firecomms FR50DHNR Case Study: CRC Errors on a Short POF Link While a
   Longer Link Works"
