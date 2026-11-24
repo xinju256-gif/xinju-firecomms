@@ -1,132 +1,151 @@
 ---
-title: Firecomms FR50DxxR 六款光纤接收器怎么选？FR50DHNR 极性与短链路 CRC 排查
-date: 2026-11-24T17:46:00.000+08:00
-description: Firecomms FR50DxxR 是一系列 DC–50 MBd RedLink 光纤接收器。本文依据 Rev. P1
-  预备版规格书，对照 FR50DHNR 等六款型号的安装方向、输出极性和接收功率条件，并给出短链路 CRC 报错时的测量方法。
-draft: false
-title_en: "Firecomms FR50DxxR Receiver Selection: FR50DHNR Polarity and
-  Short-Link CRC Checks"
-description_en: The Firecomms FR50DxxR series includes six DC–50 MBd RedLink
-  fiber optic receivers. Using the Rev. P1 preliminary datasheet, this guide
-  maps part numbers to mounting orientations and output polarities, then
-  explains what to measure when a short POF link reports CRC errors.
+title: Firecomms FT12MHNR、FT12MVNR、FT12MWNR 怎么选？12 MBd 发射器的安装方向与外部驱动
+date: 2026-11-24T17:50:00.000+08:00
+description: Firecomms FT12MxNR 包含水平、垂直和 30° 倾斜三款 DC–12 MBd RedLink 光纤发射器。本文依据
+  Rev. P1 规格书说明完整料号、PCB 孔位和 RCLED 外部驱动，并对照 20 mA 与 60 mA 下的 POF 耦合光功率。
+title_en: "Firecomms FT12MHNR, FT12MVNR, and FT12MWNR: PCB Mounting and External
+  RCLED Drive"
+description_en: The Firecomms FT12MxNR series offers horizontal, vertical, and
+  30° tilted DC–12 MBd RedLink transmitters. This guide uses the Rev. P1
+  datasheet to explain the part numbers, PCB footprints, and external RCLED
+  drive, including coupled optical power at 20 mA and 60 mA.
 body_en: >-
-  Choose a Firecomms FR50DxxR fiber optic receiver by mounting orientation and
-  output polarity. Use the FR50DHNR for horizontal mounting when an optical high
-  should produce an electrical high. Use the FR50DHIR when the same optical
-  input should produce an electrical low. If a short link reports CRC errors
-  while a longer link works, compare peak received optical power, output pulse
-  width, and CRC error counts on the same board.
+  The Firecomms FT12MxNR series consists of DC–12 MBd RedLink plastic optical
+  fiber transmitters. Choose the FT12MHNR for horizontal mounting, the FT12MVNR
+  for vertical mounting, or the FT12MWNR for 30° tilted mounting. Mounting
+  orientation is the main selection difference. Once you select the part, check
+  the external RCLED driver, series resistor, and remote receiver limits.
 
 
 
 
-  \## Which FR50DxxR part numbers match each mounting orientation and polarity?
+  \## Where can I find the PCB footprint for each FT12MxNR part?
 
 
 
 
-  \- \*\*Horizontal mount:\*\* FR50DHNR is non-inverting and FR50DHIR is inverting. See Rev. P1, page 7, Figure 7 for the PCB hole pattern.
+  \- \*\*FT12MHNR, horizontal mount.\*\* See Rev. P1, page 6, Figure 6 for the PCB hole pattern and mechanical dimensions.
 
 
-  \- \*\*Vertical mount:\*\* FR50DVNR is non-inverting and FR50DVIR is inverting. See page 8, Figure 9 for the PCB hole pattern.
+  \- \*\*FT12MVNR, vertical mount.\*\* See page 7, Figure 8 for the PCB hole pattern and mechanical dimensions.
 
 
-  \- \*\*30° tilted mount:\*\* FR50DWNR is non-inverting and FR50DWIR is inverting. See page 9, Figure 11 for the PCB hole pattern.
-
-
-
-
-  Rev. P1, page 1, Table 1 lists all six ordering codes. When changing mounting orientation, check the PCB holes, panel opening, and plug clearance. Table 3 on page 2 identifies pin 1 as receiver data output, pin 2 as GND, and pin 3 as VCC. Figures 3 and 5 on pages 3 and 4 show the steady-state polarity.
+  \- \*\*FT12MWNR, 30° tilted mount.\*\* See page 8, Figure 10 for the PCB hole pattern and mechanical dimensions.
 
 
 
 
-  \## Why can a short link report CRC errors while a longer link works?
+  Rev. P1, page 1, Table 1 lists the full ordering codes. Before changing mounting orientation, check the PCB holes, panel opening, plug insertion and removal clearance, and fiber bend radius against the drawing for the selected part.
 
 
 
 
-  In the FR50DHNR case documented by SIMACITY, the short link reported CRC errors while the longer link communicated normally. Compare received optical power and the electrical output waveform under both conditions. To determine whether high optical input contributed, measure the power and check how the waveform changes with it. \[Read the FR50DHNR short-link CRC case study](https://firecomms-cn.com/en/articles/a5b72ed712b1569c/)
+  \## Can a controller GPIO directly drive the FT12MHNR?
 
 
 
 
-  \- \*\*Check peak power for the actual fiber type.\*\* Rev. P1, page 6, Table 6 lists an optical high peak-power range of −22 to +2 dBm and an optical low limit of −40 dBm for 1 mm POF. For 200 µm PCS, the corresponding figures are −24 to −1 dBm and −42 dBm. Firecomms used a 635–680 nm source with 5 ns optical rise and fall times.
-
-
-  \- \*\*Keep the transmitter and test pattern the same.\*\* Record received optical power, output pulse width, and CRC error counts on the short and long links. If the instrument reports average power, Table 6 states that peak power is about 3 dB higher for 50% duty-cycle data.
-
-
-  \- \*\*Include the first pulse in the test.\*\* Table 6 gives a separate pulse width distortion (PWD) range of −10 to +10 ns for the first three received pulses. Firecomms used a minimum optical input pulse width of 20 ns for this characterization. For a burst-mode link, check the receiver output with the intended idle interval and shortest pulse.
+  Use a suitable external driver and a series current-limiting resistor to control RCLED current. Rev. P1, page 2, Table 3 identifies pin 1 as the RCLED anode (TD+) and pin 2 as the cathode (TD−). Pins 3 and 4 are unconnected, and pins 5 and 8 are grounded retention pins. Figure 2 on page 2 shows a single 5 V supply, an SN75451 driver, and a 47 Ω series resistor for approximately 60 mA of RCLED on-state current.
 
 
 
 
-  \## What changes when moving from FR50MxxR to FR50DxxR?
+  The ordering table on page 1 classifies all three parts as non-inverting. Note 4 to Table 6 on page 4 identifies the Figure 2 application circuit as inverting for the measurements it references. On the actual board, apply known high and low input levels to verify how the controller output maps to light on and off and to the remote electrical output.
 
 
 
 
-  For the FR50DxxR, Rev. P1, page 6, Table 6 specifies ±5% tolerance on nominal 3.3 V or 5 V supplies and a startup delay of 0.5 ms typical and 2 ms maximum. The FR50MxxR Rev. J datasheet lists ±10% supply tolerance and a typical startup delay of 40 µs on pages 1 and 6. If the existing board sends a frame immediately after power-up, measure receiver supply voltage, valid output, and first-frame timing to verify the existing firmware delay.
+  \## How should I choose the drive current and validate a 50 m link?
 
 
 
 
-  \## Where can I find the datasheets or get selection support?
+  Rev. P1, page 4, Table 6 lists a typical coupled optical power of −9.0 dBm at 20 mA DC forward current and −3.5 dBm at 60 mA. Both figures use 0.5 m of POF with a 1 mm core and 0.5 NA. The same table gives a typical emission centroid of 650 nm at 30 mA. The operating temperature range is −40 to +85 °C.
 
 
 
 
-  \- \[Firecomms FR50DxxR preliminary datasheet, Rev. P1, hosted by SIMACITY](https://firecomms-cn.com/assets/pdf/fr50dxxr-rev-p1.pdf)
+  Table 2 on page 1 lists 50 m over step-index POF as a reference, subject to installation conditions. On the prototype, check optical power margin at both ends of the intended length range.
 
 
-  \- \[Firecomms FR50MxxR manufacturer datasheet, Rev. J](https://www.firecomms.com/contentFiles/technicalDocuments/FR50MxxR-Datasheet-Rev-J.pdf)
 
 
-  \- \[Contact SIMACITY about FR50DHNR selection, samples, and short- and long-link testing](https://firecomms-cn.com/en/contact.html)[firecomms-fr50dxxr-redlink-receiver-selection](firecomms-fr50dxxr-redlink-receiver-selection)
+  \- \*\*Shortest link:\*\* Check that incident power at the remote receiver falls within its allowed range.
+
+
+  \- \*\*Longest link:\*\* Verify receive margin with the actual cable, plugs, and bends.
+
+
+  \- \*\*Actual data pattern:\*\* Measure the remote output waveform and error performance at the intended signaling rate and duty cycle before finalizing the series resistor.
+
+
+
+
+  \## Where can I get the datasheet or selection support?
+
+
+
+
+  \- \[Firecomms FT12MxNR manufacturer preliminary datasheet, Rev. P1](https://www.firecomms.com/contentFiles/technicalDocuments/FT12MxNR-Datasheet-Rev-P1.pdf)
+
+
+  \- \[Firecomms RedLink product catalog](https://www.firecomms.com/redlink/)
+
+
+  \- \[SIMACITY Firecomms fiber optic product portfolio](https://firecomms-cn.com/en/products.html)
+
+
+  \- \[Contact SIMACITY about FT12MHNR, FT12MVNR, and FT12MWNR selection and RCLED drive](https://firecomms-cn.com/en/contact.html)[firecomms-ft12mxnr-redlink-transmitter-selection](firecomms-ft12mxnr-redlink-transmitter-selection)
 ---
-Firecomms FR50DxxR 光纤接收器按安装方向和输出极性选型。FR50DHNR 适合水平安装且光高状态对应电高电平的设计。若同样水平安装，但光高状态应输出低电平，则选 FR50DHIR。遇到短链路 CRC 报错、长链路正常时，可在同一块板上对照测量接收峰值光功率、输出脉宽和 CRC 错误计数。
+Firecomms FT12MxNR 是一系列 DC–12 MBd RedLink 塑料光纤发射器。需要水平安装选 FT12MHNR，需要垂直安装选 FT12MVNR，需要 30° 倾斜安装选 FT12MWNR。三款的选型差异主要在安装方向。确定料号后，还要核对外部 RCLED 驱动、串联电阻和对端接收条件。
 
 
 
-\## FR50DxxR 六款型号的安装方向和极性怎么对应？
+\## 三款 FT12MxNR 的 PCB 孔位怎么查？
 
 
 
-\- \*\*水平安装\*\*：FR50DHNR 为非反相，FR50DHIR 为反相。PCB 孔位见 Rev. P1 第 7 页图 7。
+\- \*\*FT12MHNR 水平安装。\*\* PCB 孔位和机械尺寸见 Rev. P1 第 6 页图 6。
 
-\- \*\*垂直安装\*\*：FR50DVNR 为非反相，FR50DVIR 为反相。PCB 孔位见第 8 页图 9。
+\- \*\*FT12MVNR 垂直安装。\*\* PCB 孔位和机械尺寸见第 7 页图 8。
 
-\- \*\*30° 倾斜安装\*\*：FR50DWNR 为非反相，FR50DWIR 为反相。PCB 孔位见第 9 页图 11。
-
-
-
-完整订购料号见 Rev. P1 第 1 页表 1。跨安装方向换料时，应核对 PCB 孔位、面板开口和插头净空。第 2 页表 3 标明，1 脚为接收数据输出，2 脚为 GND，3 脚为 VCC。稳态极性波形见第 3 页图 3 和第 4 页图 5。
+\- \*\*FT12MWNR 30° 倾斜安装。\*\* PCB 孔位和机械尺寸见第 8 页图 10。
 
 
 
-\## 为什么短链路报 CRC 错，长链路却正常？
+完整订购料号见 Rev. P1 第 1 页表 1。更换安装方向前，用对应机械图核对板孔、面板开口、插头插拔空间和光纤弯曲半径。
 
 
 
-在上海芯聚电子记录的 FR50DHNR 选型案例中，短链路出现 CRC 错误，长链路通信正常。这个现象提示应比较两种接线条件下的接收光功率和电输出波形。要确认是否涉及强光输入，还需要实测功率并检查波形是否随光功率变化。\[查看 FR50DHNR 短链路 CRC 案例](https://firecomms-cn.com/articles/a5b72ed712b1569c/)
+\## FT12MHNR 能直接接主控 GPIO 吗？
 
 
 
-\- \*\*按光纤类型核对峰值功率。\*\* Rev. P1 第 6 页表 6 给出，1 mm POF 的光高状态峰值功率为 −22 至 +2 dBm，光低状态功率上限为 −40 dBm。200 µm PCS 对应的光高状态峰值功率为 −24 至 −1 dBm，光低状态功率上限为 −42 dBm。原厂使用 635–680 nm 发射源，测试光信号的上升和下降时间均为 5 ns。
-
-\- \*\*保持发射端和测试码型一致。\*\* 记录短链路与长链路的接收光功率、输出脉宽和 CRC 错误计数。若功率仪表显示平均值，表 6 给出的换算条件是 50% 占空比下峰值功率约比平均功率高 3 dB。
-
-\- \*\*把首脉冲纳入验证。\*\* 表 6 对第 1 至第 3 个接收脉冲单列了 −10 至 +10 ns 的脉宽失真（PWD），表征使用的最小光输入脉宽为 20 ns。突发链路应按实际空闲间隔和最短脉宽检查接收输出。
+应通过合适的外部驱动和串联限流电阻控制 RCLED 电流。Rev. P1 第 2 页表 3 标明，1 脚是 RCLED 阳极（TD+），2 脚是阴极（TD−），3、4 脚未连接，5、8 脚是接地固定脚。第 2 页图 2 给出 5 V 单电源驱动示例，使用 SN75451 和 47 Ω 串联电阻，RCLED 导通电流约为 60 mA。
 
 
 
-\## 从 FR50MxxR 换到 FR50DxxR，要重新核对什么？
+第 1 页订购表把三款归为非反相型，第 4 页表 6 注 4 则注明部分动态参数是在图 2 的反相应用电路下测得。上板时应以实际驱动拓扑为准，用已知高低电平检查主控输出、发光状态和远端电输出之间的对应关系。
 
 
 
-FR50DxxR 的 Rev. P1 第 6 页表 6 规定，标称 3.3 V 或 5 V 供电的容差为 ±5%，上电唤醒延时为典型 0.5 ms、最大 2 ms。FR50MxxR Rev. J 第 1 页和第 6 页表 6 对应列出 ±10% 供电容差及典型 40 µs 唤醒延时。如果原板在上电后立即发帧，应实测接收器供电、有效输出和第一帧的相对时序，再验证原有固件等待时间。
+\## 驱动电流怎么选？50 m 距离该怎么验证？
+
+
+
+Rev. P1 第 4 页表 6 给出，在 0.5 m 长、1 mm 芯径、NA 0.5 的 POF 测试条件下，RCLED 正向直流电流为 20 mA 时，典型耦合光功率为 −9.0 dBm。电流为 60 mA 时，典型值为 −3.5 dBm。同一张表列出的典型发射中心波长为 650 nm，测试电流为 30 mA。器件工作温度范围为 −40 至 +85 °C。
+
+
+
+第 1 页表 2 给出阶跃型 POF 的 50 m 参考距离，并注明受安装条件影响。样机验证时，可以从两个方向检查光功率余量。
+
+
+
+\- \*\*最短链路\*\*：检查对端入射光功率是否处于接收器允许范围内。
+
+\- \*\*最长链路\*\*：用实际线缆、插头和弯折条件验证接收余量。
+
+\- \*\*实际码型\*\*：用目标速率和占空比测量远端输出波形及误码表现，再确定串联电阻值。
 
 
 
@@ -134,8 +153,10 @@ FR50DxxR 的 Rev. P1 第 6 页表 6 规定，标称 3.3 V 或 5 V 供电的容�
 
 
 
-\- \[Firecomms FR50DxxR 预备版规格书 Rev. P1（上海芯聚站内镜像）](https://firecomms-cn.com/assets/pdf/fr50dxxr-rev-p1.pdf)
+\- \[Firecomms FT12MxNR 原厂预备版规格书 Rev. P1](https://www.firecomms.com/contentFiles/technicalDocuments/FT12MxNR-Datasheet-Rev-P1.pdf)
 
-\- \[Firecomms FR50MxxR 原厂规格书 Rev. J](https://www.firecomms.com/contentFiles/technicalDocuments/FR50MxxR-Datasheet-Rev-J.pdf)
+\- \[Firecomms RedLink 原厂产品目录](https://www.firecomms.com/redlink/)
 
-\- \[咨询 FR50DHNR 等型号的选型、样品及长短链路验证](https://firecomms-cn.com/contact.html)[firecomms-fr50dxxr-redlink-receiver-selection](firecomms-fr50dxxr-redlink-receiver-selection)
+\- \[上海芯聚电子 Firecomms 光纤器件产品中心](https://firecomms-cn.com/products.html)
+
+\- \[咨询 FT12MHNR、FT12MVNR、FT12MWNR 选型与驱动电路](https://firecomms-cn.com/contact.html)[firecomms-ft12mxnr-redlink-transmitter-selection](firecomms-ft12mxnr-redlink-transmitter-selection)
