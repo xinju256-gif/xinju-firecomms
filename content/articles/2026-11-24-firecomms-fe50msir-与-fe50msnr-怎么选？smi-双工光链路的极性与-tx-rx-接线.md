@@ -1,144 +1,148 @@
 ---
-title: Firecomms FE50MSIR 与 FE50MSNR 怎么选？SMI 双工光链路的极性与 Tx/Rx 接线
-date: 2026-11-24T11:43:00.000+08:00
-description: Firecomms FE50MSIR 与 FE50MSNR 都是 DC–50 MBd SMI
-  双工塑料光纤收发器。本文说明两款的接收极性、Tx/Rx 配对规则、板上引脚和光纤回环测试方法，帮助排查单向通信和接收数据反相。
-draft: false
-title_en: "Firecomms FE50MSIR vs FE50MSNR: SMI Receiver Polarity and Duplex Tx/Rx Wiring"
-description_en: The Firecomms FE50MSIR and FE50MSNR are DC–50 MBd SMI duplex
-  plastic optical fiber transceivers. Compare receiver polarity, Tx/Rx routing,
-  board pinout, and optical loopback checks to troubleshoot one-way
-  communication and inverted received data.
+title: Firecomms FY-ENC-KSU 怎么接？百兆 RJ45 转塑料光纤要用一台还是两台
+date: 2026-11-24T11:45:00.000+08:00
+description: Firecomms FY-ENC-KSU 将 100BASE-TX RJ45 铜缆链路接入 OptoLock 塑料光纤。本文依据原厂
+  Rev. C 规格书说明单台与成对使用的条件、Tx/Rx 接法、5 V 供电，以及 80 m 链路距离和 50 m 标准线缆订购长度的区别。
+title_en: "Firecomms FY-ENC-KSU: Do You Need One or Two Converters for RJ45 to POF?"
+description_en: The Firecomms FY-ENC-KSU converts 100BASE-TX RJ45 Ethernet to
+  OptoLock plastic optical fiber. Using the Rev. C datasheet, this guide covers
+  single and paired setups, Tx/Rx wiring, 5 V power, and the difference between
+  the 80 m link rating and the 50 m standard cable ordering limit.
 body_en: >-
-  The main difference between the Firecomms FE50MSIR and FE50MSNR is receiver
-  polarity. With stable power and a valid optical high input, the FE50MSIR
-  receiver output is low and the FE50MSNR output is high. Both models have
-  non-inverting transmitters. Between two devices, route A Tx to B Rx on one
-  fiber and B Tx to A Rx on the other.
+  The Firecomms FY-ENC-KSU is a Fast Ethernet media converter that connects a
+  100BASE-TX RJ45 copper port to OptoLock® plastic optical fiber (POF). When
+  both devices have RJ45 copper ports, use one converter at each end and connect
+  them with duplex POF. If one device already has a compatible Fast Ethernet POF
+  port, a single converter at the copper end may be sufficient. Firecomms
+  describes both configurations on page 1 of the Rev. C datasheet.
 
 
 
 
-  \## How do I choose between FE50MSIR and FE50MSNR receiver polarity?
+  \## Do I need one converter or two?
 
 
 
 
-  \- \*\*FE50MSIR, inverting receiver.\*\* When the optical input changes from low to high, receiver output Vo changes from high to low.
+  \- \*\*Both devices have RJ45 copper ports.\*\* For example, each control cabinet may contain an Ethernet switch. Connect each switch to its local FY-ENC-KSU with a copper Ethernet cable and run POF between the converters.
 
 
-  \- \*\*FE50MSNR, non-inverting receiver.\*\* When the optical input changes from low to high, Vo changes from low to high.
+  \- \*\*One device has RJ45 and the other already has POF.\*\* Check the remote port's rate, optical signaling, and fiber termination before testing direct interoperability with the FY-ENC-KSU. Use the remote device model and optical port specifications when checking compatibility.
 
 
-
-
-  Choose the FE50MSNR when the host needs the received waveform to preserve the remote transmitter input polarity. Choose the FE50MSIR when the existing circuit or logic expects an inverted signal. When designing or swapping parts, use a known pattern to compare transmitter input, receiver output, and protocol idle level. See Firecomms Rev. P2, page 1, Table 1, page 3, Figures 3–4, and page 6, Figures 8–9.
-
-
-
-
-  \## How do I wire an SMI duplex link and troubleshoot one-way communication?
+  \- \*\*Check both rates.\*\* 100 Mbps is the Fast Ethernet data rate. 125 MBd is the optical signaling rate. See Rev. C, pages 1–2.
 
 
 
 
-  An SMI duplex link has two independent optical paths. Each path connects a transmitter at one end to a receiver at the other. Check the actual Tx and Rx markings on both devices when tracing the fibers. If only one direction works, apply a known pattern to the transmitter in the failing direction and measure the receiver waveform at the other end. Repeat in the reverse direction to check each path on its own.
+  \## How do I connect Tx and Rx on an OptoLock duplex POF link?
 
 
 
 
-  A local loopback can also verify transmission, reception, and polarity on a single board. Pages 1–2 of the Firecomms EVAL-FE50MSIR and EVAL-FE50MSNR guides, Rev. Orig, use an FP-00C-3F0 long-body SMI plug and a 1 m simplex POF loop to connect local Tx back to local Rx. After the loopback passes, verify both directions with the intended duplex cable assembly.
+  Use POF with a compatible 2.2 mm jacket. Following the installation instructions on pages 3–6 of Rev. C, separate the two strands and use a POF cutter to prepare clean, flat ends. Open the OptoLock latch, insert each fiber fully, and close the latch. Run each strand from Tx at one end to Rx at the other to create the two optical paths.
 
 
 
 
-  \## Which pins and test conditions should I check before bringing up the board?
+  Auto-MDIX applies to the RJ45 copper connection. Use the T/R markings to verify optical routing. Once both units are powered and connected to the Ethernet devices, check the indicators and verify end-to-end traffic. If the power indicator is on and the link is down, check Tx/Rx routing, fiber seating, and the condition of the cut ends first.
 
 
 
 
-  \- \*\*Pinout and supply.\*\* Rev. P2, page 2, Table 3 identifies pin 2 as TTL data input Vin, pin 10 as receiver output Vo, and pin 11 as NC. The nominal supply options are 3.3 V and 5 V. Firecomms recommends 3.3 V and a common supply for Tx and Rx. If using 5 V, check the downstream input voltage rating and logic-level compatibility.
-
-
-  \- \*\*Signaling rate and startup.\*\* Both models use a 650 nm RCLED and a TTL-compatible push-pull CMOS receiver output. They support DC–50 MBd and operate from −40 to +85 °C. Rev. P2, page 11, Table 7 lists a typical receiver power-up delay of 40 µs, measured from VCC crossing 2.75 V. If only the first frame after power-up fails, capture VCC, Vo, and first-frame timing together.
-
-
-  \- \*\*Distance and cable assembly.\*\* Rev. P2, page 1, Table 2 lists 50 m over step-index POF as a reference and notes that distance depends on installation conditions. Verify waveforms and error performance in both directions with the intended SMI plugs, fiber length, bends, and operating data pattern.
+  \## What do the 80 m link rating and 50 m cable ordering limit mean?
 
 
 
 
-  \## Where can I get the datasheet or SMI cable selection support?
+  \- \*\*80 m is the link distance stated by Firecomms.\*\* Rev. C, page 1 lists up to 80 m over POF at 100 Mbps Fast Ethernet. For installations close to that distance, test the actual fiber type, end preparation, and routing.
+
+
+  \- \*\*50 m is the maximum standard cable length listed for the meter-based ordering code.\*\* Rev. C, page 7 lists the ordering rules for simplex and duplex step-index POF. The \`xxM\` length code goes up to 50 m. If the project requires a longer continuous run, confirm cable availability and validate the link separately.
 
 
 
 
-  \- \[Firecomms FE50MSIR and FE50MSNR preliminary datasheet, Rev. P2](https://www.firecomms.com/contentFiles/technicalDocuments/FE50MSIR-FE50MSNR-Data-Sheet-Rev-P2.pdf)
+  \## How is the FY-ENC-KSU powered, and what should I order?
 
 
-  \- \[Firecomms FE50MSIR evaluation board user guide, Rev. Orig](https://www.firecomms.com/contentFiles/contentblockaccordions/EVAL-FE50MSIR_SMI_Evaluation_Board_User_Guide_Orig.pdf)
 
 
-  \- \[Firecomms FE50MSNR evaluation board user guide, Rev. Orig](https://www.firecomms.com/contentFiles/contentblockaccordions/EVAL-FE50MSNR_SMI_Evaluation_Board_User_Guide_Rev_Orig.pdf)
+  Rev. C, page 2 specifies a 4.5–5.5 V DC input with 5 V nominal, a current specification of 100–260 mA, and an operating temperature range of −10 to +60 °C. Page 4 describes using a 5 V adapter or a USB power-only cable. FY-ENC-KSU is the part number for the converter itself. Order the power supply, USB power cable, POF, and Ethernet cables as needed. See the accessory list on page 7.
+
+
+
+
+  \## Where can I find the datasheet or get selection support?
+
+
+
+
+  \- \[Firecomms FY-ENC-KSU manufacturer datasheet and installation instructions, Rev. C](https://www.firecomms.com/contentFiles/contentBlocksFiles/FY-ENC-KSU_Media_Converter_Datasheet_Rev_C.pdf)
+
+
+  \- \[Firecomms media converter catalog](https://www.firecomms.com/media-converter/)
 
 
   \- \[SIMACITY Firecomms product portfolio](https://firecomms-cn.com/en/products.html)
 
 
-  \- \[Contact SIMACITY about FE50MSIR and FE50MSNR selection and SMI duplex POF cable assemblies](https://firecomms-cn.com/en/contact.html)
+  \- \[Contact SIMACITY about the FY-ENC-KSU, duplex POF, and power accessories](https://firecomms-cn.com/en/contact.html)
 ---
-Firecomms FE50MSIR 与 FE50MSNR 的主要区别是接收极性。供电稳定且光输入符合规格时，FE50MSIR 的接收输出在光高状态下为低电平，FE50MSNR 则为高电平。两款发射端均为非反相。连接两台设备时，双芯光纤应分别把 A 端 Tx 接到 B 端 Rx，把 B 端 Tx 接到 A 端 Rx。
+Firecomms FY-ENC-KSU 是一款百兆塑料光纤媒体转换器，把 100BASE-TX RJ45 铜口接入 OptoLock® 塑料光纤（POF）。两端都是 RJ45 铜口时，每端各用一台转换器，中间用双芯 POF 连接。若一端设备已有兼容的百兆 POF 光口，可评估只在铜口一端使用一台。原厂规格书 Rev. C 第 1 页给出了这两种用法。
 
 
 
-\## FE50MSIR 和 FE50MSNR 的极性怎么选？
+\## 一台还是两台？先看两端的端口
 
 
 
-\- \*\*FE50MSIR，反相接收。\*\* 光输入从低状态切换到高状态时，接收端 Vo 从高电平切换到低电平。
+\- \*\*两端都是 RJ45 铜口。\*\* 例如两个控制柜内各有一台以太网交换机。用两台 FY-ENC-KSU，交换机分别通过网线连接本端转换器，两台转换器之间走塑料光纤。
 
-\- \*\*FE50MSNR，非反相接收。\*\* 光输入从低状态切换到高状态时，接收端 Vo 从低电平切换到高电平。
+\- \*\*一端是 RJ45，另一端已有 POF 光口。\*\* 先确认对端的速率、光信号接口和光纤端接方式，再验证能否与 FY-ENC-KSU 直接通信。选型时可同时提供对端设备型号和光口规格。
 
-
-
-如果主控需要接收波形与远端发射输入保持同相，可选 FE50MSNR。现有电路或逻辑需要反相接收时，可选 FE50MSIR。设计或换料时，可用已知码型比较发射输入、接收输出和协议空闲电平。参见原厂 Rev. P2 第 1 页表 1、第 3 页图 3–4 和第 6 页图 8–9。
+\- \*\*区分数据速率与符号率。\*\* 100 Mbps 是快速以太网的数据速率，125 MBd 是光侧符号率。参见 Rev. C 第 1–2 页。
 
 
 
-\## SMI 双芯光纤怎么接？只有一个方向能通信怎么办？
+\## OptoLock 双芯 POF 的 Tx 和 Rx 怎么接？
 
 
 
-SMI 双工链路有两条独立光路，每条把一端的发射器接到另一端的接收器。装配双芯跳线时，应按两端实际的 Tx 和 Rx 标识核对每根纤芯的去向。若只有一个方向能通信，先在故障方向的发送端输入已知码型，再在对端的接收输出测波形。换到反方向重复测试，就能分别确认两条光路。
+用适配 2.2 mm 外护套的 POF。按 Rev. C 第 3–6 页的安装说明，将两根纤芯分开，用光纤切割工具制备干净平整的端面。打开 OptoLock 卡扣，插到底后锁紧。每根纤芯都从一端的 Tx 接到另一端的 Rx，形成两个方向的光路。
 
 
 
-也可以先做本机回环，检查单块板卡的发射、接收及极性。原厂 EVAL-FE50MSIR 和 EVAL-FE50MSNR 指南 Rev. Orig 第 1–2 页使用 FP-00C-3F0 长体 SMI 插头和 1 m 单芯 POF 回环，把本机 Tx 接回本机 Rx。回环通过后，再用项目的双芯跳线验证两个方向。
+Auto-MDIX 用于 RJ45 铜缆侧。光纤侧应按 T/R 标识核对两根纤芯的方向。两端通电并接好网线后，先查看指示灯，再用实际业务流量验证端到端通信。如果电源灯亮但链路仍不通，优先核对 Tx/Rx 方向、光纤是否插到底和端面质量。
 
 
 
-\## 上板前要核对哪些引脚和测试条件？
+\## 80 m 光链路与 50 m 线缆长度分别指什么？
 
 
 
-\- \*\*引脚与供电。\*\* Rev. P2 第 2 页表 3 标明，2 脚是 TTL 数据输入 Vin，10 脚是接收数据输出 Vo，11 脚为 NC。器件支持标称 3.3 V 或 5 V 供电。原厂推荐 3.3 V，并建议 Tx 和 Rx 使用同一电源。采用 5 V 供电时，应核对后级输入的耐压与逻辑电平。
+\- \*\*80 m 是原厂列出的链路能力。\*\* Rev. C 第 1 页列出，传输 100 Mbps 快速以太网时，POF 链路最长可达 80 m。接近该距离时，应按实际光纤型号、端面和布线路径测试。
 
-\- \*\*速率与上电。\*\* 两款均采用 650 nm RCLED，提供 TTL 兼容的推挽 CMOS 输出，支持 DC–50 MBd，工作温度为 −40 至 +85 °C。Rev. P2 第 11 页表 7 将接收端上电唤醒延时列为典型 40 µs，从 VCC 超过 2.75 V 起计。若只有上电首帧异常，可同时测量 VCC、Vo 和首帧时序。
-
-\- \*\*距离与线缆。\*\* Rev. P2 第 1 页表 2 列出阶跃型 POF 的 50 m 参考距离，并注明受安装条件影响。项目验证应使用实际 SMI 插头、光纤长度、弯折条件和运行码型，分别确认两个方向的波形及误码表现。
+\- \*\*50 m 是附件表中的标准米制线缆订购长度上限。\*\* Rev. C 第 7 页列出阶跃型单芯和双芯 POF 的订购规则，\`xxM\` 长度代码最大为 50 m。项目需要更长的连续线缆时，应单独确认供货规格并验证链路。
 
 
 
-\## 哪里可以查规格书或咨询 SMI 配套？
+\## FY-ENC-KSU 怎么供电？下单要配什么？
 
 
 
-\- \[Firecomms FE50MSIR 与 FE50MSNR 原厂预备版规格书 Rev. P2](https://www.firecomms.com/contentFiles/technicalDocuments/FE50MSIR-FE50MSNR-Data-Sheet-Rev-P2.pdf)
+Rev. C 第 2 页规定输入电压为 4.5–5.5 V DC，标称 5 V，电流规格为 100–260 mA，工作温度为 −10 至 +60 °C。第 4 页说明可使用 5 V 适配器或 USB 专用供电线。FY-ENC-KSU 是主机料号。电源、USB 供电线、POF 和网线需按项目另配，原厂附件清单见第 7 页。
 
-\- \[Firecomms FE50MSIR 评估板用户指南 Rev. Orig](https://www.firecomms.com/contentFiles/contentblockaccordions/EVAL-FE50MSIR_SMI_Evaluation_Board_User_Guide_Orig.pdf)
 
-\- \[Firecomms FE50MSNR 评估板用户指南 Rev. Orig](https://www.firecomms.com/contentFiles/contentblockaccordions/EVAL-FE50MSNR_SMI_Evaluation_Board_User_Guide_Rev_Orig.pdf)
+
+\## 哪里可以查规格书或咨询配套？
+
+
+
+\- \[Firecomms FY-ENC-KSU 原厂规格书与安装说明 Rev. C](https://www.firecomms.com/contentFiles/contentBlocksFiles/FY-ENC-KSU_Media_Converter_Datasheet_Rev_C.pdf)
+
+\- \[Firecomms 原厂媒体转换器目录](https://www.firecomms.com/media-converter/)
 
 \- \[上海芯聚电子 Firecomms 产品中心](https://firecomms-cn.com/products.html)
 
-\- \[咨询 FE50MSIR、FE50MSNR 选型及 SMI 双芯光纤配套](https://firecomms-cn.com/contact.html)
+\- \[咨询 FY-ENC-KSU、双芯 POF 及电源配套](https://firecomms-cn.com/contact.html)
