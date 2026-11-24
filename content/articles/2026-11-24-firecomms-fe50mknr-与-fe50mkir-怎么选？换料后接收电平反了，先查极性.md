@@ -1,87 +1,81 @@
 ---
-title: Firecomms FE50MKNR 与 FE50MKIR 怎么选？换料后接收电平反了，先查极性
-date: 2026-11-24T11:24:00.000+08:00
-description: Firecomms FE50MKNR 与 FE50MKIR 均为 DC–50 MBd OptoLock
-  塑料光纤收发器，主要区别在接收端极性。本文说明两款型号有光和暗态时的输出电平，以及选型时应核对的供电、复位和首脉冲条件。
-draft: false
-title_en: "Firecomms FE50MKNR vs FE50MKIR: Why Does the Receiver Output Flip
-  After a Swap?"
-description_en: The Firecomms FE50MKNR and FE50MKIR are DC–50 MBd OptoLock
-  plastic optical fiber transceivers with different receiver polarities. Compare
-  their output levels in light and dark states, then check supply voltage, reset
-  behavior, and first-pulse timing before swapping parts.
+title: Firecomms FB00AKAR 模拟光纤收发器怎么用？RCLED 驱动与光电流读出
+date: 2026-11-24T11:28:00.000+08:00
+description: Firecomms FB00AKAR 是一款模拟 OptoLock 塑料光纤收发器，集成红光 RCLED 和 500 µm
+  硅光电二极管。本文依据原厂 Rev. E 规格书说明如何设置发射偏置、读取光电流，以及如何验证整条光链路的带宽。
+title_en: "Firecomms FB00AKAR Analog Fiber Optic Transceiver: How to Drive the
+  RCLED and Read Photocurrent"
+description_en: The Firecomms FB00AKAR is an analog OptoLock plastic optical
+  fiber transceiver with a red RCLED and a 500 µm silicon photodiode. Using the
+  Rev. E datasheet, this article explains how to bias the transmitter, read
+  photocurrent, and verify end-to-end link bandwidth.
 body_en: >-
-  The difference between the Firecomms FE50MKNR and FE50MKIR is receiver
-  polarity. Choose the non-inverting FE50MKNR when the received electrical
-  signal must preserve the transmitter input polarity. Choose the FE50MKIR when
-  the received signal must be inverted. Both are DC–50 MBd OptoLock® plastic
-  optical fiber transceivers with non-inverting transmitters. If the received
-  logic levels flip after a part swap, check the full part number and the
-  receiver logic definition first.
+  The Firecomms FB00AKAR is an OptoLock® plastic optical fiber transceiver for
+  analog signal transmission and sensing. Use an external circuit to bias the
+  transmitter RCLED, then convert the receiver photocurrent to a voltage for an
+  ADC or comparator. The device accepts 2.2 mm jacketed plastic optical fiber
+  (POF). The datasheet describes optical coupling to a 1 mm fiber core with a
+  numerical aperture (NA) of 0.5. Applications include visible red-light
+  sensing, beam interruption detection, and remote fiber optic sensing.
 
 
 
 
-  \## What do the FE50MKNR and FE50MKIR output when light is detected?
+  \## How do I drive the FB00AKAR RCLED?
 
 
 
 
-  With the supply stable and the optical input within datasheet limits, both transmitters emit light for a high electrical input and enter the dark state for a low input. The difference appears at receiver pin 10 (Vo).
+  \- \*\*Check the pinout first.\*\* FB00AKAR Rev. E, page 2, Table 3 identifies pin 5 as the RCLED anode (TD+) and pins 2, 3, 4, and 6 as the cathode (TD−). Set the DC operating point with an external current-limiting or driver circuit.
+
+
+  \- \*\*Set the bias and modulation for the signal.\*\* Rev. E, page 1 describes an AC modulation operating point of approximately 20 mA at a forward voltage of approximately 1.9 V. Firecomms gives 100–470 nF as an example range for the AC coupling capacitor. For applications that must preserve DC or slowly changing signals, check the low-frequency response of the coupling network.
+
+
+  \- \*\*Compare optical power under matching conditions.\*\* Rev. E, page 4, Table 6 lists a typical average output power of −5.5 dBm and a typical peak wavelength of 660 nm at a 10 mA drive current over −40 to +85 °C. The product is designated as a 650 nm red-light device. Figures 3–4 on page 4 show how fiber-coupled optical power varies with temperature and drive current.
 
 
 
 
-  \- \*\*FE50MKNR, non-inverting:\*\* Vo is high when the optical input is in its high state and low when the optical input is in its low state.
-
-
-  \- \*\*FE50MKIR, inverting:\*\* Vo is low when the optical input is in its high state and high when the optical input is in its low state.
+  \## How do I interface the photodiode with an ADC?
 
 
 
 
-  Firecomms Rev. B, page 2, Table 3 identifies the input and output pins. Page 3, Figures 3–4, and page 6, Figures 8–9, show transmitter and receiver polarity for both models.
+  Receiver pin 7 is the photodiode anode (RD+) and pin 8 is the cathode (RD−). The photodiode converts received light into current, and an external readout circuit converts that current into voltage. Rev. E, page 2, Table 3 gives the pinout. Figure 2 on page 3 shows a sensor-board reference circuit with a DAC and ADC.
 
 
 
 
-  \## What other interface conditions matter on a DC–50 MBd link?
+  \- \*\*Estimate photocurrent from optical power.\*\* Rev. E, page 5, Table 7 gives a typical responsivity of 0.30 A/W at 650 nm. Using the table’s fiber-emitted optical power reference, 10 µW corresponds to about 3 µA of signal photocurrent. Measure the dark-state reading and useful signal amplitude on the prototype before setting a detection threshold.
+
+
+  \- \*\*Choose the readout circuit for the signal level and speed.\*\* A resistor readout is a starting point for beam interruption detection or low-frequency sampling. For weaker signals or greater readout bandwidth, evaluate a transimpedance amplifier (TIA) and check gain and stability against the actual photocurrent, noise, total input capacitance, and ADC range.
 
 
 
 
-  Both parts use plugless OptoLock termination for 2.2 mm jacketed plastic optical fiber (POF). The transmitter uses a 650 nm RCLED, and the receiver provides a TTL-compatible push-pull CMOS output. The nominal supply options are 3.3 V and 5 V. The operating temperature range is −40 to +85 °C. Firecomms recommends 3.3 V. See Rev. B, pages 1–2 and 10–11.
+  \## What does the 125 MHz rating describe?
 
 
 
 
-  \- \*\*Check input thresholds and output levels.\*\* If the supply voltage changes, check the downstream MCU or FPGA input voltage range and evaluate Vo under the load conditions given in Table 7 on page 11.
-
-
-  \- \*\*Check when the receiver output becomes valid.\*\* Page 5, Figure 7, and page 8, Figure 12, show that the receiver output can be high impedance during reset. The typical receiver power-up delay is 40 µs in Table 7 on page 11. Verify what the downstream logic reads during power-up and supply resets.
-
-
-  \- \*\*Test the first pulse with the actual data pattern.\*\* Table 7 on page 11 specifies a separate receiver pulse width distortion (PWD) range of −7 to +14 ns for the first three pulses. The characterization includes a minimum optical input pulse width of 20 ns, with the first pulse representing the worst case. For industrial control or burst-mode serial links, use the target pattern and actual idle interval to verify that downstream logic detects the first valid pulse.
+  The 125 MHz figure is the typical receiver −3 dB cutoff frequency in Rev. E, page 5, Table 7. End-to-end analog link bandwidth also depends on the RCLED bias and modulation circuit, the photodiode load, and the receiver amplifier. Table 6 on page 4 lists the transmitter cutoff separately for different bias conditions.
 
 
 
 
-  \## Can I swap the FE50MKNR and FE50MKIR?
+  On the prototype, measure the light-state and dark-state outputs with the intended fiber length and bend conditions. Then measure receiver amplitude roll-off at the target signal frequencies. These measurements establish the margin for beam interruption detection and the usable signal bandwidth, respectively.
 
 
 
 
-  The two models share a pinout. Before swapping them, check whether the host can handle the polarity change and verify the logic levels it sees during data transmission, protocol idle, loss of light, and reset. If the serial controller expects a particular polarity for start-bit detection or edge synchronization, verify receiver behavior on the actual hardware before approving the replacement.
+  \## Where can I download the datasheet or get design support?
 
 
 
 
-  \## Where can I find the datasheet or get selection support?
-
-
-
-
-  \- \[Firecomms FE50MKNR and FE50MKIR manufacturer datasheet, Rev. B](https://www.firecomms.com/contentFiles/technicalDocuments/FE50MKIR%20FE50MKNR%20Data%20Sheet%20Revision%20B.pdf)
+  \- \[Firecomms FB00AKAR manufacturer datasheet, Rev. E](https://www.firecomms.com/contentFiles/technicalDocuments/FB00AKAR%20Datasheet%20Revision%20E.pdf)
 
 
   \- \[Firecomms OptoLock product catalog](https://www.firecomms.com/optolock/)
@@ -90,62 +84,58 @@ body_en: >-
   \- \[SIMACITY Firecomms part-number search](https://firecomms-cn.com/en/product-index.html)
 
 
-  \- \[Contact SIMACITY about FE50MKNR and FE50MKIR selection and samples](https://firecomms-cn.com/en/contact.html)
+  \- \[Contact SIMACITY about FB00AKAR samples, RCLED drive, and photocurrent readout](https://firecomms-cn.com/en/contact.html)
 ---
-Firecomms FE50MKNR 与 FE50MKIR 的区别在接收端极性。需要接收输出保持与发射端输入同相时，选非反相的 FE50MKNR。需要接收输出反相时，选 FE50MKIR。两款都是 DC–50 MBd OptoLock® 塑料光纤收发器，发射端均为非反相。换料后如果发现接收数据的高低电平对调，先核对完整料号和接收端的逻辑定义。
+Firecomms FB00AKAR 是一款用于模拟光信号传输和传感的 OptoLock® 塑料光纤收发器。使用时，先通过外部电路给发射端 RCLED 设置偏置，再用接收端光电流转换电路把信号送入 ADC 或比较器。器件适配 2.2 mm 外护套塑料光纤（POF），原厂规格书给出的典型光学耦合条件为 1 mm 芯径、数值孔径 NA 0.5。它可用于可见红光传感、遮光检测和远端光纤传感。
 
 
 
-\## FE50MKNR 和 FE50MKIR 有光时分别输出什么？
+\## FB00AKAR 的 RCLED 怎么驱动？
 
 
 
-在供电稳定、光输入满足规格书条件时，两款型号的发射端均为高电平输入发光、低电平输入进入暗态。区别在接收端的 10 脚（Vo）。
+\- \*\*先核对引脚。\*\* FB00AKAR Rev. E 第 2 页表 3 显示，发射端 5 脚为 RCLED 阳极（TD+），2、3、4、6 脚为阴极（TD−）。用外部限流或驱动电路建立直流工作点。
+
+\- \*\*按信号需求设置偏置和调制。\*\* Rev. E 第 1 页给出的交流调制参考工作点约为 20 mA，正向压降约为 1.9 V。原厂给出的交流耦合电容示例为 100–470 nF。对于需要保留直流或慢变化分量的应用，应核对耦合网络的低频响应。
+
+\- \*\*比较光功率时对齐测试条件。\*\* Rev. E 第 4 页表 6 在驱动电流为 10 mA、温度为 −40 至 +85 °C 的条件下，列出典型平均输出光功率 −5.5 dBm，典型峰值波长 660 nm。650 nm 是该产品的红光波段标称值。第 4 页图 3–4 可用于查看温度、驱动电流与光纤耦合功率的关系。
 
 
 
-\- \*\*FE50MKNR 非反相型\*\*：光输入为高状态时，Vo 输出高电平。光输入为低状态时，Vo 输出低电平。
-
-\- \*\*FE50MKIR 反相型\*\*：光输入为高状态时，Vo 输出低电平。光输入为低状态时，Vo 输出高电平。
+\## 光电二极管的输出怎么接到 ADC？
 
 
 
-原厂 Rev. B 第 2 页表 3 定义了输入和输出引脚，第 3 页图 3–4 与第 6 页图 8–9 给出了两款型号的发射和接收极性。
+接收端 7 脚为光电二极管阳极（RD+），8 脚为阴极（RD−）。光电二极管把接收光转换成电流，外部读出电路再把电流转换成电压。Rev. E 第 2 页表 3 给出引脚定义，第 3 页图 2 给出含 DAC 和 ADC 的传感板参考电路。
 
 
 
-\## DC–50 MBd 还要核对哪些接口条件？
+\- \*\*按光功率估算光电流。\*\* Rev. E 第 5 页表 7 给出的典型响应度为 0.30 A/W（650 nm）。按表中的光纤出射光功率口径估算，10 µW 对应约 3 µA 的信号光电流。设定检测阈值时，还要用样机测量暗态读数和有效信号幅度。
+
+\- \*\*按信号幅度和速度选读出方式。\*\* 遮光检测或低频采样可先评估电阻读出。需要检测较弱信号或提高读出带宽时，可评估跨阻放大器（TIA），并按实际光电流、噪声、输入总电容和 ADC 量程核对增益与稳定性。
 
 
 
-两款均采用 OptoLock 免插头端接，适配 2.2 mm 外护套塑料光纤（POF）。发射端采用 650 nm RCLED，接收端为 TTL 兼容的推挽 CMOS 输出。器件支持标称 3.3 V 或 5 V 供电，工作温度为 −40 至 +85 °C。原厂建议优先使用 3.3 V。参见 Rev. B 第 1–2 页及第 10–11 页。
+\## 规格书里的 125 MHz 指的是哪一级带宽？
 
 
 
-\- \*\*对照输入门限与输出电平。\*\* 更换供电电压时，应重新核对后级 MCU 或 FPGA 的输入电压范围，并按第 11 页表 7 给出的负载条件评估 Vo。
-
-\- \*\*确认接收端何时开始有效输出。\*\* 原厂第 5 页图 7 和第 8 页图 12 显示，复位期间接收输出可能处于高阻态。第 11 页表 7 列出的接收端上电唤醒延时为典型 40 µs。设计应检查上电和电源复位时后级读到的状态。
-
-\- \*\*用实际码型验证首脉冲。\*\* 第 11 页表 7 单列了第 1 至第 3 个接收脉冲的脉宽失真（PWD），表中范围为 −7 至 +14 ns。该项包含最小 20 ns 光输入脉宽的表征条件，首脉冲是最不利情形。工业控制或突发式串行链路，可用目标码型和实际空闲间隔检查首个有效脉冲能否被后级识别。
+125 MHz 是 Rev. E 第 5 页表 7 给出的接收端典型 −3 dB 截止频率。整条模拟光链路的带宽还取决于 RCLED 偏置与调制电路、光电二极管负载和接收放大电路。第 4 页表 6 单独列出了发射端在不同偏置条件下的截止频率。
 
 
 
-\## FE50MKNR 和 FE50MKIR 可以直接换料吗？
+样机验证时，可以先在实际光纤长度和弯折条件下测量亮态与暗态的输出，再以目标信号频率测量接收端幅度衰减。用这两组数据分别确认遮光检测余量和有效信号带宽。
 
 
 
-两款采用同一份引脚定义。更换前，应确认主机是否支持极性调整，并验证正常数据、协议空闲态、断光和复位时后级看到的电平。若串行通信控制器依赖固定极性识别起始位或同步边沿，应在实际硬件上验证接收行为后再确认替换方案。
+\## 哪里可以下载规格书或咨询电路选型？
 
 
 
-\## 哪里可以查规格书或咨询选型？
-
-
-
-\- \[Firecomms FE50MKNR 与 FE50MKIR 原厂规格书 Rev. B](https://www.firecomms.com/contentFiles/technicalDocuments/FE50MKIR%20FE50MKNR%20Data%20Sheet%20Revision%20B.pdf)
+\- \[Firecomms FB00AKAR 原厂规格书 Rev. E](https://www.firecomms.com/contentFiles/technicalDocuments/FB00AKAR%20Datasheet%20Revision%20E.pdf)
 
 \- \[Firecomms 原厂 OptoLock 产品目录](https://www.firecomms.com/optolock/)
 
 \- \[上海芯聚电子 Firecomms 型号检索](https://firecomms-cn.com/product-index.html)
 
-\- \[咨询 FE50MKNR 与 FE50MKIR 极性选型及样品](https://firecomms-cn.com/contact.html)
+\- \[咨询 FB00AKAR 样品、RCLED 驱动与光电流读出](https://firecomms-cn.com/contact.html)
