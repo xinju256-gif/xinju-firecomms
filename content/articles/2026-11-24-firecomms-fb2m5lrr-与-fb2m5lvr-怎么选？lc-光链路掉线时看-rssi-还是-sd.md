@@ -1,161 +1,169 @@
 ---
-title: Firecomms FB2M5LRR 与 FB2M5LVR 怎么选？LC 光链路掉线时看 RSSI 还是 SD
-date: 2026-11-24T11:38:00.000+08:00
-description: Firecomms FB2M5LRR 和 FB2M5LVR 均为 10–250 Mbps LC 塑料光纤收发器。FB2M5LRR 的
-  RSSI 用于观察接收光功率变化，FB2M5LVR 的 Signal Detect 用于读取光信号检测状态。本文说明 9
-  脚接法、接收光功率上限和板卡换料验证。
-draft: false
-title_en: "Firecomms FB2M5LRR vs FB2M5LVR: RSSI or Signal Detect for LC Link
-  Troubleshooting?"
-description_en: The Firecomms FB2M5LRR and FB2M5LVR are 10–250 Mbps LC plastic
-  optical fiber transceivers. The FB2M5LRR provides RSSI for tracking received
-  optical power, while the FB2M5LVR provides Signal Detect status. Compare pin
-  9, receiver optical power limits, and the checks required before swapping
-  parts.
+title: Firecomms FE50MLIR 与 FE50MLNR 怎么选？LC 光链路上电首帧异常，先查极性和时序
+date: 2026-11-24T11:40:00.000+08:00
+description: Firecomms FE50MLIR 与 FE50MLNR 均为 DC–50 MBd LC 塑料光纤收发器。FE50MLIR
+  有光时输出低电平，FE50MLNR 有光时输出高电平。本文依据原厂 Rev. A 规格书说明接收极性、上电高阻态和首帧验证方法。
+title_en: "Firecomms FE50MLIR vs FE50MLNR: LC Receiver Polarity and First-Frame
+  Errors at Startup"
+description_en: The Firecomms FE50MLIR and FE50MLNR are DC–50 MBd LC plastic
+  optical fiber transceivers. With a valid optical high input, the FE50MLIR
+  outputs low and the FE50MLNR outputs high. See how to check receiver polarity,
+  startup high impedance, and first-frame timing using the Rev. A datasheet.
 body_en: >-
-  Pin 9 is the main selection difference between the Firecomms FB2M5LRR and
-  FB2M5LVR. Choose the FB2M5LRR with analog RSSI to track received optical power
-  on an industrial Ethernet or FPGA link. Choose the FB2M5LVR with Signal Detect
-  (SD) if the system only needs optical detection status. Both are LC
-  transceivers for 2.2 mm jacketed plastic optical fiber (POF).
+  Choose between the Firecomms FE50MLIR and FE50MLNR based on the receiver
+  polarity your system needs. The inverting FE50MLIR drives pin 10 low when the
+  received optical signal is in its specified high state. The non-inverting
+  FE50MLNR drives pin 10 high under the same conditions. If the link misses its
+  first frame after power-up and then communicates normally, check when the
+  receiver output leaves its high-impedance state and when the host starts
+  accepting data.
 
 
 
 
-  \## How do I measure FB2M5LRR RSSI, and what does it tell me?
+  \## How do the FE50MLIR and FE50MLNR receiver polarities differ?
 
 
 
 
-  Pin 9 on the FB2M5LRR supplies an analog current related to average received optical power. A load resistor from RSSI to ground converts the current to a voltage for an ADC. Compare readings before and after replacing a cable, reseating a connector, or changing a fiber bend to see whether received optical power changes.
+  Both are DC–50 MBd LC transceivers for 2.2 mm jacketed plastic optical fiber (POF). Both transmitters are non-inverting. With stable power and an optical signal within the specified limits, a logic high at pin 2 (Vin) produces the optical high state. Receiver pin 10 (Vo) behaves as follows.
 
 
 
 
-  \- FB2M5LRR Rev. A, page 2, Table 3 defines pin 9. Page 6, Figure 8 shows the typical response with a 10 kΩ load resistor.
+  \- \*\*FE50MLIR, inverting receiver.\*\* Vo is low for an optical high input and high for an optical low input.
 
 
-  \- Page 2 of the Firecomms EVAL-FB2M5LRR Rev. A guide describes how to measure RSSI voltage with a multimeter or an oscilloscope set to 1 MΩ input impedance.
-
-
-  \- Use the same data pattern and duty cycle when comparing installation conditions. Calibrate on the actual board and optical link if you need to convert readings to absolute optical power.
+  \- \*\*FE50MLNR, non-inverting receiver.\*\* Vo is high for an optical high input and low for an optical low input.
 
 
 
 
-  \## Does FB2M5LVR Signal Detect confirm that communication is working?
+  See Firecomms Rev. A, page 2, Table 3 for the pinout. Figures 3–4 on page 3 and Figures 8–9 on page 6 show the polarity waveforms.
 
 
 
 
-  Pin 9 on the FB2M5LVR provides optical detection status. Rev. E, page 2, Table 3 and Figure 2 identify the SD output. For troubleshooting, read it alongside PHY or FPGA link status, bit error rate, or CRC error counts.
+  \## When is the receiver output valid after power-up?
 
 
 
 
-  For example, if SD indicates that light is detected and CRC errors persist, check the received electrical waveform, interface termination, and optical link conditions. Before connecting SD to a controller or using it as an alarm input, confirm assert and deassert thresholds, output levels, and interface requirements with Firecomms.
+  Firecomms Rev. A, page 5, Figure 7 and page 8, Figure 12 show that both receivers present a high-impedance output during startup. The timing diagrams show approximately 2.8 V on the rising VCC rail and a return to high impedance when VCC falls below approximately 2.6 V. Table 7 on page 11 defines receiver wake-up delay from VCC crossing 2.75 V to Vo responding correctly to the optical input. The listed delay is 40 µs typical.
 
 
 
 
-  \## What should I check before swapping these LC transceivers?
+  \- \*\*Measure startup timing.\*\* Capture receiver VCC, Vo at pin 10, and the first frame together on an oscilloscope. The 40 µs value is typical. Verify the system timing with the actual supply ramp and operating temperature.
+
+
+  \- \*\*Check the default logic level during high impedance.\*\* Review the MCU or FPGA pull-up, pull-down, and reset settings to determine what the host reads before Vo becomes valid.
+
+
+  \- \*\*Check transmitter power sequencing.\*\* Rev. A, page 9, Table 5, Note 2 specifies \`VIN ≤ VCC\` during power-up. If the host powers up before the transceiver, check whether it drives the data input before the transceiver supply is ready.
 
 
 
 
-  Both parts specify a 10–250 Mbps range, a 3.0–3.6 V supply with 3.3 V nominal, and an operating temperature range of −40 to +85 °C. Allow for encoding overhead. For example, 200 Mbps of data with 8B/10B encoding runs at 250 MBd on the optical link. See FB2M5LRR Rev. A, page 9, Table 7 and FB2M5LVR Rev. E, page 8, Table 7.
+  \## What else should I check before swapping parts on a DC–50 MBd link?
 
 
 
 
-  \- \*\*Review the pin 9 circuit.\*\* When changing from the FB2M5LVR to the FB2M5LRR, check the load resistor, host measurement interface, and firmware logic.
-
-
-  \- \*\*Check both ends of the receiver optical power range.\*\* Both datasheets list −24 dBm receiver sensitivity. The maximum allowed receive power is −2 dBm for the FB2M5LRR and 0 dBm for the FB2M5LVR. The receiver tables specify 250 Mbps PRBS7 unless otherwise stated. They also specify optical coupling through at least 0.5 m of step-index POF with a 1 mm core and 0.5 NA. Check the strongest signal on the shortest, lowest-loss link and receiver margin on the longest, highest-loss link.
-
-
-  \- \*\*Validate with the intended LC cable assembly.\*\* Both datasheets list 50 m over step-index POF at 250 Mbps as a reference on page 1. Verify your required distance with the actual cable assembly, connection losses, bends, and operating rate.
+  Both parts use a 650 nm RCLED and provide a TTL-compatible push-pull CMOS receiver output. They support nominal 3.3 V or 5 V supplies and operate from −40 to +85 °C. Firecomms recommends 3.3 V. See Rev. A, pages 1–2 and 9–11.
 
 
 
 
-  \## Where can I find datasheets or get selection support?
+  \- \*\*Check the downstream input levels.\*\* Table 7 on page 11 specifies a receiver output high close to VCC under its stated load conditions. If the transceiver runs at 5 V, verify the downstream input rating and logic-level compatibility.
+
+
+  \- \*\*Test the first frame after a cold start and the first pulse after a long idle interval.\*\* Table 7 on page 11 specifies −7 to +14 ns of receiver pulse width distortion (PWD) for the first three pulses. The characterization includes a minimum optical input pulse width of 20 ns. Test with the actual data pattern, shortest pulse, and receiver output load.
+
+
+  \- \*\*Verify protocol polarity before swapping parts.\*\* The two devices share a pinout. Confirm that the host can handle the polarity change, then verify the protocol idle state, start bit, and first frame after reset.
 
 
 
 
-  \- \[Firecomms FB2M5LRR manufacturer datasheet, Rev. A](https://www.firecomms.com/contentFiles/technicalDocuments/FB2M5LRR%20Datasheet%20Revision%20A.pdf)
+  \## Where can I get the datasheet or LC fiber selection support?
 
 
-  \- \[Firecomms FB2M5LVR manufacturer datasheet, Rev. E](https://www.firecomms.com/contentFiles/technicalDocuments/FB2M5LVR%20Datasheet%20Revision%20E_.pdf)
 
 
-  \- \[Firecomms LC transceiver evaluation boards and user guides](https://www.firecomms.com/eval-boards/)
+  \- \[Firecomms FE50MLIR and FE50MLNR manufacturer datasheet, Rev. A](https://www.firecomms.com/contentFiles/technicalDocuments/FE50MLIR%20FE50MLNR%20Data%20Sheet%20Revision%20A.pdf)
+
+
+  \- \[Firecomms LC fiber optic transceiver catalog](https://www.firecomms.com/LC/)
 
 
   \- \[SIMACITY LC fiber optic transceiver portfolio](https://firecomms-cn.com/en/products.html)
 
 
-  \- \[Contact SIMACITY about FB2M5LRR and FB2M5LVR selection and LC POF cable assemblies](https://firecomms-cn.com/en/contact.html)
+  \- \[Contact SIMACITY for FE50MLIR and FE50MLNR selection, samples, and LC fiber assemblies](https://firecomms-cn.com/en/contact.html)
 ---
-Firecomms FB2M5LRR 与 FB2M5LVR 的主要选型区别在 9 脚。需要在工业以太网或 FPGA 光链路中记录接收光功率趋势，选带模拟 RSSI 输出的 FB2M5LRR。只需要读取光信号检测状态，可选带 Signal Detect（SD）输出的 FB2M5LVR。两款都是适配 2.2 mm 外护套塑料光纤（POF）的 LC 收发器。
+Firecomms FE50MLIR 与 FE50MLNR 的选型取决于接收端需要什么极性。FE50MLIR 为反相型，光输入处于规定高状态时，10 脚输出低电平。FE50MLNR 为非反相型，同一条件下 10 脚输出高电平。如果链路上电后漏收第一帧，但随后通信正常，应优先检查接收输出何时退出高阻态，以及主控何时开始接收。
 
 
 
-\## FB2M5LRR 的 RSSI 怎么接？能看出什么？
+\## FE50MLIR 和 FE50MLNR 的接收极性有什么区别？
 
 
 
-FB2M5LRR 的 9 脚输出与接收端平均光功率相关的模拟电流。在 RSSI 脚与地之间接负载电阻，可把电流转换成电压，再用 ADC 采样。换线、重新插接或调整弯折前后，可以通过读数判断接收光功率是否发生变化。
+两款都是 DC–50 MBd 的 LC 塑料光纤收发器，适配 2.2 mm 外护套 POF。发射端均采用非反相逻辑。供电稳定且光信号满足规格书规定时，2 脚（Vin）输入高电平，发射端输出光高状态。接收端 10 脚（Vo）的逻辑如下。
 
 
 
-\- FB2M5LRR Rev. A 第 2 页表 3 定义了 9 脚，第 6 页图 8 给出采用 10 kΩ 负载电阻时的典型响应曲线。
+\- \*\*FE50MLIR，反相接收。\*\* 光输入为高时，Vo 输出低电平。光输入为低时，Vo 输出高电平。
 
-\- 原厂 EVAL-FB2M5LRR Rev. A 指南第 2 页给出测量方法，可用万用表或设为 1 MΩ 输入的示波器测量 RSSI 电压。
-
-\- 比较不同安装条件时，尽量使用相同码型和占空比。需要把读数换算成绝对光功率时，应在实际板卡和光链路上标定。
+\- \*\*FE50MLNR，非反相接收。\*\* 光输入为高时，Vo 输出高电平。光输入为低时，Vo 输出低电平。
 
 
 
-\## FB2M5LVR 的 SD 能判断通信正常吗？
+参见原厂 Rev. A 第 2 页表 3 的引脚定义，以及第 3 页图 3–4 和第 6 页图 8–9 的极性波形。
 
 
 
-FB2M5LVR 的 9 脚提供光信号检测状态。原厂 Rev. E 第 2 页表 3 和图 2 标明了这一路 SD 输出。工程上可把它与 PHY 或 FPGA 的链路状态、误码率或 CRC 错误计数一起看。
+\## 上电后多久可以读取接收输出？
 
 
 
-例如，SD 显示检测到光信号，但接收端仍有 CRC 错误时，可同时检查接收电信号、接口端接和光链路条件。设计时若要把 SD 接入主控或作为告警依据，应先向原厂确认置位和解除门限、输出电平及接口要求。
+原厂 Rev. A 第 5 页图 7 和第 8 页图 12 显示，两款的接收输出在启动阶段处于高阻态。上电时序图以 VCC 约 2.8 V 为参考，掉电降到约 2.6 V 时，Vo 回到高阻态。第 11 页表 7 将接收唤醒延时定义为 VCC 超过 2.75 V 到 Vo 正确响应光输入的时间，列出的典型值为 40 µs。
 
 
 
-\## 两款 LC 收发器换料前要核对什么？
+\- \*\*测启动过程。\*\* 用示波器同时观察接收端 VCC、10 脚 Vo 和第一帧的时序。40 µs 是典型值，整机接收时序应结合实际电源斜率和温度验证。
+
+\- \*\*检查高阻阶段的默认电平。\*\* 查看 MCU 或 FPGA 输入上拉、下拉和复位配置，确认主控在 Vo 进入有效状态前会读到什么。
+
+\- \*\*核对发射端上电顺序。\*\* Rev. A 第 9 页表 5 注 2 要求上电过程中 \`VIN ≤ VCC\`。若主控先于收发器上电，应检查数据输入是否提前被驱动。
 
 
 
-两款器件的规格范围均为 10–250 Mbps，供电为 3.0–3.6 V，标称 3.3 V，工作温度为 −40 至 +85 °C。速率选型要考虑编码开销。例如，200 Mbps 数据经 8B/10B 编码后，光链路符号率为 250 MBd。相关条件见 FB2M5LRR Rev. A 第 9 页表 7 和 FB2M5LVR Rev. E 第 8 页表 7。
+\## DC–50 MBd 链路换料时还要核对什么？
 
 
 
-\- \*\*核对 9 脚电路。\*\* 从 FB2M5LVR 切换到 FB2M5LRR 时，要重新核对负载电阻、主控采样接口和固件判断逻辑。
-
-\- \*\*检查接收光功率上下限。\*\* 两款规格书均列出 −24 dBm 的接收灵敏度。FB2M5LRR 的允许接收光功率上限为 −2 dBm，FB2M5LVR 为 0 dBm。原厂接收表默认采用 250 Mbps PRBS7，并注明光功率经至少 0.5 m、1 mm 芯径、NA 0.5 的阶跃型 POF 耦入。用最短、最低损耗的链路检查强光条件，用最长、最高损耗的链路检查接收余量。
-
-\- \*\*用实际 LC 跳线验证。\*\* 两份规格书首页均给出在 250 Mbps 下使用阶跃型 POF 的 50 m 参考距离。项目距离应结合实际跳线、连接损耗、弯折和运行速率验证。
+两款均使用 650 nm RCLED，接收端为 TTL 兼容的推挽 CMOS 输出，支持标称 3.3 V 或 5 V 供电。工作温度为 −40 至 +85 °C，原厂建议优先使用 3.3 V。参见 Rev. A 第 1–2 页及第 9–11 页。
 
 
 
-\## 哪里可以查规格书或咨询选型？
+\- \*\*检查后级输入电平。\*\* 第 11 页表 7 在指定负载条件下给出的接收高电平接近 VCC。收发器使用 5 V 供电时，先确认后级输入的耐压和电平兼容性。
+
+\- \*\*分别验证冷启动首帧与长空闲后的首脉冲。\*\* 第 11 页表 7 单列了第 1 至第 3 个接收脉冲的脉宽失真（PWD），范围为 −7 至 +14 ns，表征条件包括最小 20 ns 光输入脉宽。用实际码型、最短脉宽和接收端负载测试。
+
+\- \*\*换料前验证协议极性。\*\* 两款共用引脚定义。换料时需确认主控能否处理极性变化，并验证协议空闲态、起始位和复位后的第一帧。
 
 
 
-\- \[Firecomms FB2M5LRR 原厂规格书 Rev. A](https://www.firecomms.com/contentFiles/technicalDocuments/FB2M5LRR%20Datasheet%20Revision%20A.pdf)
+\## 哪里可以查规格书或咨询 LC 光纤选型？
 
-\- \[Firecomms FB2M5LVR 原厂规格书 Rev. E](https://www.firecomms.com/contentFiles/technicalDocuments/FB2M5LVR%20Datasheet%20Revision%20E_.pdf)
 
-\- \[Firecomms LC 收发器评估板与用户指南](https://www.firecomms.com/eval-boards/)
+
+\- \[Firecomms FE50MLIR 与 FE50MLNR 原厂规格书 Rev. A](https://www.firecomms.com/contentFiles/technicalDocuments/FE50MLIR%20FE50MLNR%20Data%20Sheet%20Revision%20A.pdf)
+
+\- \[Firecomms 原厂 LC 光纤收发器目录](https://www.firecomms.com/LC/)
 
 \- \[上海芯聚电子 LC 光纤收发器产品中心](https://firecomms-cn.com/products.html)
 
-\- \[咨询 FB2M5LRR、FB2M5LVR 选型和 LC 塑料光纤配套](https://firecomms-cn.com/contact.html)
+\- \[咨询 FE50MLIR、FE50MLNR 选型、样品及 LC 光纤配套](https://firecomms-cn.com/contact.html)
