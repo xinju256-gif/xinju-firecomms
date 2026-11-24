@@ -1,159 +1,152 @@
 ---
-title: Firecomms FR12DHIR、FR12DVIR、FR12DWIR 怎么选？12 MBd 反相接收器的安装与电平
-date: 2026-11-24T17:53:00.000+08:00
-description: Firecomms FR12DxIR 系列包含三款 DC–12 MBd RedLink 反相光纤接收器。本文依据原厂 Rev. P1
-  规格书，说明安装方向、5 V 供电、输出电平，以及 POF 与 PCS 的峰值接收光功率条件。
-draft: false
-title_en: "Firecomms FR12DHIR, FR12DVIR, and FR12DWIR: Mounting and Output
-  Levels for 12 MBd Links"
-description_en: The Firecomms FR12DxIR series includes three DC–12 MBd RedLink
-  inverting fiber optic receivers. Using the Rev. P1 datasheet, this guide
-  covers mounting options, 5 V operation, output levels, and peak received
-  optical power limits for POF and PCS.
+title: Firecomms FT1M2HAR 能跑 125 MBd 吗？RCLED 外部驱动与 POF/PCS 光功率验证
+date: 2026-11-24T17:56:00.000+08:00
+description: Firecomms FT1M2HAR 是一款水平安装的 650 nm RedLink 光纤发射器，达到 125 MBd
+  取决于外部驱动电路。本文依据原厂 Rev. A 规格书说明引脚、参考电路和不同光纤的耦合光功率，以及样机验证方法。
+title_en: Can the Firecomms FT1M2HAR Run at 125 MBd? RCLED Drive and Optical Power Checks
+description_en: The Firecomms FT1M2HAR is a horizontal 650 nm RedLink fiber
+  optic transmitter. Reaching 125 MBd depends on the external driver. This guide
+  uses the Rev. A datasheet to explain the pinout, reference circuit, coupled
+  optical power for POF and PCS, and prototype tests.
 body_en: >-
-  The Firecomms FR12DxIR series consists of DC–12 MBd RedLink inverting fiber
-  optic receivers. Choose the FR12DHIR for horizontal mounting, the FR12DVIR for
-  vertical mounting, or the FR12DWIR for 30° tilted mounting. All three drive
-  their output low for an optical high. For a new design or part replacement,
-  check the PCB footprint, 5 V supply, downstream input rating, and received
-  optical power.
+  The Firecomms FT1M2HAR can support optical links up to 125 MBd with a
+  dedicated external driver capable of that signaling rate. It is a horizontal
+  650 nm RedLink fiber optic transmitter. The board-level driver controls the
+  light output through the RCLED anode and cathode. Firecomms Rev. A, page 1,
+  Table 2 and page 5, Table 6 identify the signaling rate as driver-dependent.
 
 
 
 
-  \## Which PCB footprint does each FR12DxIR part use?
+  \## How do I connect the FT1M2HAR? Can a GPIO drive it directly?
 
 
 
 
-  \- \*\*FR12DHIR, horizontal mount.\*\* See Rev. P1, page 6, Figure 5 for the PCB hole pattern and mechanical dimensions.
-
-
-  \- \*\*FR12DVIR, vertical mount.\*\* See page 7, Figure 7 for the PCB hole pattern and mechanical dimensions.
-
-
-  \- \*\*FR12DWIR, 30° tilted mount.\*\* See page 8, Figure 9 for the PCB hole pattern and mechanical dimensions.
+  Select an external RCLED driver for the target rate and use the controller logic to control the driver stage. Rev. A, page 2, Table 3 identifies pin 1 as the RCLED anode (TD+), pin 2 as the cathode (TD−), pins 3 and 4 as NC, and pins 5 and 8 as mechanical retention pins. Figure 2 on page 3 shows an external driver circuit powered by a 5 V supply.
 
 
 
 
-  Page 1, Table 1 lists the full ordering codes. If the mounting orientation changes, check PCB holes, the panel opening, and plug insertion and removal clearance against the corresponding drawing. Page 2, Table 3 identifies pin 1 as data output Vo, pin 2 as GND, pin 3 as VCC, pin 4 as NC, and pins 5 and 8 as grounded retention pins.
+  Figure 2 lists separate R8, R9, R11, and C8 values for POF and PCS/HCS. Use the reference configuration for the intended fiber. If you change the driver components or adjust resistor or capacitor values, remeasure the RCLED current and receiver waveform.
 
 
 
 
-  \## Can the inverting output connect to a 3.3 V MCU?
+  \## How does coupled optical power differ between POF and PCS?
 
 
 
 
-  Start with the MCU or FPGA input voltage rating and logic thresholds. Firecomms Rev. P1, page 5, Table 6 uses a 5 V ±5% test supply. All three receivers have a TTL-compatible push-pull CMOS output. At a high-level output current of up to 40 µA, the datasheet gives a high output range of VCC − 0.05 V to VCC. Use suitable level translation if the downstream input only accepts 3.3 V levels.
+  Rev. A, page 5, Table 6 lists the typical coupled optical power values below. The POF test uses 0.5 m of fiber with a 1 mm core and a numerical aperture of 0.5. The PCS test uses 0.5 m of fiber with a 200 µm core.
 
 
 
 
-  With stable power and an optical input within specification, an optical high produces an electrical low, and an optical low produces an electrical high. If you pair the receiver with an FT12MxNR transmitter, verify end-to-end polarity with the actual external transmitter driver. Use a known pattern to check the idle level and active edges before testing protocol traffic.
+  \- \*\*1 mm POF at 20 mA DC forward current:\*\* −9.0 dBm typical.
+
+
+  \- \*\*1 mm POF at 60 mA DC forward current:\*\* −3.5 dBm typical.
+
+
+  \- \*\*200 µm PCS at 60 mA DC forward current:\*\* −12.5 dBm typical.
 
 
 
 
-  \## How do received optical power limits differ for POF and PCS?
+  At 60 mA, the listed typical coupled optical powers differ by 9 dB. When switching to PCS, recalculate link margin using the corresponding transmitter coupling, actual cable loss, and remote receiver limits.
 
 
 
 
-  Rev. P1, page 5, Table 6 uses a 635–680 nm source with 5 ns optical rise and fall times. The received optical power figures are peak values.
+  \## How do I verify the target rate on a prototype?
 
 
 
 
-  \- \*\*1 mm POF:\*\* Optical high ranges from −20 to 0 dBm. The optical low limit is −40 dBm.
+  \- \*\*At the transmitter:\*\* Measure the RCLED current waveform with the intended pattern. Record peak current, average current, and pulse width, and compare them with Rev. A, page 4, Table 5 and its notes.
 
 
-  \- \*\*200 µm PCS:\*\* Optical high ranges from −22 to 0 dBm. The optical low limit is −42 dBm.
+  \- \*\*At the receiver:\*\* Measure the waveform, pulse width distortion, and error performance with the intended fiber, plugs, and remote receiver. Use the short link to check high optical input and the long link to check receiver margin.
 
 
-
-
-  Firecomms characterizes receiver pulse width distortion with 12 MBd NRZ PRBS7 and lists a range of −25 to +25 ns. On the prototype, check the remote pulse width and error performance using the actual transmitter, cable assembly, and data pattern. If only the first frame after power-up fails, check when Vo leaves its high-impedance state. Table 6 gives a typical wake-up delay of 40 µs from VCC crossing 2.75 V.
-
-
-
-
-  \## Where can I find the datasheet or get selection support?
+  \- \*\*Under actual installation conditions:\*\* Rev. A, page 1, Table 2 lists reference distances of 50 m over step-index POF and 100 m over 200 µm PCS, subject to installation conditions. Validate the project distance with the intended driver, signaling rate, and cable routing.
 
 
 
 
-  \- \[Firecomms FR12DxIR manufacturer preliminary datasheet, Rev. P1](https://www.firecomms.com/contentFiles/technicalDocuments/FR12DxIR-Datasheet-Rev-P1.pdf)
+  \## Where can I find the datasheet or get driver selection support?
 
 
-  \- \[Firecomms FT12MxNR companion transmitter datasheet, Rev. P1](https://www.firecomms.com/contentFiles/technicalDocuments/FT12MxNR-Datasheet-Rev-P1.pdf)
+
+
+  \- \[Firecomms FT1M2HAR manufacturer datasheet, Rev. A](https://www.firecomms.com/contentFiles/technicalDocuments/FT1M2HAR-Datasheet-Rev-A.pdf)
+
+
+  \- \[Firecomms RedLink product catalog](https://www.firecomms.com/redlink/)
 
 
   \- \[SIMACITY Firecomms fiber optic product portfolio](https://firecomms-cn.com/en/products.html)
 
 
-  \- \[Contact SIMACITY about FR12DHIR, FR12DVIR, and FR12DWIR selection and logic-level compatibility](https://firecomms-cn.com/en/contact.html)[firecomms-fr12dxir-redlink-receiver-selection](firecomms-fr12dxir-redlink-receiver-selection)
+  \- \[Contact SIMACITY about FT1M2HAR drivers, samples, and optical link validation](https://firecomms-cn.com/en/contact.html)[firecomms-ft1m2har-rcled-driver-optical-power](firecomms-ft1m2har-rcled-driver-optical-power)
 ---
-Firecomms FR12DxIR 是一系列 DC–12 MBd RedLink 反相光纤接收器。水平安装选 FR12DHIR，垂直安装选 FR12DVIR，30° 倾斜安装选 FR12DWIR。三款在光输入为高状态时均输出低电平。设计或换料时，先确认 PCB 孔位，再检查 5 V 供电、后级输入耐压和接收光功率。
+Firecomms FT1M2HAR 可以用于最高 125 MBd 的光链路，前提是采用满足该速率的专用外部驱动电路。它是一款水平安装的 650 nm RedLink 光纤发射器，板上驱动电路通过 RCLED 阳极和阴极控制发光电流。Firecomms Rev. A 第 1 页表 2 和第 5 页表 6 均注明速率取决于驱动条件。
 
 
 
-\## 三款 FR12DxIR 的安装方向和 PCB 孔位怎么查？
+\## FT1M2HAR 怎么接？能直接用 GPIO 驱动吗？
 
 
 
-\- \*\*FR12DHIR，水平安装。\*\* PCB 孔位与机械尺寸见 Rev. P1 第 6 页图 5。
-
-\- \*\*FR12DVIR，垂直安装。\*\* PCB 孔位与机械尺寸见第 7 页图 7。
-
-\- \*\*FR12DWIR，30° 倾斜安装。\*\* PCB 孔位与机械尺寸见第 8 页图 9。
+按目标速率选用外部 RCLED 驱动，再由主控逻辑控制驱动级。Rev. A 第 2 页表 3 标明，1 脚为 RCLED 阳极（TD+），2 脚为阴极（TD−），3、4 脚为 NC，5、8 脚为机械固定脚。第 3 页图 2 给出了使用 5 V 电源的外部驱动示例。
 
 
 
-完整料号见 Rev. P1 第 1 页表 1。更换安装方向时，按对应机械图核对板孔、面板开口和插头插拔空间。第 2 页表 3 标明，1 脚为数据输出 Vo，2 脚为 GND，3 脚为 VCC，4 脚为 NC，5、8 脚为接地固定脚。
+原厂在图 2 中为 POF 和 PCS/HCS 分别列出 R8、R9、R11、C8 的取值。样机应按目标光纤选择对应的参考配置。若更换驱动器件或调整电阻电容，需重新测量 RCLED 电流和接收端波形。
 
 
 
-\## 反相输出能接 3.3 V MCU 吗？
+\## 相同驱动电流下，POF 和 PCS 的耦合光功率差多少？
 
 
 
-先查 MCU 或 FPGA 输入脚的耐压和逻辑门限。FR12DxIR Rev. P1 第 5 页表 6 的测试供电为 5 V ±5%。三款均为 TTL 兼容的推挽 CMOS 输出，在高电平输出电流不超过 40 µA 的条件下，规格书给出的高电平范围是 VCC − 0.05 V 至 VCC。后级输入若只允许 3.3 V 电平，应选用合适的电平转换方案。
+Rev. A 第 5 页表 6 给出下列典型耦合光功率。POF 测试使用 0.5 m 长、1 mm 芯径、NA 0.5 的光纤。PCS 测试使用 0.5 m 长、200 µm 芯径的光纤。
 
 
 
-在供电稳定且光输入符合规格时，光高状态对应电低电平，光低状态对应电高电平。若搭配 FT12MxNR 发射器，应按实际外部驱动电路验证从主控发送端到远端接收端的整体极性。使用已知码型检查空闲电平和有效边沿，再验证协议数据。
+\- \*\*1 mm POF，20 mA 正向直流电流\*\*：典型 −9.0 dBm。
+
+\- \*\*1 mm POF，60 mA 正向直流电流\*\*：典型 −3.5 dBm。
+
+\- \*\*200 µm PCS，60 mA 正向直流电流\*\*：典型 −12.5 dBm。
 
 
 
-\## POF 和 PCS 的接收光功率条件有什么区别？
+同为 60 mA 时，表中的两种光纤典型耦合功率相差 9 dB。改用 PCS 时，应按对应的发射耦合功率、实际线损和对端接收条件重新计算链路余量。
 
 
 
-Rev. P1 第 5 页表 6 使用 635–680 nm 的发射源，测试光信号的上升和下降时间均为 5 ns。表中的接收光功率为峰值。
+\## 怎么验证样机能稳定跑到目标速率？
 
 
 
-\- \*\*1 mm POF：\*\* 光高状态为 −20 至 0 dBm，光低状态上限为 −40 dBm。
+\- \*\*发射端\*\*：用目标码型观察 RCLED 电流波形，记录峰值电流、平均电流和脉宽，并对照 Rev. A 第 4 页表 5 及注释。
 
-\- \*\*200 µm PCS：\*\* 光高状态为 −22 至 0 dBm，光低状态上限为 −42 dBm。
+\- \*\*接收端\*\*：使用项目的光纤、插头和对端接收器，测量接收波形、脉宽失真及误码表现。用短链路检查强光输入，用长链路检查接收余量。
 
-
-
-原厂用 12 MBd NRZ PRBS7 表征接收端脉宽失真，表中范围为 −25 至 +25 ns。样机测试时，用实际发射器、线束和码型检查远端脉宽及误码。若只有上电首帧异常，先看 Vo 何时退出高阻态。表 6 给出的典型唤醒延时为 40 µs，从 VCC 超过 2.75 V 起计。
+\- \*\*安装条件\*\*：Rev. A 第 1 页表 2 列出 50 m 阶跃型 POF 和 100 m、200 µm PCS 的参考距离，并注明受安装条件影响。应以实际驱动、运行速率和布线路径验证项目距离。
 
 
 
-\## 哪里可以查规格书或咨询选型？
+\## 哪里可以查规格书或咨询驱动选型？
 
 
 
-\- \[Firecomms FR12DxIR 原厂预备版规格书 Rev. P1](https://www.firecomms.com/contentFiles/technicalDocuments/FR12DxIR-Datasheet-Rev-P1.pdf)
+\- \[Firecomms FT1M2HAR 原厂规格书 Rev. A](https://www.firecomms.com/contentFiles/technicalDocuments/FT1M2HAR-Datasheet-Rev-A.pdf)
 
-\- \[配套 Firecomms FT12MxNR 发射器原厂规格书 Rev. P1](https://www.firecomms.com/contentFiles/technicalDocuments/FT12MxNR-Datasheet-Rev-P1.pdf)
+\- \[Firecomms RedLink 原厂产品目录](https://www.firecomms.com/redlink/)
 
 \- \[上海芯聚电子 Firecomms 光纤器件产品中心](https://firecomms-cn.com/products.html)
 
-\- \[咨询 FR12DHIR、FR12DVIR、FR12DWIR 选型和电平匹配](https://firecomms-cn.com/contact.html)[firecomms-fr12dxir-redlink-receiver-selection](firecomms-fr12dxir-redlink-receiver-selection)
+\- \[咨询 FT1M2HAR 驱动电路、样品与光链路验证](https://firecomms-cn.com/contact.html)[firecomms-ft1m2har-rcled-driver-optical-power](firecomms-ft1m2har-rcled-driver-optical-power)
