@@ -1,205 +1,183 @@
 ---
-title: AFBR-1624Z 能用 Firecomms FT50MHNR 做 Pin2Pin 替代吗？旧板换料核对指南
-date: 2026-11-26T11:31:00.000+08:00
-description: Firecomms FT50MHNR 是 Broadcom（Avago）AFBR-1624Z 的 Pin2Pin
-  替代候选。本文对照两份原厂规格书，核对 50 MBd 非反相光纤发射器的引脚、PCB 封装、3.3 V／5 V 供电、峰值光功率和脉宽失真，并给出保留
-  AFBR-2624Z 接收器时的验证步骤。
-draft: false
-title_en: Can Firecomms FT50MHNR Replace AFBR-1624Z Pin-to-Pin? A Board-Level Checklist
-description_en: The Firecomms FT50MHNR is a pin-to-pin replacement candidate for
-  the Broadcom (Avago) AFBR-1624Z. Compare the pinout, PCB footprint, 3.3 V and
-  5 V supplies, peak optical power, and pulse-width distortion of these 50 MBd
-  transmitters. Then validate the replacement with the existing AFBR-2624Z
-  receiver.
+title: 高压变频器塑料光纤怎么选？IGBT 控制、故障回传与采样反馈的选型指南
+date: 2026-11-26T11:35:00.000+08:00
+description: 高压变频器中，IGBT 门极驱动指令、功率单元故障状态和数字化采样数据，都可评估通过塑料光纤（POF）传输。本文以 Firecomms
+  FT50MHNR 和 FR50MHNR 为例，讲解如何核对最小脉宽、传输延迟、失光状态和接收光功率。
+title_en: "Plastic Optical Fiber in Medium-Voltage Drives: IGBT Control and
+  Feedback Link Selection"
+description_en: Plastic optical fiber can carry IGBT gate commands, power-cell
+  fault status, and digitized measurements in medium-voltage drives. Using the
+  Firecomms FT50MHNR and FR50MHNR as examples, this guide covers minimum pulse
+  width, link delay, loss-of-light behavior, and received optical power.
 body_en: >-
-  The Firecomms FT50MHNR is a pin-to-pin replacement candidate for the Broadcom
-  (Avago) AFBR-1624Z. Both are horizontal, non-inverting, TTL-compatible
-  DC-to-50 MBd fiber optic transmitters with matching main pin functions. For an
-  existing industrial control board, check the PCB holes, connector fit, and
-  supply first. Then verify optical power and the received waveform using the
-  original receiver and production cable assemblies.
+  Three types of signals between a control board and a power cell in a
+  medium-voltage drive are candidates for plastic optical fiber (POF): outbound
+  IGBT gate commands, inbound fault and ready status, and digitized voltage,
+  current, and temperature measurements. Plastic optical fiber carries signals
+  without a conductive path between the two endpoints. Evaluate timing,
+  loss-of-light behavior, and optical power margin for each signal type.
 
 
 
 
-  \## Do the AFBR-1624Z and FT50MHNR have the same pinout?
+  \## Can IGBT gate-drive PWM commands travel over plastic optical fiber?
 
 
 
 
-  On both transmitters, pin 1 is the supply, pin 2 is physically absent, pin 3 is ground, and pin 4 is the TTL data input. Pins 5 and 8 retain the housing. Broadcom recommends chassis ground for these two pins, and Firecomms specifies ground. Check how signal ground and chassis ground are connected on the existing board.
+  Yes. In a drive with a separate gate-driver board, the main controller feeds PWM switching commands into an optical transmitter. The power-cell receiver restores the logic signal, and the local gate driver drives the IGBT. Page 43 of Eaton’s SC9000 EP medium-voltage drive manual shows an example of a control board sending inverter commands over fiber.
 
 
 
 
-  Use the top-view PCB drawings to compare mounting holes, board-edge clearance, and room to insert, latch, and remove the existing connector. Both parts use horizontal packages. A sample fit check can confirm clearance around neighboring parts and the enclosure.
+  Check the \*\*shortest valid pulse width, end-to-end propagation delay, channel-to-channel skew, and pulse-width distortion (PWD)\*\*. If the upper and lower switches use separate channels, verify dead-time margin using the received waveforms. If pulses resume after a long idle period, check the first pulse separately. The 50 MBd rating describes symbol-rate capability. Evaluate PWM switching frequency and the shortest high and low intervals from the actual waveform.
 
 
 
 
-  Pinout and footprint references: \[Broadcom AV02-4369EN, May 31, 2023, pp. 3–4 and 6](https://docs.broadcom.com/doc/AV02-4369EN) and \[Firecomms FT50MxxR Rev G, p. 2, Table 3, and p. 5, Figure 4](https://www.firecomms.com/contentFiles/technicalDocuments/FT50MxxR-Datasheet-Rev-G.pdf).
+  \[Read the Eaton SC9000 EP medium-voltage drive user manual, IB020002EN, November 2017, p. 43](https://www.eaton.com/content/dam/eaton/products/medium-voltage-power-distribution-control-systems/motor-control/literature/installation-instructions/sc9000-instruction-booklet-user-manual-ib020002en.pdf)
 
 
 
 
-  \## Can the existing 3.3 V or 5 V circuit be reused?
+  \## How can the controller distinguish a fault from a disconnected fiber?
 
 
 
 
-  \- \*\*Supply range.\*\* The AFBR-1624Z supports 3.3 V or 5 V with ±5% tolerance. The FT50MHNR supports 3.3 V or 5 V with ±10% tolerance. Both specify a −40 °C to +85 °C operating temperature range.
+  Power-cell ready status, gate-driver undervoltage, and overcurrent can be reported over a dedicated fiber or in digital status frames. When light indicates normal operation, a device fault, disconnected fiber, or loss of transmitter power can all cause loss of light at the receiver. Define the system response to loss of light during design review. If the controller needs to tell these events apart, use independent status encoding, a heartbeat timeout, or other diagnostic information.
 
 
-  \- \*\*Input thresholds.\*\* Both specify a minimum high-level input of 2.0 V and a maximum low-level input of 0.8 V. The FT50MHNR specifies an upper high-level input limit of VCC + 0.25 V. If the old board drives a 3.3 V transmitter with 5 V logic, check the actual peak voltage at the data pin.
 
 
-  \- \*\*Input and decoupling.\*\* Check the existing input pull-down, supply filtering, and decoupling layout. Figure 2 on p. 2 of Firecomms FT50MxxR Rev G shows the recommended circuit and calls for a 100 nF decoupling capacitor as close as possible to each device’s VCC pin.
+  The Power Integrations 2SB315B gate-driver manual shows one implementation. Normal feedback includes a brief interruption of light to acknowledge an edge, while a longer interruption signals a fault. For your design, verify normal operation, faults, fiber disconnection, power-up, and power-down against the selected driver’s logic and timing.
 
 
 
 
-  Electrical references: \[Broadcom AV02-4369EN, pp. 7 and 9](https://docs.broadcom.com/doc/AV02-4369EN) and \[Firecomms FT50MxxR Rev G, pp. 1, 2, and 4](https://www.firecomms.com/contentFiles/technicalDocuments/FT50MxxR-Datasheet-Rev-G.pdf).
+  \[Read the Power Integrations 2SB315B application manual, pp. 9–10, Figures 4–5](https://www.power.com/sites/default/files/documents/2SB315B_Manual.pdf)
 
 
 
 
-  \## Why retest optical power and the first pulse at 50 MBd?
+  \## How can voltage, current, and temperature measurements be sent over fiber?
 
 
 
 
-  The AFBR-1624Z uses a 650 nm LED with an integrated driver. The FT50MHNR uses a 650 nm RCLED with an integrated driver. The datasheets specify peak optical power using different lengths of 1 mm plastic optical fiber (POF):
+  One approach is to sample and digitize measurements at the power cell, then send them to the main controller over a serial optical link. For closed-loop control, evaluate the total delay from sampling to data availability, delay variation, and the criteria for treating data as invalid. For condition monitoring, use the required update interval, frame overhead, and timeout rules to determine the line rate.
 
 
 
 
-  \- \*\*AFBR-1624Z:\*\* −4.5 to +2 dBm measured after 1 m of POF with a numerical aperture (NA) of 0.5.
+  \## What type of link can use the Firecomms FT50MHNR and FR50MHNR?
 
 
-  \- \*\*FT50MHNR:\*\* −6 to +2 dBm measured with 0.5 m of POF with an NA of 0.5.
 
 
+  The Firecomms RedLink FT50MHNR transmitter and FR50MHNR receiver are candidates for a horizontal, non-inverting DC-to-50 MBd digital optical link. Both support 3.3 V or 5 V supplies with ±10% tolerance and are rated for operation from −40 °C to +85 °C.
 
 
-  Account for the measurement conditions when assessing the optical link budget. With the production harness, check the high optical input condition at the shortest link length and the low optical power margin at the longest length.
 
 
+  \- \*\*FT50MHNR transmitter.\*\* It uses a 650 nm RCLED and an integrated driver. The datasheet lists transmitter PWD of −3 to +3 ns. See \[Firecomms FT50MxxR Rev G, p. 1 and p. 4, Table 6](https://www.firecomms.com/contentFiles/technicalDocuments/FT50MxxR-Datasheet-Rev-G.pdf#page=4).
 
 
-  Both datasheets list transmitter pulse-width distortion (PWD) of −3 to +3 ns. Broadcom separately specifies −5 to +3 ns for the first optical pulse. For burst traffic, check the first pulse after idle and the receiver’s handling of the first frame.
+  \- \*\*FR50MHNR receiver.\*\* The peak optical input range in the light-on state is −22 to +2 dBm under the datasheet’s specified transmitter wavelength, optical edge, and receiver circuit conditions. The manufacturer lists separate PWD conditions for different received power ranges and for the first one to three pulses. See \[Firecomms FR50MxxR Rev H, p. 5, Table 6](https://www.firecomms.com/contentFiles/technicalDocuments/FR50MxxR_Datasheet_Rev_H.pdf#page=5).
 
 
 
 
-  Optical references: \[Broadcom AV02-4369EN, p. 9](https://docs.broadcom.com/doc/AV02-4369EN#page=9) and \[Firecomms FT50MxxR Rev G, p. 4, Table 6](https://www.firecomms.com/contentFiles/technicalDocuments/FT50MxxR-Datasheet-Rev-G.pdf#page=4).
+  During prototype validation, measure received optical power using the shortest and longest production cable assemblies. At the receiver, capture the shortest PWM pulse, the first pulse after idle, and the output during loss of light. Verify system insulation and protective functions separately against the equipment design requirements.
 
 
 
 
-  \## How do you validate the FT50MHNR with the existing AFBR-2624Z receiver?
+  \## What information is needed to evaluate a POF link for a medium-voltage drive?
 
 
 
 
-  1. \*\*Capture a baseline.\*\* Use the original AFBR-1624Z, receiver, and production cable assembly. Record receiver output waveforms, pulse widths, and bit errors. Log CRC errors if the protocol uses CRC.
+  Provide the signal direction, shortest pulse width or protocol line rate, minimum and maximum cable lengths, connector type, supply voltages at both ends, and expected response to loss of light. If the design carries both control and feedback, list the requirements for each link.
 
 
-  2. \*\*Change only the transmitter.\*\* Install the FT50MHNR and keep the original receiver, cable assemblies, and test data. Cover the shortest and longest installed links, continuous traffic, and the first frame after idle.
 
 
-  3. \*\*Retest at the equipment’s operating limits.\*\* Use the project’s waveform, bit-error, and protocol acceptance criteria at the specified supply and temperature limits. The link distance guarantee on p. 7 of the Broadcom datasheet applies to the Broadcom transmitter and receiver combinations it specifies. Qualify the FT50MHNR and AFBR-2624Z combination with measurements from your equipment.
+  \- \[Explore Firecomms industrial automation and plastic optical fiber applications](https://firecomms-cn.com/en/solutions.html)
 
 
-
-
-  \## Where can I check the cross-reference or request an evaluation?
-
-
-
-
-  \- \[Look up Avago and Firecomms cross-reference part numbers](https://firecomms-cn.com/en/cross-ref.html)
-
-
-  \- \[Contact Shanghai SIMACITY about an AFBR-1624Z to FT50MHNR evaluation](https://firecomms-cn.com/en/contact.html). Include the existing receiver part number, supply voltage, fiber type, minimum and maximum cable lengths, and actual traffic pattern.[afbr-1624z-ft50mhnr-pin-to-pin](afbr-1624z-ft50mhnr-pin-to-pin)
+  \- \[Contact Shanghai SIMACITY to evaluate a POF link for a medium-voltage drive](https://firecomms-cn.com/en/contact.html)[medium-voltage-drive-pof-control-feedback](medium-voltage-drive-pof-control-feedback)
 ---
-Firecomms FT50MHNR 可以作为 Broadcom（Avago）AFBR-1624Z 的 Pin2Pin 替代候选。两款都是水平安装、非反相、TTL 兼容的 DC–50 MBd 光纤发射器，主要引脚功能一致。用于工业控制设备旧板换料时，先核对 PCB 孔位、连接器和供电，再用原接收器及实际线束验证光功率与接收波形。
+高压变频器的控制板与功率单元之间，适合评估用塑料光纤（POF）传输的信号有三类：下行的 IGBT 门极驱动指令、上行的故障与就绪状态，以及数字化后的电压、电流和温度采样数据。塑料光纤可在两端之间提供无导电通路的信号传输。选型时要按信号用途分别核对时序、失光行为和光功率裕量。
 
 
 
-\## AFBR-1624Z 和 FT50MHNR 的引脚一样吗？
+\## IGBT 门极驱动的 PWM 信号可以走塑料光纤吗？
 
 
 
-两款发射器的 1 脚为电源，2 脚无实体引脚，3 脚为地，4 脚为 TTL 数据输入。5 脚和 8 脚用于外壳固定。Broadcom 建议将这两个固定脚接机壳地，Firecomms 的规格书标注接地。换料时应对照旧板的信号地和机壳地连接方式。
+可以。在采用独立门极驱动板的架构中，主控板将 PWM 开关指令送入光发射器，功率单元侧的光接收器恢复逻辑信号，再由本地门极驱动电路驱动 IGBT。Eaton SC9000 EP 高压变频器手册第 43 页展示了控制板经光纤向逆变器发送控制指令的实例。
 
 
 
-比对封装时，按规格书的 PCB 顶视图核对插装孔位、板边距离、旧线束插拔空间和连接器锁扣。两款器件均为水平封装，样件试装可确认相邻器件和机壳是否留有足够空间。
+这类链路要核对\*\*最短有效脉宽、端到端传播延迟、通道间延迟差和脉宽失真（PWD）\*\*。如果上下桥臂走独立通道，应以接收侧的实际波形核对死区余量。设计中若有长时间空闲后的重新发脉冲，还要单独检查首脉冲。50 MBd 描述的是器件的符号速率能力，PWM 开关频率和最短高、低电平持续时间需要按实际波形分别核对。
 
 
 
-引脚与封装依据：\[Broadcom AV02-4369EN（2023 年 5 月 31 日），第 3–4、6 页](https://docs.broadcom.com/doc/AV02-4369EN)；\[Firecomms FT50MxxR Rev G，第 2 页表 3、第 5 页图 4](https://www.firecomms.com/contentFiles/technicalDocuments/FT50MxxR-Datasheet-Rev-G.pdf)。
+\[查看 Eaton SC9000 EP 高压变频器用户手册 IB020002EN，2017 年 11 月版，第 43 页](https://www.eaton.com/content/dam/eaton/products/medium-voltage-power-distribution-control-systems/motor-control/literature/installation-instructions/sc9000-instruction-booklet-user-manual-ib020002en.pdf)
 
 
 
-\## 3.3 V 和 5 V 的旧板能沿用原电路吗？
+\## 故障回传和光纤断开，主控板怎么判断？
 
 
 
-\- \*\*供电范围\*\*：AFBR-1624Z 支持 3.3 V 或 5 V，容差为 ±5%。FT50MHNR 支持 3.3 V 或 5 V，容差为 ±10%。两款器件的工作温度范围均为 −40 °C 至 +85 °C。
-
-\- \*\*输入门限\*\*：两款的高电平输入下限均为 2.0 V，低电平输入上限均为 0.8 V。FT50MHNR 的高电平输入上限为 VCC + 0.25 V。若旧板用 5 V 逻辑驱动 3.3 V 供电的发射器，先核对数据脚实际峰值。
-
-\- \*\*输入与去耦\*\*：核对旧板的输入下拉、供电滤波和去耦布局。FT50MxxR Rev G 第 2 页图 2 给出了推荐电路，并要求每颗器件的 100 nF 去耦电容尽量靠近 VCC 脚。
+功率单元的就绪、驱动欠压、过流等状态可以通过独立光纤或数字状态帧回传。若接口用“有光”表示正常，器件故障、光纤断开和发射端掉电都可能导致接收端失光。设计评审应明确失光时的系统响应。需要区分原因时，可结合独立状态编码、心跳超时或其他诊断信息。
 
 
 
-电气依据：\[Broadcom AV02-4369EN，第 7、9 页](https://docs.broadcom.com/doc/AV02-4369EN)；\[Firecomms FT50MxxR Rev G，第 1、2、4 页](https://www.firecomms.com/contentFiles/technicalDocuments/FT50MxxR-Datasheet-Rev-G.pdf)。
+Power Integrations 的 2SB315B 门极驱动手册给出了一个实现示例。其正常反馈包含短暂灭光的确认脉冲，故障反馈则用较长的灭光时间表示。实际项目应按所用驱动器的逻辑和时序验证正常、故障、断纤及上电、掉电状态。
 
 
 
-\## 同为 50 MBd，为什么还要复测光功率和首脉冲？
+\[查看 Power Integrations 2SB315B 应用手册，第 9–10 页，图 4–5](https://www.power.com/sites/default/files/documents/2SB315B_Manual.pdf)
 
 
 
-AFBR-1624Z 使用集成驱动的 650 nm LED，FT50MHNR 使用集成驱动的 650 nm RCLED。两份规格书给出的 1 mm POF 峰值光功率采用了不同的测试光纤长度：
+\## 电压、电流和温度采样怎么通过光纤上传？
 
 
 
-\- \*\*AFBR-1624Z\*\*：−4.5 至 +2 dBm，在 1 m、数值孔径 NA = 0.5 的 POF 末端测量。
-
-\- \*\*FT50MHNR\*\*：−6 至 +2 dBm，使用 0.5 m、NA = 0.5 的 POF 测量。
+一种常见做法是在功率单元侧完成采样和数字化，再经串行光链路送回主控。若采样用于闭环控制，应把采样到数据可用的总延迟、延迟波动和数据失效判据纳入评估。若采样用于状态监测，可根据所需更新周期、帧开销和超时规则确定线路速率。
 
 
 
-计算替代后的光链路预算时，应结合各自的测量条件。在实际线束上，用最短链路检查接收端高光功率工况，用最长链路检查低光功率余量。
+\## Firecomms FT50MHNR 和 FR50MHNR 适合怎样的链路？
 
 
 
-两份规格书所列发射端脉宽失真（PWD）均为 −3 至 +3 ns。Broadcom 另列首个光脉冲的 PWD 为 −5 至 +3 ns。若设备采用间歇发送，应单独检查空闲后的首个脉冲及接收端首帧表现。
+在评估水平安装、非反相的 DC–50 MBd 数字光链路时，可以将 Firecomms RedLink FT50MHNR 发射器与 FR50MHNR 接收器作为一组候选。两款器件均支持 3.3 V 或 5 V 供电，电源容差为 ±10%，额定工作温度为 −40 °C 至 +85 °C。
 
 
 
-光学依据：\[Broadcom AV02-4369EN，第 9 页](https://docs.broadcom.com/doc/AV02-4369EN#page=9)；\[Firecomms FT50MxxR Rev G，第 4 页表 6](https://www.firecomms.com/contentFiles/technicalDocuments/FT50MxxR-Datasheet-Rev-G.pdf#page=4)。
+\- \*\*FT50MHNR 发射端\*\*采用 650 nm RCLED 和集成驱动，规格书所列发射端 PWD 为 −3 至 +3 ns。见 \[Firecomms FT50MxxR Rev G，第 1 页及第 4 页表 6](https://www.firecomms.com/contentFiles/technicalDocuments/FT50MxxR-Datasheet-Rev-G.pdf#page=4)。
+
+\- \*\*FR50MHNR 接收端\*\*在规格书规定的发射波长、光信号边沿和接收电路条件下，光高电平峰值输入范围为 −22 至 +2 dBm。原厂对不同接收光功率区间及前 1–3 个脉冲分别列出了 PWD 条件。见 \[Firecomms FR50MxxR Rev H，第 5 页表 6](https://www.firecomms.com/contentFiles/technicalDocuments/FR50MxxR_Datasheet_Rev_H.pdf#page=5)。
 
 
 
-\## 保留 AFBR-2624Z 接收器时，怎么验证只换发射端？
+样机验证时，用实际最短和最长线束检查接收光功率，并在接收端记录最短 PWM 脉冲、空闲后的首脉冲及失光时的输出。整机绝缘与保护功能按设备设计要求单独验证。
 
 
 
-1. \*\*记录原链路基线\*\*。使用原 AFBR-1624Z、原接收器和实际线束，在接收端记录波形、脉宽和误码。协议带 CRC 时同步记录 CRC 错误。
-
-2. \*\*只换发射器\*\*。装上 FT50MHNR，沿用原接收器、线束和测试数据。覆盖实际最短及最长链路、连续数据以及空闲后的首帧。
-
-3. \*\*复测设备边界条件\*\*。在设备规定的供电和温度边界下，按项目的波形、误码及协议判据验收。Broadcom 第 7 页的链路距离保证适用于其规格书指定的原厂收发配对。FT50MHNR 与 AFBR-2624Z 的组合应以实测结果作为换料依据。
+\## 评估高压变频器的塑料光纤方案，需要提供什么信息？
 
 
 
-\## 哪里可以查替代型号或提交选型信息？
+整理信号方向、最短脉宽或协议速率、最短及最长线长、连接器类型、两端供电和失光时预期行为。若同时承载控制和反馈，分别列出两条链路的要求。
 
 
 
-\- \[查询 Avago 与 Firecomms 替代料号](https://firecomms-cn.com/cross-ref.html)
+\- \[查看飞尔康工业自动化与塑料光纤应用](https://firecomms-cn.com/solutions.html)
 
-\- \[联系上海芯聚电子评估 AFBR-1624Z 与 FT50MHNR](https://firecomms-cn.com/contact.html)。提交原接收器料号、供电电压、光纤类型、最短及最长线长，以及实际数据模式。[afbr-1624z-ft50mhnr-pin-to-pin](afbr-1624z-ft50mhnr-pin-to-pin)
+\- \[联系上海芯聚电子评估高压变频器 POF 链路](https://firecomms-cn.com/contact.html)[medium-voltage-drive-pof-control-feedback](medium-voltage-drive-pof-control-feedback)
