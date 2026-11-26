@@ -1,157 +1,159 @@
 ---
-title: Firecomms FT05MHNR 能传 50 米吗？FT05MxNR 三款发射器的安装、驱动与接收器搭配
-date: 2026-11-26T11:20:00.000+08:00
-description: Firecomms FT05MHNR、FT05MVNR 和 FT05MWNR 是三款 DC–5 MBd RedLink
-  发射器。本文依据原厂 Rev. J 规格书，说明安装方向、51 Ω 外部驱动电路、30 m 与 50 m 的条件差异，以及搭配 FR05DHIR
-  时的光功率与极性验证。
-draft: false
-title_en: Can the Firecomms FT05MHNR Reach 50 m? FT05MxNR Mounting, Drive, and
-  Receiver Pairing
-description_en: The Firecomms FT05MHNR, FT05MVNR, and FT05MWNR are DC–5 MBd
-  RedLink transmitters. This guide uses the Rev. J datasheet to explain
-  mounting, the 51 Ω external drive circuit, the 30 m and 50 m distance
-  conditions, and what to verify with an FR05DHIR receiver.
+title: Firecomms FR05DxDR、FR05DxIR、FR05DxCR 怎么选？5 MBd 接收器换料先查 4 脚与上拉
+date: 2026-11-26T11:27:00.000+08:00
+description: Firecomms FR05DxIR 为推挽输出，FR05DxCR 为开集电极输出，FR05DxDR 为 MOSFET
+  开漏输出。本文对照三份原厂规格书，说明 4 脚接法、20 V 开关条件，以及选型时如何验证上拉和输出波形。
+title_en: Firecomms FR05DxDR vs FR05DxIR vs FR05DxCR — Pin 4 and Pull-Up Checks
+  Before a Swap
+description_en: The Firecomms FR05DxIR uses push-pull CMOS, the FR05DxCR uses
+  open collector, and the FR05DxDR uses MOSFET open drain. Compare pin 4 wiring,
+  20 V switching conditions, and the output checks required before replacing a 5
+  MBd RedLink receiver.
 body_en: >-
-  The Firecomms FT05MxNR series consists of DC–5 MBd RedLink plastic optical
-  fiber transmitters. Choose the FT05MHNR for horizontal mounting, the FT05MVNR
-  for vertical mounting, or the FT05MWNR for 30° tilted mounting. If the project
-  requires 50 m, verify that distance with the intended fiber, receiver, and
-  operating conditions. Firecomms Rev. J, page 1, Table 2 lists 50 m over
-  step-index POF under typical operating conditions and 30 m under worst-case
-  conditions.
+  The Firecomms FR05DxDR, FR05DxIR, and FR05DxCR are DC–5 MBd RedLink inverting
+  fiber optic receivers. Evaluate the FR05DxIR if the controller needs an output
+  that actively drives both logic states. Evaluate the FR05DxCR for an
+  open-collector output pulled up to the receiver supply. When the output needs
+  an independent pull-up rail above the receiver supply, evaluate the FR05DxDR.
+  Output topology and pin 4 wiring determine which part fits the board.
 
 
 
 
-  \## Where can I find the PCB footprint for each transmitter?
+  \## How do I wire the push-pull, open-collector, and open-drain outputs?
 
 
 
 
-  \- \*\*FT05MHNR, horizontal mount.\*\* See Rev. J, page 6, Figure 9 for the PCB hole pattern and mechanical dimensions.
+  \- \*\*FR05DxIR, push-pull CMOS.\*\* The output actively drives high and low. Rev. F, page 2, Table 3 lists pin 4 as internally unconnected. Figure 2 shows pin 4 grounded for the standard circuit. Firecomms also allows an external connection between pins 4 and 1 for existing board layouts. Figure 4 on page 3 shows the push-pull output stage. With a 5 V receiver and a 3.3 V controller, check the controller’s input voltage rating and thresholds.
 
 
-  \- \*\*FT05MVNR, vertical mount.\*\* See page 7, Figure 11 for the PCB hole pattern and mechanical dimensions.
+  \- \*\*FR05DxCR, open collector.\*\* Rev. D, page 2, Figure 2 connects pin 1 (Vo) to pin 4 (RL) to enable the internal pull-up to VCC, which is 1 kΩ typical. With this connection and a 15 pF load, Table 6 on page 4 lists a rise time of 73 ns typical and 85 ns maximum. After a board change, remeasure the rising edge with the actual routing and input capacitance.
 
 
-  \- \*\*FT05MWNR, 30° tilted mount.\*\* See page 8, Figure 13 for the PCB hole pattern and mechanical dimensions.
-
-
-
-
-  Page 1, Table 1 lists all three parts as non-inverting. Before changing orientation, check the PCB holes, panel opening, and plug clearance against the relevant drawing. Verify the fiber bend radius in the assembled unit.
+  \- \*\*FR05DxDR, MOSFET open drain.\*\* If the maximum Vo stays at or below VCC, use the internal 1 kΩ typical pull-up as shown in Rev. G, page 3, Figure 2. To pull the output above VCC, follow Figure 3 on the same page. Leave pin 4 (RL) open and pull pin 1 (Vo) up to a separate VSwitch rail through an external resistor.
 
 
 
 
-  \## How do I drive the FT05MHNR RCLED?
+  \## What does the FR05DxDR 20 V rating mean, and can it run at 5 MBd at that voltage?
 
 
 
 
-  Rev. J, page 2, Table 3 identifies pin 1 as RCLED anode TD+, pin 2 as cathode TD−, pins 3 and 4 as unconnected, and pins 5 and 8 as grounded retention pins. Figure 2 on the same page shows an external reference driver using a 5 V supply and an SN75451. With a 51 Ω series resistor at R1, Firecomms gives an RCLED on-state current of approximately 60 mA.
+  20 V is the upper limit for the external switching rail VSwitch. The receiver’s own VCC operating range is 2.97–5.5 V. Rev. G, page 5, Table 6 characterizes dynamic performance with VCC and VSwitch at 4.5–5.5 V, a 560 Ω external pull-up, a 22 pF load, and pin 4 left open.
 
 
 
 
-  Increasing R1 reduces drive current. After changing it, measure the current, coupled optical power, and remote waveform. Rev. J, page 4, Table 6 lists coupled optical power of −16 to −7 dBm, with a typical value of −9.5 dBm at 60 mA DC forward current. The test uses 0.5 m of POF with a 1 mm core and 0.5 NA. The same table specifies 30 mA average forward current for the 5 MBd dynamic test. Keep on-state current, DC test current, and pattern-dependent average current separate when checking the driver.
+  If the project switches 12 V, 15 V, or a signal near 20 V, check sink current, output dissipation, rise time, and receive data with the intended load. Use the actual data pattern to verify that downstream logic detects the shortest pulse. Apply the datasheet’s rate and voltage limits under their respective test conditions.
 
 
 
 
-  \## How do I verify distance and polarity with an FR05DHIR receiver?
+  \## Which part numbers fit each orientation, and what changes when moving from push-pull to open collector?
 
 
 
 
-  The FR05DHIR is a horizontal 5 MBd inverting receiver. FR05DxIR Rev. E, page 3, Figure 3 shows that an optical high produces an electrical low. For 1 mm, 0.5 NA POF, Table 6 on page 4 specifies an optical high peak input range of −22 to +2 dBm and an optical low limit of −40 dBm.
+  Page 1, Table 1 of each datasheet lists the full ordering codes.
 
 
 
 
-  \- \*\*Estimate optical margin.\*\* Subtract the actual link loss from the minimum FT05MxNR coupled power and compare the result with the receiver’s optical high lower limit. Use a consistent power measurement basis. The receiver specifies peak power. If your meter reports average power, interpret the reading using the actual duty cycle.
+  \- \*\*Horizontal mount:\*\* FR05DHDR is open drain, FR05DHIR is push-pull, and FR05DHCR is open collector.
 
 
-  \- \*\*Test both long and short links.\*\* Check receiver margin on the longest link and the upper receive power limit on the shortest. Measure the receive waveform and count errors using the intended plugs, routing, and data pattern.
+  \- \*\*Vertical mount:\*\* FR05DVDR is open drain, FR05DVIR is push-pull, and FR05DVCR is open collector.
 
 
-  \- \*\*Verify end-to-end logic.\*\* Observe the controller’s transmit signal and the FR05DHIR output together. Confirm that the receive idle level and start edge meet system requirements.
-
-
-
-
-  \## Where can I find the datasheets or get selection support?
+  \- \*\*30° tilted mount:\*\* FR05DWDR is open drain, FR05DWIR is push-pull, and FR05DWCR is open collector.
 
 
 
 
-  \- \[Firecomms FT05MxNR transmitter datasheet, Rev. J](https://www.firecomms.com/contentFiles/technicalDocuments/FT05MxNR-Datasheet-Rev-J.pdf)
+  For example, when replacing an FR05DHIR with an FR05DHCR, remove the existing pin 4 ground connection if present, then enable the internal pull-up as shown in Rev. D, Figure 2. Check output levels, edges, and error performance with the intended fiber and data pattern. Use the optical power limits for the selected part when budgeting the link. With 1 mm, 0.5 NA POF, the minimum peak input for the optical high state is −20 dBm for DR and −22 dBm for IR and CR. See Table 6 on page 5 of DR Rev. G and page 4 of IR Rev. F and CR Rev. D.
 
 
-  \- \[Firecomms FR05DxIR inverting receiver datasheet, Rev. E](https://www.firecomms.com/contentFiles/technicalDocuments/FR05DxIR-Datasheet-Rev-E.pdf)
+
+
+  \## Where can I find the datasheets or get replacement support?
+
+
+
+
+  \- \[Firecomms FR05DxDR open-drain receiver datasheet, Rev. G](https://www.firecomms.com/contentFiles/technicalDocuments/FR05DxDR-Datasheet-Rev-G.pdf)
+
+
+  \- \[Firecomms FR05DxIR push-pull receiver datasheet, Rev. F](https://www.firecomms.com/contentFiles/technicalDocuments/FR05DxIR-Datasheet-Rev-F.pdf)
+
+
+  \- \[Firecomms FR05DxCR open-collector receiver datasheet, Rev. D](https://www.firecomms.com/contentFiles/technicalDocuments/FR05DxCR-Datasheet-Rev-D.pdf)
 
 
   \- \[SIMACITY Firecomms fiber optic product portfolio](https://firecomms-cn.com/en/products.html)
 
 
-  \- \[Contact SIMACITY about FT05MxNR drive, FR05DHIR pairing, and link validation](https://firecomms-cn.com/en/contact.html)[firecomms-ft05mxnr-5mbd-pof-transmitter-selection](firecomms-ft05mxnr-5mbd-pof-transmitter-selection)
+  \- \[Contact SIMACITY about FR05 receiver selection and board-level replacement](https://firecomms-cn.com/en/contact.html)[firecomms-fr05dxdr-fr05dxir-fr05dxcr-output-comparison](firecomms-fr05dxdr-fr05dxir-fr05dxcr-output-comparison)
 ---
-Firecomms FT05MxNR 是一系列 DC–5 MBd RedLink 塑料光纤发射器。水平安装选 FT05MHNR，垂直安装选 FT05MVNR，30° 倾斜安装选 FT05MWNR。若项目要求传输 50 m，应按实际光纤、接收器和运行条件验证。原厂 Rev. J 第 1 页表 2 将 50 m 列为阶跃型 POF 的典型工作距离，将 30 m 列为最不利条件下的距离。
+Firecomms FR05DxDR、FR05DxIR 和 FR05DxCR 都是 DC–5 MBd RedLink 反相光纤接收器。主控需要接收器主动驱动高低电平时，可评估 FR05DxIR。需要开集电极输出并上拉到接收器电源时，可评估 FR05DxCR。需要独立上拉电源且输出电压高于接收器供电时，可评估 FR05DxDR。三款的关键差异在输出级和 4 脚接法。
 
 
 
-\## 三款发射器的 PCB 孔位怎么查？
+\## 推挽、开集电极和开漏，分别怎么接？
 
 
 
-\- \*\*FT05MHNR，水平安装。\*\* PCB 孔位和机械尺寸见 Rev. J 第 6 页图 9。
+\- \*\*FR05DxIR，推挽 CMOS。\*\* 输出级主动驱动高、低电平。Rev. F 第 2 页表 3 将 4 脚列为内部未连接。按原厂图 2 的常规接法将 4 脚接地，兼容旧板布局时可按原厂说明将 4 脚与 1 脚外接。第 3 页图 4 给出推挽输出结构。若接收器用 5 V 供电、后级是 3.3 V 主控，应核对主控输入耐压和门限。
 
-\- \*\*FT05MVNR，垂直安装。\*\* PCB 孔位和机械尺寸见第 7 页图 11。
+\- \*\*FR05DxCR，开集电极。\*\* Rev. D 第 2 页图 2 将 1 脚 Vo 与 4 脚 RL 相连，启用内部典型 1 kΩ 上拉至 VCC。第 4 页表 6 在这一接法、负载电容 15 pF 的条件下，列出典型上升时间 73 ns、最大 85 ns。换板后，应按实际布线和后级输入电容复测上升沿。
 
-\- \*\*FT05MWNR，30° 倾斜安装。\*\* PCB 孔位和机械尺寸见第 8 页图 13。
-
-
-
-第 1 页表 1 将三款均列为非反相型。更换安装方向前，要按对应机械图核对 PCB 孔位、面板开口和插拔净空，并检查装机后的光纤弯曲半径。
+\- \*\*FR05DxDR，MOSFET 开漏。\*\* 当 Vo 的最高电压不超过 VCC 时，可按 Rev. G 第 3 页图 2 使用内部典型 1 kΩ 上拉。需要上拉到高于 VCC 的电压时，按同页图 3 将 4 脚 RL 留空，用外部电阻把 1 脚 Vo 上拉到独立的 VSwitch。
 
 
 
-\## FT05MHNR 的 RCLED 怎么驱动？
+\## FR05DxDR 的 20 V 指什么？能同时跑到 5 MBd 吗？
 
 
 
-Rev. J 第 2 页表 3 标明，1 脚为 RCLED 阳极 TD+，2 脚为阴极 TD−，3、4 脚未连接，5、8 脚为接地固定脚。同页图 2 给出采用 5 V 电源和 SN75451 的外部参考驱动。串联电阻 R1 为 51 Ω 时，原厂给出的 RCLED 导通电流约为 60 mA。
+20 V 是外部开关电源 VSwitch 的上限。接收器本身的 VCC 工作范围为 2.97–5.5 V。Rev. G 第 5 页表 6 的动态测试使用 4.5–5.5 V 的 VCC 和 VSwitch、560 Ω 外部上拉电阻、22 pF 负载，并将 4 脚留空。
 
 
 
-增大 R1 可降低驱动电流。调整后应测量实际电流、耦合光功率和远端波形。Rev. J 第 4 页表 6 在 60 mA 正向直流电流下，通过 0.5 m 长、1 mm 芯径、NA 0.5 的 POF 测得耦合光功率为 −16 至 −7 dBm，典型值为 −9.5 dBm。该表的 5 MBd 动态测试使用 30 mA 平均正向电流。核对电路时，要区分导通电流、直流测试电流和实际码型下的平均电流。
+如果项目要切换 12 V、15 V 或接近 20 V 的信号，应按实际负载核对下拉电流、输出功耗、上升时间和接收数据。用实际码型实测后级能否识别最短脉冲。原厂表中的速率和电压上限需要结合各自的测试条件使用。
 
 
 
-\## 搭配 FR05DHIR 时，怎么验证距离和接收极性？
+\## 九个料号怎么选？从推挽换成开集电极时要看什么？
 
 
 
-FR05DHIR 是水平安装的 5 MBd 反相接收器。根据 FR05DxIR Rev. E 第 3 页图 3，光高状态对应电低电平。第 4 页表 6 对 1 mm、NA 0.5 的 POF 给出光高状态峰值接收功率 −22 至 +2 dBm，以及光低状态功率上限 −40 dBm。
+三个系列的完整订购料号均见各自规格书第 1 页表 1。
 
 
 
-\- \*\*先估算光功率余量。\*\* 用 FT05MxNR 的最小耦合光功率减去实际链路损耗，再与接收器的光高状态下限比较。两项功率须采用一致的测量口径。接收器规格按峰值定义，使用平均功率仪表时应结合实际占空比解读。
+\- \*\*水平安装：\*\* FR05DHDR 为开漏，FR05DHIR 为推挽，FR05DHCR 为开集电极。
 
-\- \*\*再测试长短两种链路。\*\* 在项目最长链路上检查接收余量，在最短链路上核对接收光功率上限。用实际插头、布线路径和目标码型测量接收波形并统计错误。
+\- \*\*垂直安装：\*\* FR05DVDR 为开漏，FR05DVIR 为推挽，FR05DVCR 为开集电极。
 
-\- \*\*确认整条链路的逻辑。\*\* 同时观察主控发送信号和 FR05DHIR 输出，检查接收空闲电平与起始边沿是否符合系统要求。
-
-
-
-\## 哪里可以查规格书或咨询选型？
+\- \*\*30° 倾斜安装：\*\* FR05DWDR 为开漏，FR05DWIR 为推挽，FR05DWCR 为开集电极。
 
 
 
-\- \[Firecomms FT05MxNR 发射器原厂规格书 Rev. J](https://www.firecomms.com/contentFiles/technicalDocuments/FT05MxNR-Datasheet-Rev-J.pdf)
+例如，把 FR05DHIR 换成 FR05DHCR 时，如果旧板把 4 脚接地，应先修改这条走线，再按 Rev. D 图 2 接入内部上拉。随后用实际光纤和码型检查输出高低电平、边沿和误码。做光功率预算时，也要分别查规格表。以 1 mm、NA 0.5 的 POF 为例，光高状态的峰值接收功率下限，DR 为 −20 dBm，IR 和 CR 均为 −22 dBm。对应数据见 DR Rev. G 第 5 页表 6，以及 IR Rev. F、CR Rev. D 第 4 页表 6。
 
-\- \[Firecomms FR05DxIR 反相接收器原厂规格书 Rev. E](https://www.firecomms.com/contentFiles/technicalDocuments/FR05DxIR-Datasheet-Rev-E.pdf)
+
+
+\## 哪里可以查规格书或咨询换料？
+
+
+
+\- \[Firecomms FR05DxDR 开漏接收器规格书 Rev. G](https://www.firecomms.com/contentFiles/technicalDocuments/FR05DxDR-Datasheet-Rev-G.pdf)
+
+\- \[Firecomms FR05DxIR 推挽接收器规格书 Rev. F](https://www.firecomms.com/contentFiles/technicalDocuments/FR05DxIR-Datasheet-Rev-F.pdf)
+
+\- \[Firecomms FR05DxCR 开集电极接收器规格书 Rev. D](https://www.firecomms.com/contentFiles/technicalDocuments/FR05DxCR-Datasheet-Rev-D.pdf)
 
 \- \[上海芯聚电子 Firecomms 光纤器件产品中心](https://firecomms-cn.com/products.html)
 
-\- \[咨询 FT05MxNR 驱动、FR05DHIR 配套和链路验证](https://firecomms-cn.com/contact.html)[firecomms-ft05mxnr-5mbd-pof-transmitter-selection](firecomms-ft05mxnr-5mbd-pof-transmitter-selection)
+\- \[咨询 FR05 系列接收器输出选型与旧板换料](https://firecomms-cn.com/contact.html)[firecomms-fr05dxdr-fr05dxir-fr05dxcr-output-comparison](firecomms-fr05dxdr-fr05dxir-fr05dxcr-output-comparison)
