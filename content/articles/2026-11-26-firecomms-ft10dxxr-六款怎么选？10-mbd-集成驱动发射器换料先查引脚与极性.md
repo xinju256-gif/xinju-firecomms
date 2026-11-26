@@ -1,9 +1,8 @@
 ---
 title: Firecomms FT10DxxR 六款怎么选？10 MBd 集成驱动发射器换料先查引脚与极性
-date: 2026-11-26T11:00:00.000+08:00
+date: 2026-11-26T11:05:00.000+08:00
 description: Firecomms FT10DxxR 是 DC–10 MBd 集成驱动 RedLink 光纤发射器系列。本文依据原厂 Rev. E
   规格书，对照六款型号的封装和极性，并说明如何核对 TTL 输入门限及 FT10MHNR 换料时的引脚差异。
-draft: false
 title_en: Firecomms FT10DxxR 10 MBd Transmitters — Pinout and Polarity Checks
   Before a Swap
 description_en: The Firecomms FT10DxxR series includes six DC–10 MBd RedLink
