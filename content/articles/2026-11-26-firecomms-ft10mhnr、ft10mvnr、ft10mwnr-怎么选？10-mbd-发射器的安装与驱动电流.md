@@ -1,152 +1,166 @@
 ---
-title: Firecomms FT10MHNR、FT10MVNR、FT10MWNR 怎么选？10 MBd 发射器的安装与驱动电流
-date: 2026-11-26T10:52:00.000+08:00
-description: Firecomms FT10MxNR 是一系列 DC–10 MBd RedLink 塑料光纤发射器。本文依据原厂 Rev. G
-  规格书说明三款型号的安装方向、RCLED 外部驱动，并用 20 mA 和 60 mA 的耦合光功率数据说明如何验证驱动电流。
-draft: false
-title_en: "Firecomms FT10MHNR, FT10MVNR, and FT10MWNR: Mounting and Drive
-  Current for 10 MBd Links"
-description_en: The Firecomms FT10MxNR series includes three DC–10 MBd RedLink
-  plastic optical fiber transmitters. Using the Rev. G datasheet, this guide
-  covers mounting, external RCLED drive, and how to use coupled optical power at
-  20 mA and 60 mA to validate the drive current.
+title: Firecomms FT10MHLR、FT10MVLR、FT10MWLR 怎么选？10 mA 下怎样核对 POF 链路余量
+date: 2026-11-26T10:54:00.000+08:00
+description: Firecomms FT10MxLR 是 DC–10 MBd 低电流 RedLink 光纤发射器系列。本文依据原厂 Rev. L
+  规格书，对照三个安装方向和四个驱动电流下的耦合光功率，并说明如何核对旧板驱动和接收余量。
+title_en: Firecomms FT10MHLR, FT10MVLR, and FT10MWLR — Is 10 mA Enough for Your POF Link?
+description_en: The Firecomms FT10MxLR series offers low-current DC–10 MBd
+  RedLink transmitters. Using the Rev. L datasheet, this guide compares mounting
+  options and coupled optical power at four drive currents, then explains how to
+  validate receiver margin and the existing driver.
 body_en: >-
-  Choose the Firecomms FT10MHNR for horizontal mounting, the FT10MVNR for
-  vertical mounting, or the FT10MWNR for 30° tilted mounting. All three FT10MxNR
-  10 MBd RedLink transmitters use an external circuit to drive the 650 nm RCLED.
-  Once you select the package, use the Firecomms reference circuit as a starting
-  point and verify the drive current on the intended optical link.
+  Choose the Firecomms FT10MHLR for horizontal mounting, the FT10MVLR for
+  vertical mounting, or the FT10MWLR for 30° tilted mounting. All three
+  low-current FT10MxLR RedLink transmitters support DC–10 MBd. With 1 mm POF at
+  10 mA DC forward current, the datasheet lists −3 dBm typical and −9 dBm
+  minimum coupled optical power. Use the minimum value for an initial link
+  budget, then verify the actual cable assembly and receiver.
 
 
 
 
-  \## Where can I find the PCB footprint for each FT10MxNR part?
+  \## Where can I find the PCB footprint for each FT10MxLR model?
 
 
 
 
-  \- \*\*FT10MHNR, horizontal mount.\*\* See Rev. G, page 7, Figure 8 for the PCB hole pattern.
+  \- \*\*FT10MHLR, horizontal mount.\*\* See Rev. L, page 6, Figure 6 for the PCB hole pattern.
 
 
-  \- \*\*FT10MVNR, vertical mount.\*\* See page 8, Figure 10 for the PCB hole pattern.
+  \- \*\*FT10MVLR, vertical mount.\*\* See page 7, Figure 8 for the PCB hole pattern.
 
 
-  \- \*\*FT10MWNR, 30° tilted mount.\*\* See page 9, Figure 12 for the PCB hole pattern.
-
-
-
-
-  Page 1, Table 1 lists all three parts as non-inverting. Before changing orientation, check the PCB holes, panel opening, and plug clearance against the correct drawing. Verify the fiber bend radius in the assembled unit.
+  \- \*\*FT10MWLR, 30° tilted mount.\*\* See page 8, Figure 10 for the PCB hole pattern.
 
 
 
 
-  \## How do I drive the FT10MHNR, and what current does 47 Ω produce?
+  Page 1, Table 1 lists the full ordering codes. When changing mounting orientation, check the PCB holes, panel opening, plug clearance, and cable bend radius against the relevant drawing.
 
 
 
 
-  Rev. G, page 2, Table 3 identifies pin 1 as RCLED anode TD+, pin 2 as cathode TD−, pins 3 and 4 as NC, and pins 5 and 8 as grounded retention pins. Figure 2 on the same page shows a reference driver with a 5 V supply and an SN75451. Firecomms gives an on-state current of approximately 60 mA with a 47 Ω series resistor at R2. Increasing R2 reduces the current. Measure the actual current on the prototype and check how it varies with supply voltage and temperature.
+  \## How much optical power does the transmitter couple at 3, 5, 10, and 30 mA?
 
 
 
 
-  Note 4 to Table 6 on page 4 describes the Figure 2 test circuit as inverting. Apply known high and low levels on the assembled board to verify how the controller signal maps to light output and to the electrical output at the remote receiver.
+  Rev. L, page 4, Table 6 measures coupled optical power over 0.5 m of POF with a 1 mm core and a numerical aperture of 0.5. The currents below are RCLED DC forward currents.
 
 
 
 
-  \## How do I choose between 20 mA and 60 mA?
+  \- \*\*3 mA:\*\* −8 dBm typical, −14 dBm minimum.
+
+
+  \- \*\*5 mA:\*\* −5 dBm typical, −11 dBm minimum.
+
+
+  \- \*\*10 mA:\*\* −3 dBm typical, −9 dBm minimum.
+
+
+  \- \*\*30 mA:\*\* +2 dBm typical, −3 dBm minimum, +4 dBm maximum.
 
 
 
 
-  Rev. G, page 4, Table 6 lists the following typical coupled optical powers. The POF test uses 0.5 m of fiber with a 1 mm core and a numerical aperture of 0.5. The PCS test uses 0.5 m of fiber with a 200 µm core.
+  Reducing the current from 30 mA to 10 mA lowers the listed typical coupled power by 5 dB. The 50 m reference on page 1, Table 2 assumes step-index POF and a Firecomms 10 MBd receiver, with distance subject to installation conditions. To assess 10 mA operation, subtract the worst-case link loss from the minimum coupled transmitter power and compare the result with receiver sensitivity. Check the upper received power limit on the lowest-loss link as well.
 
 
 
 
-  \- \*\*1 mm POF at 20 mA DC forward current:\*\* −9.0 dBm.
-
-
-  \- \*\*1 mm POF at 60 mA DC forward current:\*\* −3.5 dBm.
-
-
-  \- \*\*200 µm PCS at 60 mA DC forward current:\*\* −12.5 dBm.
+  \## What should I check when replacing an FT10MHNR with an FT10MHLR?
 
 
 
 
-  Reducing the current from 60 mA to 20 mA lowers the listed typical coupled power by 5.5 dB in the 1 mm POF test. To reduce power consumption, verify receive margin on the highest-loss link and check the receiver’s upper optical power limit on the lowest-loss link. Then measure the waveform and error performance at the intended signaling rate, duty cycle, and data pattern. Table 6 on page 4 lists pulse width distortion of −4 to +8 ns with the Figure 2 test circuit and 30 mA average forward current.
+  Check the external driver first. FT10MxLR Rev. L, page 2, Figure 2 uses a 100 Ω series resistor in its 5 V SN75451 reference circuit. FT10MxNR Rev. G, page 2, Figure 2 uses 47 Ω and gives an on-state current of about 60 mA. If the existing board uses that circuit, adjust the driver and measure the actual current before qualifying the replacement.
 
 
 
 
-  \## Where can I find the datasheet or get selection support?
+  \- \*\*Confirm the pinout.\*\* Rev. L, page 2, Table 3 identifies pin 1 as RCLED anode TD+ and pin 2 as cathode TD−.
+
+
+  \- \*\*Check the current limits.\*\* Rev. L, page 3, Table 5 lists 45 mA peak and 30 mA average under absolute maximum ratings. It also limits pulse width and average current when peak current exceeds 30 mA. Measure peak current, average current, and pulse width at the intended duty cycle, with margin for supply and temperature variation.
+
+
+  \- \*\*Verify the remote waveform.\*\* The dynamic measurements in Rev. L, page 4, Table 6 use the Figure 2 circuit and 15 mA average forward current. After reducing drive current, use the intended data pattern to recheck pulse width and errors at the remote receiver before finalizing the operating point.
 
 
 
 
-  \- \[Firecomms FT10MxNR manufacturer datasheet, Rev. G](https://www.firecomms.com/contentFiles/technicalDocuments/FT10MxNR-Datasheet-Rev-G.pdf)
+  \## Where can I find the datasheets or get selection support?
 
 
-  \- \[Firecomms EVAL-FT10MHNR evaluation board user guide, Rev. A](https://www.firecomms.com/contentFiles/contentblockaccordions/EVAL-FT10MHNR_Mini_Evaluation_Board_User_Guide_Revision_A.pdf)
+
+
+  \- \[Firecomms FT10MxLR low-current transmitter datasheet, Rev. L](https://www.firecomms.com/contentFiles/technicalDocuments/FT10MxLR-Datasheet-Rev-L.pdf)
+
+
+  \- \[Firecomms FT10MxNR transmitter datasheet, Rev. G](https://www.firecomms.com/contentFiles/technicalDocuments/FT10MxNR-Datasheet-Rev-G.pdf)
 
 
   \- \[SIMACITY Firecomms fiber optic product portfolio](https://firecomms-cn.com/en/products.html)
 
 
-  \- \[Contact SIMACITY about FT10MHNR, FT10MVNR, and FT10MWNR selection and driver design](https://firecomms-cn.com/en/contact.html)[firecomms-ft10mxnr-redlink-transmitter-drive-current](firecomms-ft10mxnr-redlink-transmitter-drive-current)
+  \- \[Contact SIMACITY about FT10MHLR, FT10MVLR, and FT10MWLR selection and link validation](https://firecomms-cn.com/en/contact.html)[firecomms-ft10mxlr-low-current-pof-link-budget](firecomms-ft10mxlr-low-current-pof-link-budget)
 ---
-Firecomms FT10MxNR 10 MBd RedLink 光纤发射器按安装方向选型：水平选 FT10MHNR，垂直选 FT10MVNR，30° 倾斜选 FT10MWNR。三款都通过外部电路给 650 nm RCLED 提供驱动电流。选好封装后，可从原厂参考电路出发，用实际链路验证驱动电流是否合适。
+Firecomms FT10MxLR 低电流 RedLink 发射器按安装方向选型。水平安装选 FT10MHLR，垂直安装选 FT10MVLR，30° 倾斜安装选 FT10MWLR。三款均支持 DC–10 MBd。以 1 mm POF 为例，10 mA 正向直流电流下的耦合光功率为典型 −3 dBm、最小 −9 dBm。做链路预算时，可先用最小值估算，再用实际线束和接收器验证。
 
 
 
-\## 三款 FT10MxNR 的安装方向和 PCB 孔位怎么查？
+\## 三款 FT10MxLR 的 PCB 孔位怎么查？
 
 
 
-\- \*\*FT10MHNR，水平安装。\*\* PCB 孔位见 Rev. G 第 7 页图 8。
+\- \*\*FT10MHLR，水平安装。\*\* PCB 孔位见 Rev. L 第 6 页图 6。
 
-\- \*\*FT10MVNR，垂直安装。\*\* PCB 孔位见第 8 页图 10。
+\- \*\*FT10MVLR，垂直安装。\*\* PCB 孔位见第 7 页图 8。
 
-\- \*\*FT10MWNR，30° 倾斜安装。\*\* PCB 孔位见第 9 页图 12。
-
-
-
-第 1 页表 1 将三款均列为非反相型。更换安装方向前，应按目标型号的机械图核对 PCB 孔位、面板开口和插头插拔空间，并确认装机后的光纤弯曲半径。
+\- \*\*FT10MWLR，30° 倾斜安装。\*\* PCB 孔位见第 8 页图 10。
 
 
 
-\## FT10MHNR 的外部驱动怎么接？47 Ω 对应多大电流？
+完整订购料号见第 1 页表 1。跨安装方向换料时，按目标机械图核对 PCB 孔位、面板开口、插头插拔空间和线缆弯曲半径。
 
 
 
-Rev. G 第 2 页表 3 标明，1 脚为 RCLED 阳极 TD+，2 脚为阴极 TD−，3、4 脚为 NC，5、8 脚为接地固定脚。同页图 2 给出采用 5 V 电源和 SN75451 的参考驱动。串联电阻 R2 为 47 Ω 时，原厂给出的导通电流约为 60 mA。增大 R2 可以降低电流，样机上应测量实际电流并核对电源与温度变化的影响。
+\## 3 mA、5 mA、10 mA 和 30 mA 分别有多少光功率？
 
 
 
-第 4 页表 6 注 4 将图 2 的测试电路标为反相。上板时可用已知高低电平检查主控信号、发光状态和对端接收输出之间的对应关系。
+Rev. L 第 4 页表 6 使用 0.5 m 长、1 mm 芯径、NA 0.5 的 POF 测量耦合光功率。下列电流均为 RCLED 正向直流电流。
 
 
 
-\## 20 mA 和 60 mA 怎么选？
+\- \*\*3 mA：\*\* 典型 −8 dBm，最小 −14 dBm。
+
+\- \*\*5 mA：\*\* 典型 −5 dBm，最小 −11 dBm。
+
+\- \*\*10 mA：\*\* 典型 −3 dBm，最小 −9 dBm。
+
+\- \*\*30 mA：\*\* 典型 +2 dBm，最小 −3 dBm，最大 +4 dBm。
 
 
 
-Rev. G 第 4 页表 6 给出以下典型耦合光功率。POF 测试使用 0.5 m 长、1 mm 芯径、NA 0.5 的光纤。PCS 测试使用 0.5 m 长、200 µm 芯径的光纤。
+从 30 mA 降到 10 mA，表中的典型耦合功率下降 5 dB。第 1 页表 2 给出的 50 m 参考距离以阶跃型 POF、配套 Firecomms 10 MBd 接收器及安装条件为前提。要判断 10 mA 是否够用，可用发射端最小耦合功率减去最不利链路损耗，再与接收器灵敏度比较。还应在最低损耗链路上核对接收光功率上限。
 
 
 
-\- \*\*1 mm POF，20 mA 正向直流电流\*\*：−9.0 dBm。
-
-\- \*\*1 mm POF，60 mA 正向直流电流\*\*：−3.5 dBm。
-
-\- \*\*200 µm PCS，60 mA 正向直流电流\*\*：−12.5 dBm。
+\## 从 FT10MHNR 换到 FT10MHLR，要重新核对什么？
 
 
 
-在这组 1 mm POF 测试中，从 60 mA 降到 20 mA，典型耦合光功率下降 5.5 dB。若希望降低功耗，可先在最高损耗链路上验证接收余量，再在最低损耗链路上检查接收光功率是否超出对端允许范围。最后用目标速率、占空比和实际码型验证波形和误码。第 4 页表 6 的脉宽失真范围为 −4 至 +8 ns，对应图 2 测试电路和 30 mA 平均正向电流。
+先核对外部驱动。FT10MxLR Rev. L 第 2 页图 2 的 5 V、SN75451 参考电路使用 100 Ω 串联电阻。FT10MxNR Rev. G 第 2 页图 2 则使用 47 Ω，原厂给出的导通电流约为 60 mA。如果旧板仍采用这套驱动，应先调整电路并测量实际电流，再评估换料。
+
+
+
+\- \*\*确认引脚。\*\* Rev. L 第 2 页表 3 标明，1 脚为 RCLED 阳极 TD+，2 脚为阴极 TD−。
+
+\- \*\*核对电流边界。\*\* Rev. L 第 3 页表 5 将 45 mA 峰值和 30 mA 平均值列在绝对最大额定值中，并对峰值超过 30 mA 时的脉宽与平均电流设有限制。用实际占空比测量峰值、平均电流和脉宽，给供电与温度变化留出余量。
+
+\- \*\*验证远端波形。\*\* Rev. L 第 4 页表 6 的动态测试采用图 2 电路和 15 mA 平均正向电流。调低电流后，用目标码型复测远端脉宽和误码，再确定工作点。
 
 
 
@@ -154,10 +168,10 @@ Rev. G 第 4 页表 6 给出以下典型耦合光功率。POF 测试使用 0.5 m
 
 
 
-\- \[Firecomms FT10MxNR 原厂规格书 Rev. G](https://www.firecomms.com/contentFiles/technicalDocuments/FT10MxNR-Datasheet-Rev-G.pdf)
+\- \[Firecomms FT10MxLR 低电流发射器规格书 Rev. L](https://www.firecomms.com/contentFiles/technicalDocuments/FT10MxLR-Datasheet-Rev-L.pdf)
 
-\- \[Firecomms EVAL-FT10MHNR 评估板用户指南 Rev. A](https://www.firecomms.com/contentFiles/contentblockaccordions/EVAL-FT10MHNR_Mini_Evaluation_Board_User_Guide_Revision_A.pdf)
+\- \[Firecomms FT10MxNR 发射器规格书 Rev. G](https://www.firecomms.com/contentFiles/technicalDocuments/FT10MxNR-Datasheet-Rev-G.pdf)
 
 \- \[上海芯聚电子 Firecomms 光纤器件产品中心](https://firecomms-cn.com/products.html)
 
-\- \[咨询 FT10MHNR、FT10MVNR、FT10MWNR 选型和驱动电路](https://firecomms-cn.com/contact.html)[firecomms-ft10mxnr-redlink-transmitter-drive-current](firecomms-ft10mxnr-redlink-transmitter-drive-current)
+\- \[咨询 FT10MHLR、FT10MVLR、FT10MWLR 选型及链路验证](https://firecomms-cn.com/contact.html)[firecomms-ft10mxlr-low-current-pof-link-budget](firecomms-ft10mxlr-low-current-pof-link-budget)
