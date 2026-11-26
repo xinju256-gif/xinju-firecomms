@@ -1,0 +1,6 @@
+.listing .article-title-list{display:block;border-top:1px solid #dce3eb}
+.listing .article-title-row{margin:0;padding:0;border-bottom:1px solid #dce3eb}
+.listing .article-title-row h2{margin:0;padding:0;font-size:18px;font-weight:600;line-height:1.65}
+.listing .article-title-row a{display:block;padding:17px 0;color:#003270;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip}
+.listing .article-title-row a:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:560px){.listing .article-title-row h2{font-size:16px}.listing .article-title-row a{padding:15px 0}}
